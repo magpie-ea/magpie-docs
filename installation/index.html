@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Installation guide - _babe documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installation guide";
+    var mkdocs_page_input_path = "installation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> _babe documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../basics/">Experiments (basics)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../complex/">Complex experiments</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../server_app/">Server app</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">_babe documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installation guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installation-guide">Installation guide</h1>
+<h2 id="experiments">Experiments</h2>
+<h2 id="server-app">Server app</h2>
+<p>The _babe server app can be hosted on any hosting service or your own server. We here describe the process for
+installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
+<p><a href="https://www.heroku.com/">Heroku</a> makes it easy to deploy an web app without having to manually manage the infrastructure. It has a free starter tier, which should be sufficient for the purpose of running experiments.</p>
+<p>There is an <a href="https://hexdocs.pm/phoenix/heroku.html">official guide</a> on how to deploy the Phoenix framework on Heroku. The deployment procedure is based on this guide, but differs in some places.</p>
+<p>{:start="0"}
+0. Ensure that you have <a href="https://hexdocs.pm/phoenix/installation.html">the Phoenix Framework installed</a> and working. However, if you just want to deploy this server and do no development work/change on it at all, you may skip this step.</p>
+<ol>
+<li>
+<p>Ensure that you have a <a href="https://signup.heroku.com/">Heroku account</a> already, and have the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a> installed and working on your computer.</p>
+</li>
+<li>
+<p>Ensure you have <a href="https://git-scm.com/downloads">Git</a> installed. Clone this git repo with <code>git clone https://github.com/babe-project/BABE</code> or <code>git clone git@github.com:babe-project/BABE.git</code>.</p>
+</li>
+<li>
+<p><code>cd</code> into the project directory just cloned from your Terminal (or cmd.exe on Windows).</p>
+</li>
+<li>
+<p>Run <code>heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"</code></p>
+</li>
+<li>
+<p>Run <code>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</code></p>
+<p>(N.B.: Although the command line output tells you to run <code>git push heroku master</code>, don't do it yet.)</p>
+</li>
+<li>
+<p>You may want to change the application name instead of using the default name. In that case, run <code>heroku apps:rename newname</code>.</p>
+</li>
+<li>
+<p>Edit line 17 of the file <code>config/prod.exs</code>. Replace the part <code>babe-backend.herokuapp.com</code> after <code>host</code> with the app name (shown when you first ran <code>heroku create</code>, e.g. <code>mysterious-meadow-6277.herokuapp.com</code>, or the app name that you set at step 6, e.g.  <code>newname.herokuapp.com</code>). You shouldn't need to modify anything else.</p>
+</li>
+<li>
+<p>Ensure that you're at the top-level project directory. Run</p>
+<p><code>heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set POOL_SIZE=18</code></p>
+</li>
+<li>
+<p>Run <code>mix deps.get</code> then <code>mix phx.gen.secret</code>. Then run <code>heroku config:set SECRET_KEY_BASE="OUTPUT"</code>, where <code>OUTPUT</code> should be the output of the <code>mix phx.gen.secret</code> step.</p>
+<p>Note: If you don't have the Phoenix framework installed on your computer, you may choose to use some other random generator for this task, which essentially asks for a random 64-character secret. On Mac and Linux, you may run <code>openssl rand -base64 64</code>. Or you may use an online password generator <a href="https://lastpass.com/generatepassword.php">such as the one offered by LastPass</a>.</p>
+</li>
+<li>
+<p>Run <code>git add config/prod.exs</code>, then <code>git commit -m "Set app URL"</code>.</p>
+</li>
+<li>
+<p>Don't forget to set the environment variables <code>AUTH_USERNAME</code> and <code>AUTH_PASSWORD</code>, either in the Heroku web interface or via the command line, i.e.</p>
+<p><code>heroku config:set AUTH_USERNAME="your_username"
+heroku config:set AUTH_PASSWORD="your_password"</code></p>
+</li>
+<li>
+<p>Run <code>git push heroku master</code>. This will push the repo to the git remote at Heroku (instead of the original remote at Github), and deploy the app.</p>
+</li>
+<li>
+<p>Run <code>heroku run "POOL_SIZE=2 mix ecto.migrate"</code></p>
+</li>
+<li>
+<p>Now, <code>heroku open</code> should open the frontpage of the app.</p>
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

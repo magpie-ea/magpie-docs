@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Server app - _babe documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Server app";
+    var mkdocs_page_input_path = "server_app.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> _babe documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../basics/">Experiments (basics)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../complex/">Complex experiments</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Server app</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installation">Installation</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#installation-on-heroku">Installation on Heroku</a></li>
+        
+            <li><a class="toctree-l3" href="#installation-locally">Installation locally</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#using-the-server-app">Using the server app</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">_babe documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Server app</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installation">Installation</h1>
+<h2 id="installation-on-heroku">Installation on Heroku</h2>
+<p>The _babe server app can be hosted on any hosting service or your own server. We here describe the process for
+installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
+<p><a href="https://www.heroku.com/">Heroku</a> makes it easy to deploy an web app without having to manually manage the infrastructure. It has a free starter tier, which should be sufficient for the purpose of running experiments.</p>
+<p>There is an <a href="https://hexdocs.pm/phoenix/heroku.html">official guide</a> on how to deploy the Phoenix framework on Heroku. The deployment procedure is based on this guide, but differs in some places.</p>
+<p>{:start="0"}
+0. Ensure that you have <a href="https://hexdocs.pm/phoenix/installation.html">the Phoenix Framework installed</a> and working. However, if you just want to deploy this server and do no development work/change on it at all, you may skip this step.</p>
+<ol>
+<li>
+<p>Ensure that you have a <a href="https://signup.heroku.com/">Heroku account</a> already, and have the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a> installed and working on your computer.</p>
+</li>
+<li>
+<p>Ensure you have <a href="https://git-scm.com/downloads">Git</a> installed. Clone this git repo with <code>git clone https://github.com/babe-project/BABE</code> or <code>git clone git@github.com:babe-project/BABE.git</code>.</p>
+</li>
+<li>
+<p><code>cd</code> into the project directory just cloned from your Terminal (or cmd.exe on Windows).</p>
+</li>
+<li>
+<p>Run <code>heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"</code></p>
+</li>
+<li>
+<p>Run <code>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</code></p>
+<p>(N.B.: Although the command line output tells you to run <code>git push heroku master</code>, don't do it yet.)</p>
+</li>
+<li>
+<p>You may want to change the application name instead of using the default name. In that case, run <code>heroku apps:rename newname</code>.</p>
+</li>
+<li>
+<p>Edit line 17 of the file <code>config/prod.exs</code>. Replace the part <code>babe-backend.herokuapp.com</code> after <code>host</code> with the app name (shown when you first ran <code>heroku create</code>, e.g. <code>mysterious-meadow-6277.herokuapp.com</code>, or the app name that you set at step 6, e.g.  <code>newname.herokuapp.com</code>). You shouldn't need to modify anything else.</p>
+</li>
+<li>
+<p>Ensure that you're at the top-level project directory. Run</p>
+<p><code>heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set POOL_SIZE=18</code></p>
+</li>
+<li>
+<p>Run <code>mix deps.get</code> then <code>mix phx.gen.secret</code>. Then run <code>heroku config:set SECRET_KEY_BASE="OUTPUT"</code>, where <code>OUTPUT</code> should be the output of the <code>mix phx.gen.secret</code> step.</p>
+<p>Note: If you don't have the Phoenix framework installed on your computer, you may choose to use some other random generator for this task, which essentially asks for a random 64-character secret. On Mac and Linux, you may run <code>openssl rand -base64 64</code>. Or you may use an online password generator <a href="https://lastpass.com/generatepassword.php">such as the one offered by LastPass</a>.</p>
+</li>
+<li>
+<p>Run <code>git add config/prod.exs</code>, then <code>git commit -m "Set app URL"</code>.</p>
+</li>
+<li>
+<p>Don't forget to set the environment variables <code>AUTH_USERNAME</code> and <code>AUTH_PASSWORD</code>, either in the Heroku web interface or via the command line, i.e.</p>
+<p><code>heroku config:set AUTH_USERNAME="your_username"
+heroku config:set AUTH_PASSWORD="your_password"</code></p>
+</li>
+<li>
+<p>Run <code>git push heroku master</code>. This will push the repo to the git remote at Heroku (instead of the original remote at Github), and deploy the app.</p>
+</li>
+<li>
+<p>Run <code>heroku run "POOL_SIZE=2 mix ecto.migrate"</code></p>
+</li>
+<li>
+<p>Now, <code>heroku open</code> should open the frontpage of the app.</p>
+</li>
+</ol>
+<h2 id="installation-locally">Installation locally</h2>
+<p>The first-time installation requires an internet connection. After it is finished, the server can be launched offline.</p>
+<p>(Note that for local deployment, the default username is <code>default</code> and the default password is <code>password</code>. You can change them in <code>config/dev.exs</code>.)</p>
+<h3 id="first-time-installation">First time installation</h3>
+<p>To begin with, install Docker from <a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a>. You may have to launch the application once in order to let it install its command line tools. Verify the installation by typing <code>docker version</code> in a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows).</p>
+<p>Note:
+- Although the Docker app on Windows and Mac asks for login credentials to Docker Hub, they are not needed for local deployment. You can proceed without creating any Docker account/logging in.
+- Linux users would need to install <code>docker-compose</code> separately. See relevant instructions <a href="https://docs.docker.com/compose/install/">here</a>.</p>
+<p>Once you have Docker installed, follow these steps:</p>
+<ol>
+<li>
+<p>Ensure you have <a href="https://git-scm.com/downloads">Git</a> installed. Clone the server repo with <code>git clone https://github.com/babe-project/BABE.git</code> or <code>git clone git@github.com:babe-project/BABE.git</code>.</p>
+</li>
+<li>
+<p>Open a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows), <code>cd</code> into the project directory just cloned via git.</p>
+</li>
+<li>
+<p>For the first-time setup, run in the terminal
+  <code>docker volume create --name babe-app-volume -d local
+  docker volume create --name babe-db-volume -d local
+  docker-compose run --rm web bash -c "mix deps.get &amp;&amp; npm install &amp;&amp; node node_modules/brunch/bin/brunch build &amp;&amp; mix ecto.migrate"</code></p>
+</li>
+</ol>
+<h3 id="deployment">Deployment</h3>
+<p>After first-time installation, you can launch a local server instance which allows you to manage the experiments in your browser and stores the results.</p>
+<ol>
+<li>
+<p>Run <code>docker-compose up</code> to launch the application every time you want to run the server. Wait until the line <code>web_1  | [info] Running BABE.Endpoint with Cowboy using http://0.0.0.0:4000</code> appears in the terminal.</p>
+</li>
+<li>
+<p>Visit <code>localhost:4000</code> in your browser. You should see the server up and running.</p>
+<p>Note: Windows 7 users who installed <em>Docker Machine</em> might need to find out the IP address used by <code>docker-machine</code> instead of <code>localhost</code>. See <a href="https://docs.docker.com/get-started/part2/#build-the-app">Docker documentation</a> for details.</p>
+</li>
+<li>
+<p>Use <kbd>Ctrl + C</kbd> to shut down the server.</p>
+</li>
+</ol>
+<p>Note that the database for storing experiment results is stored at <code>/var/lib/docker/volumes/babe-db-volume/_data</code> folder by default. As long as this folder is preserved, experiment results should persist as well.</p>
+<h1 id="using-the-server-app">Using the server app</h1>
+<p>After installation you can visit the server app in a browser, with the username and password you previously specified. For Heroku deployment, you may do so by running <code>heroku open</code> in the command line or find the app URL in your Heroku account. For local deployment, the URL is by default http://localhost:4000.</p>
+<p>The server app shows a list of experiments whose data may be stored in a database. It
+shows the experiments ID, its name, its author, the number of submissions retrieved so far,
+date information, as well as whether the experiment is currently active or not. If an
+experiment is set to be active, it allows further submissions to be recorded in the
+database.</p>
+<p><img src="../images/server_app_screen.png" width="100%"></p>
+<p>The server app allows you to retrieve the data for an experiment from the database. Simply
+click on the button "Retrieve CSV" to download a CSV-file with the data collected so far.</p>
+<p>To delete an experiment, click the "Delete" button. Always make sure that you have recovered
+all necessary data from that experiment; otherwise your data collected so far might be
+irrevocably lost.</p>
+<p>You can also edit an experiment with the "Edit" button. You can change information about the
+experiment on the edit-screen. You can also toggle whether the experiment is active or not. You
+can set a maximum number of submissions after which the experiment automatically toggles its
+activity status off. Any submission made by a participant to a non-active experiment is just
+lost and will not be recorded. This is to protect your database from pollution or attacks, but
+if used unwisely could also cause you loss of relevant data.</p>
+<p>Finally, the server app allows you to create and manage new experiments. Click on the
+"New" button to do this. The interface for creating a new experiment is parallel to editing an
+existing experiment. Importantly, you need to give some required information about a
+new experiment (name and author). If you want to use dynamic retrieval of experiment data (documented <a href="../experiments/09dynamics">here</a>), you must specify which fields should be available to be retrieved by your API calls. This allows you to expose only the relevant fields, since the dynamic retrieval API is not password protected by default.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../complex/" class="btn btn-neutral" title="Complex experiments"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../complex/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
