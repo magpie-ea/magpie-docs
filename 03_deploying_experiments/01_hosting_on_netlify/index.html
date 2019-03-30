@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Michael Franke">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Hosting on netlify - _babe documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Hosting on netlify";
+    var mkdocs_page_input_path = "03_deploying_experiments/01_hosting_on_netlify.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> _babe documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">designing experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/01_views/">Template views</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/02_complex.md">Custom views</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/03_miscellaneous/">Miscellaneous</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">server app</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../02_using_the_server_app/01_installation/">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../02_using_the_server_app/02_use/">Use</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">deploying experiments</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Hosting on netlify</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#deployment-using-netlify">Deployment using Netlify</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../04_development/">Development</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../05_about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">_babe documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>deploying experiments &raquo;</li>
+        
+      
+    
+    <li>Hosting on netlify</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#deployment-using-netlify">Deployment using Netlify</a></li>
+</ul>
+</div>
+<h3 id="deployment-using-netlify">Deployment using Netlify</h3>
+<ol>
+<li>Registration<ul>
+<li>Go to https://www.netlify.com/ and sign up using GitHub</li>
+</ul>
+</li>
+<li>Deployment<ul>
+<li>Using git: Click on the <code>New site from Git</code>-Button, choose GitHub and authorize the netlify-app on GitHub, configure which repositories to give access to, (back on netlify) select the repository to deploy, enter the build command <code>rm -rf dist &amp;&amp; mkdir dist &amp;&amp; rsync -rv * dist --exclude ./dist</code> and the publish directory <code>dist</code> (this is a workaround for publishing <code>node_modules</code>, see <a href="https://stackoverflow.com/questions/54527465/no-node-modules-from-netlify-deploy/54545546#54545546">here</a>, another way of bundling the files may be appropriate), click on <code>Deploy site</code> </li>
+<li>Manual: Go to https://app.netlify.com/ and drag and drop your finished experiment folder (including node_modules) to the drag&amp;drop area</li>
+</ul>
+</li>
+<li>Configuration<ul>
+<li>Change the domain name:<ul>
+<li>Click on the deployed site you want to configure, click on <code>Domain setting</code>, click on <code>Edit site name</code> and change to the name of choice.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../04_development/" class="btn btn-neutral float-right" title="Development">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../02_using_the_server_app/02_use/" class="btn btn-neutral" title="Use"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT license</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../02_using_the_server_app/02_use/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../04_development/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Michael Franke">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Template views - _babe documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Template views";
+    var mkdocs_page_input_path = "01_designing_experiments/01_views.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> _babe documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">designing experiments</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Template views</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#trial-views-data-format">Trial views' data format</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#forced-choice-task">Forced-choice task</a></li>
+        
+            <li><a class="toctree-l4" href="#textbox-input-task">Textbox Input task</a></li>
+        
+            <li><a class="toctree-l4" href="#slider-rating-task">Slider Rating task</a></li>
+        
+            <li><a class="toctree-l4" href="#dropdown-choice-task">Dropdown Choice task</a></li>
+        
+            <li><a class="toctree-l4" href="#rating-scale-task">Rating Scale task</a></li>
+        
+            <li><a class="toctree-l4" href="#sentence-choice-task">Sentence Choice task</a></li>
+        
+            <li><a class="toctree-l4" href="#image-selection-task">Image Selection task</a></li>
+        
+            <li><a class="toctree-l4" href="#key-press-task">Key Press task</a></li>
+        
+            <li><a class="toctree-l4" href="#self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</a></li>
+        
+            <li><a class="toctree-l4" href="#self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#sample-use-of-95babe-views">Sample use of _babe views</a></li>
+    
+
+    <li class="toctree-l3"><a href="#data-format">Data format</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#obligatory-properties">obligatory properties</a></li>
+        
+            <li><a class="toctree-l4" href="#optional-properties">optional properties</a></li>
+        
+            <li><a class="toctree-l4" href="#canvas-element-settings">canvas element settings</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#samples">Samples</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1">1</a></li>
+        
+            <li><a class="toctree-l4" href="#2">2</a></li>
+        
+            <li><a class="toctree-l4" href="#3">3</a></li>
+        
+            <li><a class="toctree-l4" href="#4">4</a></li>
+        
+            <li><a class="toctree-l4" href="#5">5</a></li>
+        
+            <li><a class="toctree-l4" href="#6">6</a></li>
+        
+            <li><a class="toctree-l4" href="#7">7</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../02_complex.md">Custom views</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../03_miscellaneous/">Miscellaneous</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../04_lifecycles_hooks/">Life cycles & hooks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../05_canvas/">Canvas</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../06_complex_experiments/">Complex experiments</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">server app</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../02_using_the_server_app/01_installation/">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../02_using_the_server_app/02_use/">Use</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">deploying experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../03_deploying_experiments/01_hosting_on_netlify/">Hosting on netlify</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../04_development/">Development</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../05_about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">_babe documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>designing experiments &raquo;</li>
+        
+      
+    
+    <li>Template views</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>There are two types of views: trial type and wrapping views.
+_babe provides a number of templates to create views with a pre-given structure. </p>
+<p><strong>Template trial views defined in _babe:</strong></p>
+<ul>
+<li>babeViews.forcedChoice<ul>
+<li><a href="../../images/views_samples/view_fc.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.sliderRating<ul>
+<li><a href="../../images/views_samples/view_sr.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.dropdownChoice<ul>
+<li><a href="../../images/views_samples/view_dc.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.textboxInput<ul>
+<li><a href="../../images/views_samples/view_ti.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.ratingScale<ul>
+<li><a href="../../images/views_samples/view_rc.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.imageSelection<ul>
+<li><a href="../../images/views_samples/view_is.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.sentenceChoice<ul>
+<li><a href="../../images/views_samples/view_ss.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.keyPress<ul>
+<li><a href="../../images/views_samples/view_kp.png">image of the view</a></li>
+</ul>
+</li>
+<li>babeViews.selfPacedReading</li>
+<li>babeViews.selfPacedReading_ratingScale</li>
+</ul>
+<p><strong>Template wrapping views:</strong></p>
+<ul>
+<li>babeViews.intro<ul>
+<li>gives general information about the experiment</li>
+<li>records the participant's prolific id if the experiment runs on <a href="prolific.ac">Prolific</a></li>
+</ul>
+</li>
+<li>babeViews.instructions<ul>
+<li>gives experiment-specific instructions</li>
+</ul>
+</li>
+<li>babeViews.begin<ul>
+<li>warns the participant the experiment is about to begin</li>
+<li>can be used between the practice trial and the main trial</li>
+</ul>
+</li>
+<li>babeViews.postTest<ul>
+<li>collects extra information about the participant (age, gender, etc.)</li>
+</ul>
+</li>
+<li>babeViews.thanks (and submit the data)<ul>
+<li>Debug mode: displays the data</li>
+<li>submits the data of the live experiments</li>
+</ul>
+</li>
+</ul>
+<p><strong>Trial views' properties</strong></p>
+<p><em>Obligatory fields</em>
+<em> <code>trials: int</code> - the number of trials this view will appear
+</em> <code>name: string</code>
+<em> <code>trial_type: string</code> - the name of the trial type as you want it to appear in the submitted the final data (for example 'main binary choice')
+</em> <code>data: array</code> - an array of trial objects</p>
+<p><em>Optional fields (can be skipped)</em>
+<em> <code>title: string</code> - the title at the top of the view 
+</em> <code>pause: number (in ms)</code> - blank screen before the fixation point or stimulus show
+<em> <code>fix_duration: number (in ms)</code> - blank screen with fixation point in the middle
+</em> <code>stim_duration: number (in ms)</code> - for how long to have the stimulus on the screen
+* <code>hook: object</code> - option to hook and add custom functions to the view. <a href="hooks.md">more about hooks</a></p>
+<p><strong>Wrapping views' properties</strong></p>
+<p><em>Obligatory fields</em>
+<em> <code>trials: int</code> - the number of trials this view will appear
+</em> <code>name: string</code></p>
+<p><em>Optional fields by view type</em>
+<em> babeViews.intro:
+    * <code>buttonText: string</code>
+        * the text of the button that takes the participant to the next view
+        * default: 'Next'
+    * <code>title: string</code>
+        * the title of the view
+        * default: 'Welcome!'
+    * <code>text: string</code>
+        * the text of the view
+        * default: </em>there is no default*</p>
+<ul>
+<li>
+<p>babeViews.instructions:</p>
+<ul>
+<li><code>buttonText: string</code><ul>
+<li>the text of the button that takes the participant to the next view</li>
+<li>default: 'Next'</li>
+</ul>
+</li>
+<li><code>title: string</code><ul>
+<li>the title of the view</li>
+<li>default: 'Instructions'</li>
+</ul>
+</li>
+<li><code>text: string</code><ul>
+<li>the text of the view</li>
+<li>default: <em>there is no default</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>babeViews.begin:</p>
+<ul>
+<li><code>buttonText: string</code><ul>
+<li>the text of the button that takes the participant to the next view</li>
+<li>default: 'Next'</li>
+</ul>
+</li>
+<li><code>title: string</code><ul>
+<li>the title of the view</li>
+<li>default: 'Begin'</li>
+</ul>
+</li>
+<li><code>text: string</code><ul>
+<li>the text of the view</li>
+<li>default: <em>there is no default</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>babeViews.postTest:</p>
+<ul>
+<li><code>buttonText: string</code><ul>
+<li>the text of the button that takes the participant to the next view</li>
+<li>default: 'Next'</li>
+</ul>
+</li>
+<li><code>title: string</code><ul>
+<li>the title of the view</li>
+<li>default: 'Additional Information'</li>
+</ul>
+</li>
+<li><code>text: string</code><ul>
+<li>the text of the view</li>
+<li>default: <em>there is no default</em></li>
+</ul>
+</li>
+<li><code>age_question: string</code><ul>
+<li>question about participant's age</li>
+<li>default: 'Age',</li>
+</ul>
+</li>
+<li><code>gender_question: string</code><ul>
+<li>question about participant's gender</li>
+<li>default: 'Gender'</li>
+</ul>
+</li>
+<li><code>gender_male: string</code><ul>
+<li>answer option for the gender question</li>
+<li>default: 'male'</li>
+</ul>
+</li>
+<li><code>gender_female: string</code><ul>
+<li>answer option for the gender question</li>
+<li>default: 'female'</li>
+</ul>
+</li>
+<li><code>gender_other: string</code><ul>
+<li>answer option for the gender question</li>
+<li>default: 'other'</li>
+</ul>
+</li>
+<li><code>edu_question: string</code><ul>
+<li>question about participant's level of education</li>
+<li>default: 'Level of Education'</li>
+</ul>
+</li>
+<li><code>edu_graduated_high_school: string</code><ul>
+<li>answer option for the education question</li>
+<li>default: 'Graduated High School'</li>
+</ul>
+</li>
+<li><code>edu_graduated_college: string</code><ul>
+<li>answer option for the education question</li>
+<li>default: 'Graduated College'</li>
+</ul>
+</li>
+<li><code>edu_higher_degree: string</code><ul>
+<li>answer option for the education question</li>
+<li>default: 'Higher Degree'</li>
+</ul>
+</li>
+<li><code>languages_question: string</code><ul>
+<li>question about participant's native languages</li>
+<li>default: 'Native Languages'</li>
+</ul>
+</li>
+<li><code>languages_more: string</code><ul>
+<li>more info about what native languages are</li>
+<li>default: '(i.e. the language(s) spoken at home when you were a child)'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>babeViews.thanks:</p>
+<ul>
+<li><code>title: string</code><ul>
+<li>the title of the view</li>
+<li>default: 'Thank you for taking part in this experiment!'</li>
+</ul>
+</li>
+<li><code>prolificConfirmText: string</code><ul>
+<li>text asking the participant to press the 'confirm' button</li>
+<li>default: 'Please press the button below to confirm that you completed the experiment with Prolific'</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="trial-views-data-format">Trial views' data format</h3>
+<h4 id="forced-choice-task">Forced-choice task</h4>
+<p><a href="../../images/views_samples/view_fc.png">image of the view</a></p>
+<h5 id="data-properties">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>option1: string</code></li>
+<li><code>option2: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>question: string</code></li>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data">Sample data</h5>
+<pre><code>const forced_choice_trials = [
+    {
+        picture: &quot;path/to/picture_of_bread.jpg&quot;,
+        question: &quot;What's on the bread?&quot;,
+        option1: &quot;jam&quot;,
+        option2: &quot;ham&quot;
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        option1: &quot;shiny&quot;,
+        option2: &quot;rainbow&quot;
+    }
+];
+</code></pre>
+
+<h4 id="textbox-input-task">Textbox Input task</h4>
+<p><a href="../../images/views_samples/view_ti.png">image of the view</a></p>
+<h5 id="data-properties_1">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>question: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+<li><code>min_chars: number</code><ul>
+<li>the minumum number of characters in the textarea field before proceeding is available</li>
+<li>default - <em>10</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_1">Sample data</h5>
+<pre><code>const textbox_input_trials = [
+    {
+        picture: &quot;path/to/picture.jpg&quot;,
+        question: &quot;What's on the bread?&quot;,
+        min_chars: 100
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        min_chars: 50
+    }
+];
+</code></pre>
+
+<h4 id="slider-rating-task">Slider Rating task</h4>
+<p><a href="../../images/views_samples/view_sr.png">image of the view</a></p>
+<h5 id="data-properties_2">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>optionLeft: string</code></li>
+<li><code>optionRight: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+<li><code>question: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_2">Sample data</h5>
+<pre><code>const slider_rating_trials = [
+    {
+        picture: 'path/to/picture_of_bread.jpg',
+        question: &quot;What's on the bread?&quot;,
+        optionLeft: 'jam',
+        optionRight: 'ham'
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        optionLeft: 'shiny',
+        optionRight: 'rainbow'
+    }
+];
+</code></pre>
+
+<h4 id="dropdown-choice-task">Dropdown Choice task</h4>
+<p><a href="../../images/views_samples/view_dc.png">image of the view</a></p>
+<h5 id="data-properties_3">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>option1: string</code></li>
+<li><code>option2: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+<li><code>question_left_part: string</code></li>
+<li><code>question_right_part: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_3">Sample data</h5>
+<pre><code>const dropdown_choice_trials = [
+    {
+        picture: 'path/to/picture_of_bread.jpg',
+        question: &quot;What's on the bread?&quot;,
+        option1: 'jam',
+        option2: 'ham'
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        option1: 'shiny',
+        option2: 'rainbow'
+    }
+];
+</code></pre>
+
+<h4 id="rating-scale-task">Rating Scale task</h4>
+<p><a href="../../images/views_samples/view_rc.png">image of the view</a></p>
+<h5 id="data-properties_4">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>optionLeft: string</code></li>
+<li><code>optionRight: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+<li><code>question: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_4">Sample data</h5>
+<pre><code>const rating_scale_trials = [
+    {
+        picture: 'path/to/picture_of_bread.jpg',
+        question: 'What\'s on the bread?',
+        option1: 'jam',
+        option2: 'ham'
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        option1: 'shiny',
+        option2: 'rainbow'
+    }
+];
+</code></pre>
+
+<h4 id="sentence-choice-task">Sentence Choice task</h4>
+<p><a href="../../images/views_samples/view_ss.png">image of the view</a></p>
+<h5 id="data-properties_5">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>option1: string</code></li>
+<li><code>option2: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>picture: string (link)</code></li>
+<li><code>question: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_5">Sample data</h5>
+<pre><code>const sentence_choice_trials = [
+    {
+        picture: 'path/to/picture_of_bread.jpg',
+        question: &quot;What's on the bread?&quot;,
+        option1: 'jam',
+        option2: 'ham'
+    },
+    {
+        picture: 'path/to/picture_of_bread.jpg',
+        option1: 'jam',
+        option2: 'ham'
+    },
+    {
+        question: &quot;What's the weather?&quot;,
+        option1: 'shiny',
+        option2: 'rainbow'
+    }
+];
+</code></pre>
+
+<h4 id="image-selection-task">Image Selection task</h4>
+<p><a href="../../images/views_samples/view_is.png">image of the view</a></p>
+<h5 id="data-properties_6">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>option1: string</code></li>
+<li><code>option2: string</code></li>
+<li><code>picture1: string (link)</code> - refers to <code>option1</code></li>
+<li><code>picture2: string (link)</code> - refers to <code>option2</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>question: string</code></li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_6">Sample data</h5>
+<pre><code>const image_selection_trials = [
+    {
+        picture1: 'path/to/picture1.jpg',
+        picture2: 'path/to/picture2.jpg',
+        option1: 'yes',
+        option2: 'no'
+    },
+    {
+        picture1: 'path/to/picture_of_bread1.jpg',
+        picture2: 'path/to/picture_of_bread2.jpg',
+        question: &quot;What's on the bread?&quot;,
+        option1: 'jam',
+        option2: 'ham'
+    }
+];
+</code></pre>
+
+<h4 id="key-press-task">Key Press task</h4>
+<p><a href="../../images/views_samples/view_kp.png">image of the view</a></p>
+<h5 id="data-properties_7">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>key1: string</code></li>
+<li><code>key2: string</code></li>
+<li><code>&lt;key-specified in key1, e.g. f&gt;: string</code></li>
+<li><code>&lt;key specified in key2, e.g. j&gt;: string</code></li>
+<li><code>expected: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>question: string</code></li>
+<li><code>picture: string (link)</code></li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_7">Sample data</h5>
+<pre><code>const key_press_trials = [
+    {
+        question: &quot;What's the weather like?&quot;,
+        key1: 'f',
+        key2: 'j',
+        f: 'shiny',
+        j: 'rainbow',
+        expected: 'shiny'
+    },
+    {
+        question: &quot;What's on the bread?&quot;,
+        picture: 'path/to/picture.jpg',
+        key1: 'f',
+        key2: 'j',
+        f: 'ham',
+        j: 'jam',
+        expected: 'jam'
+    }
+];
+</code></pre>
+
+<h4 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h4>
+<h5 id="data-properties_8">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>sentence: string</code><ul>
+<li>the spr parts are separated by ' | '</li>
+</ul>
+</li>
+<li><code>option1: string</code></li>
+<li><code>option2: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>help_text: string</code><ul>
+<li>instructions to press SPACE above the spr sentence lines</li>
+<li>default - <em>Press the SPACE bar to reveal the words</em></li>
+</ul>
+</li>
+<li><code>picture: string</code></li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>question: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_8">Sample data</h5>
+<pre><code>const spr_trials = [
+    {
+        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
+        picture: &quot;images/all-false3.png&quot;
+        help_text: 'just press SPACE',
+        question: &quot;Should you bring Johnny this box or not?&quot;,
+        sentence: &quot;all | of | the | yellow | marbles | are | inside | the | case.'&quot;,
+        option1: &quot;Bring it&quot;,
+        option2: &quot;Leave it&quot;,
+    },
+    {
+        question: &quot;Should you bring Johnny this box or not?&quot;,
+        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
+        option1: &quot;Bring it&quot;,
+        option2: &quot;Leave it&quot;
+    }
+];
+</code></pre>
+
+<h4 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h4>
+<h5 id="data-properties_9">Data properties</h5>
+<ul>
+<li>
+<p><strong>Obligatory Fileds</strong></p>
+<ul>
+<li><code>sentence: string</code><ul>
+<li>the spr parts are separated by ' | '</li>
+</ul>
+</li>
+<li><code>optionLeft: string</code></li>
+<li><code>optionRight: string</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Optional Fields</strong></p>
+<ul>
+<li><code>QUD: string</code> - text that is always present on the slide</li>
+<li><code>help_text: string</code> - SPACE press text above the spr sentence</li>
+<li><code>picture: string</code></li>
+<li><code>canvas: object</code> <a href="canvas.md">more about babe canvas</a></li>
+<li><code>question: string</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="sample-data_9">Sample data</h5>
+<pre><code>const spr_rc_trials = [
+    {
+        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
+        picture: &quot;images/all-false3.png&quot;
+        help_text: 'SPACEEEE',
+        sentence: &quot;all | of the | yellow marbles | are | inside | the case.'&quot;,
+        question: &quot;Should you bring Johnny this box or not?&quot;,
+        optionLeft: &quot;Bring it&quot;,
+        optionRight: &quot;Leave it&quot;,
+    },
+    {
+        question: &quot;Should you bring Johnny this box or not?&quot;,
+        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
+        optionLeft: &quot;Bring it&quot;,
+        optionRight: &quot;Leave it&quot;
+    }
+];
+</code></pre>
+
+<h3 id="sample-use-of-95babe-views">Sample use of _babe views</h3>
+<p>Sample use of _babe views:</p>
+<pre><code>// your_js_file.js
+
+const intro = babeViews.intro({
+    name: 'intro',
+    title: 'Welcome!',
+    text: &quot;Let's start!&quot;,
+    buttonText: 'Begin the experiment',
+    trials: 1
+});
+
+const instructions = babeViews.instructions({
+    name: 'instuctions',
+    title: 'Instructions',
+    text: 'Choose an answer',
+    buttonText: 'Next',
+    trials: 1
+});
+
+const practice = babeViews.forcedChoice({
+    name: 'practice_forced_choice',
+    trial_type: 'practice',
+    data: practice_trials,
+    trials: 2
+});
+
+const main = babeViews.forcedChoice({
+    name: 'main_forced_choice',
+    trial_type: 'main',
+    data: main_trials,
+    trials: 4
+});
+
+const thanks = babeViews.thanks({
+    name: 'thanks'
+    title: 'Thank you for taking part in this experiment!',
+    trials: 1
+});
+
+$(&quot;document&quot;).ready(function() {
+    babeInit({
+        views_seq: [
+            intro,
+            instructions,
+            main,
+            thanks
+        ],
+        deploy: {
+            'experimentID': '4',
+            'serverAppURL': 'https://babe-demo.herokuapp.com/api/submit_experiment/',
+            'deployMethod': 'debug',
+            'contact_email&quot;: 'YOUREMAIL@wherelifeisgreat.you',
+            'prolificURL&quot;: 'https://app.prolific.ac/submissions/complete?cc=ABCD1234'
+
+        },
+        progress_bar: {
+            in: [
+                'practice_forced_choice',
+                'main_forced_choice'
+            ],
+            style: 'default',
+            width: 100
+        }
+    });
+});
+</code></pre>
+
+<h3 id="data-format">Data format</h3>
+<h4 id="obligatory-properties">obligatory properties</h4>
+<ul>
+<li>
+<p><code>sort</code> - the way the elements are arranged on the canvas.</p>
+<ul>
+<li>
+<p><code>sort: 'random'</code> - randomly placed on the canvas. <code>start_with</code> does not have an effect with this arrangement method;</p>
+</li>
+<li>
+<p><code>sort: 'grid'</code> - placed in a grid. Uses <code>canvas.canvas.rows</code>;</p>
+</li>
+<li>
+<p><code>sort: 'split_grid'</code> - placed in a grid that is split in the middle.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>elemSize</code> - the size of the element's shapes (in pixels).</p>
+</li>
+<li>
+<p><code>total</code> - the total elements that are drawn on the canvas.</p>
+</li>
+<li>
+<p><code>focalColor</code> - the color of the focal elements.</p>
+</li>
+<li>
+<p><code>focalNumber</code> - the number of focal elements wanted on the canvas.</p>
+</li>
+<li>
+<p><code>focalShape</code> - the shape of the foca elements (can be 'triangle', 'circle' or 'square')</p>
+</li>
+<li>
+<p><code>otherColor</code> - the color of the other elements</p>
+</li>
+<li>
+<p><code>otherShape</code> - the shape of the elements (can be 'triangle', 'circle' or 'square')</p>
+</li>
+</ul>
+<p>The number of the other elements is total - focal.number</p>
+<h4 id="optional-properties">optional properties</h4>
+<h5 id="grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</h5>
+<ul>
+<li>
+<p><code>rows</code> the number of grid rows. Placed in one row of not given.</p>
+</li>
+<li>
+<p><code>start_with</code> - the <code>grid</code> and <code>split_grid</code> coordinates are generated from left to right. By default first the focal elements are placed on the canvas so they always appear on the left unless <code>start_with</code> is set to <code>'other'</code></p>
+<ul>
+<li>
+<p><code>start_with: 'focal'</code>: places the focal shapes first (from left to right)</p>
+</li>
+<li>
+<p>not set <code>start_with</code> places the focal shapes first (from left to right)</p>
+</li>
+<li>
+<p><code>start_with: 'other'</code>: places the other shapes first (from left to right)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="split-grid-extra-properties">Split Grid extra properties</h5>
+<ul>
+<li>
+<p><code>gap</code> - the gap between the two sides. The default <code>gap</code> is 1.5 * <code>elemSize</code></p>
+</li>
+<li>
+<p><code>direction</code> - the direction in which the elements are placed. Set to <code>'row'</code> if not given.</p>
+<ul>
+<li>
+<p><code>'row'</code> - in a row, starting from left to right, ignoring the gap between the two sides;</p>
+</li>
+<li>
+<p><code>'side_row'</code> - in a row starting from left to right, not ignoring the gap, i.e. first finishes with the left side and then moves to the right;</p>
+</li>
+<li>
+<p><code>'column'</code> - in a column, starting from top left.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="canvas-element-settings">canvas element settings</h4>
+<p>You can add a <code>canvasSettings</code> object to your <code>canvas</code> if you want to set the height, width and background of the canvas.</p>
+<p>for example:</p>
+<pre><code>canvas: {
+    canvasSettings: {
+        height: 600,
+        width: 800,
+        backrgound: 'grey'
+    },
+    focalColor: 'black',
+    focalShape: 'circle',
+    focalNumber: 23,
+    otherShape: 'square',
+    otherColor: 'red',
+    sort: 'random',
+    elemSize: 30,
+    total: 40
+}
+</code></pre>
+
+<p>If not passed the canvas's
+- height is 300 (300px)
+- width is 500 (500px)
+- background is 'white'</p>
+<h3 id="samples">Samples</h3>
+<h4 id="1">1</h4>
+<p><img src='../images/canvas_samples/samples_1.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    canvasSettings: {
+        background: 'grey'
+    },
+    focalColor: 'black',
+    focalShape: 'circle',
+    focalNumber: 4,
+    otherShape: 'circle',
+    otherColor: 'white',
+    sort: 'split_grid',
+    rows: 4,
+    direction: 'side_row',
+    elemSize: 30,
+    total: 10
+}
+
+// gap is default (1.5 * elemSize)
+// start_with is default (focal elem)
+</code></pre>
+
+<h4 id="2">2</h4>
+<p><img src='../images/canvas_samples/samples_2.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    canvasSettings: {
+        height: 500,
+        width: 700
+    },
+    focalColor: 'blue',
+    focalShape: 'circle',
+    focalNumber: 25,
+    otherShape: 'circle',
+    otherColor: 'green',
+    sort: 'random',
+    elemSize: 10,
+    total: 100
+}
+
+// the canvas size is increased to fit 100 elements
+</code></pre>
+
+<h4 id="3">3</h4>
+<p><img src='../images/canvas_samples/samples_3.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    focalColor: 'red',
+    focalShape: 'circle',
+    focalNumber: 1,
+    otherShape: 'triangle',
+    otherColor: 'green',
+    sort: 'random',
+    elemSize: 30,
+    total: 10
+}
+</code></pre>
+
+<h4 id="4">4</h4>
+<p><img src='../images/canvas_samples/samples_4.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    focalColor: 'red',
+    focalShape: 'circle',
+    focalNumber: 8,
+    otherShape: 'triangle',
+    otherColor: 'blue',
+    sort: 'split_grid',
+    start_with: 'other',
+    rows: 2,
+    direction: 'side_row',
+    elemSize: 30,
+    total: 16
+}
+</code></pre>
+
+<h4 id="5">5</h4>
+<p><img src='../images/canvas_samples/samples_5.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    focalColor: 'red',
+    focalShape: 'circle',
+    focalNumber: 8,
+    otherShape: 'triangle',
+    otherColor: 'blue',
+    sort: 'split_grid',
+    rows: 4,
+    gap: 200,
+    elemSize: 30,
+    total: 16
+}
+
+// the default direction is 'row'
+</code></pre>
+
+<h4 id="6">6</h4>
+<p><img src='../images/canvas_samples/samples_6.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    focalColor: 'red',
+    focalShape: 'circle',
+    focalNumber: 10,
+    otherShape: 'triangle',
+    otherColor: 'blue',
+    sort: 'split_grid',
+    rows: 4,
+    gap: 200,
+    direction: 'column'
+    elemSize: 30,
+    total: 16
+}
+
+// direction is default ('row')
+// start_with is default (focal elem)
+</code></pre>
+
+<h4 id="7">7</h4>
+<p><img src='../images/canvas_samples/samples_7.png' alt='sample' height='auto' width='500' /></p>
+<pre><code>canvas: {
+    focalColor: 'grey',
+    focalShape: 'circle',
+    focalNumber: 6,
+    otherShape: 'square',
+    otherColor: 'blue',
+    sort: 'grid',
+    rows: 3,
+    elemSize: 30,
+    total: 18
+}
+
+// start_with is default (focal elem)
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../03_miscellaneous/" class="btn btn-neutral float-right" title="Miscellaneous">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT license</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="../03_miscellaneous/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
