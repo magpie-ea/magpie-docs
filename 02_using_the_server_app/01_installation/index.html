@@ -50,33 +50,52 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">designing experiments</span>
+    <a class="" href="../../01_designing_experiments/01_views/">Designing experiments</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Template views</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../01_designing_experiments/01_views/">Template views</a>
+    <a class="" href="../../01_designing_experiments/02a_wrapping_views/">Wrapping views</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../01_designing_experiments/02_template_views/">Custom views</a>
+    <a class="" href="../../01_designing_experiments/02b_trial_views/">Trial views</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../../01_designing_experiments/02c_SPR/">Self-paced reading</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Custom views</span>
+    <ul class="subnav">
                 <li class="">
                     
     <a class="" href="../../01_designing_experiments/03_custom_views/">Miscellaneous</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
-                </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -168,7 +187,7 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="installation-on-heroku">Installation on Heroku</h3>
+                <h5 id="installation-on-heroku">Installation on Heroku</h5>
 <p>The _babe server app can be hosted on any hosting service or your own server. We here describe the process for
 installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
 <p><a href="https://www.heroku.com/">Heroku</a> makes it easy to deploy an web app without having to manually manage the infrastructure. It has a free starter tier, which should be sufficient for the purpose of running experiments.</p>
@@ -225,10 +244,10 @@ heroku config:set AUTH_PASSWORD="your_password"</code></p>
 <p>Now, <code>heroku open</code> should open the frontpage of the app.</p>
 </li>
 </ol>
-<h3 id="installation-locally">Installation locally</h3>
+<h5 id="installation-locally">Installation locally</h5>
 <p>The first-time installation requires an internet connection. After it is finished, the server can be launched offline.</p>
 <p>(Note that for local deployment, the default username is <code>default</code> and the default password is <code>password</code>. You can change them in <code>config/dev.exs</code>.)</p>
-<h4 id="first-time-installation">First time installation</h4>
+<h6 id="first-time-installation">First time installation</h6>
 <p>To begin with, install Docker from <a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a>. You may have to launch the application once in order to let it install its command line tools. Verify the installation by typing <code>docker version</code> in a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows).</p>
 <p>Note:
 - Although the Docker app on Windows and Mac asks for login credentials to Docker Hub, they are not needed for local deployment. You can proceed without creating any Docker account/logging in.
@@ -248,7 +267,7 @@ heroku config:set AUTH_PASSWORD="your_password"</code></p>
   docker-compose run --rm web bash -c "mix deps.get &amp;&amp; npm install &amp;&amp; node node_modules/brunch/bin/brunch build &amp;&amp; mix ecto.migrate"</code></p>
 </li>
 </ol>
-<h4 id="deployment">Deployment</h4>
+<h6 id="deployment">Deployment</h6>
 <p>After first-time installation, you can launch a local server instance which allows you to manage the experiments in your browser and stores the results.</p>
 <ol>
 <li>

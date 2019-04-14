@@ -50,33 +50,52 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">designing experiments</span>
+    <a class="" href="../01_designing_experiments/01_views/">Designing experiments</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Template views</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../01_designing_experiments/01_views/">Template views</a>
+    <a class="" href="../01_designing_experiments/02a_wrapping_views/">Wrapping views</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../01_designing_experiments/02_template_views/">Custom views</a>
+    <a class="" href="../01_designing_experiments/02b_trial_views/">Trial views</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../01_designing_experiments/02c_SPR/">Self-paced reading</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Custom views</span>
+    <ul class="subnav">
                 <li class="">
                     
     <a class="" href="../01_designing_experiments/03_custom_views/">Miscellaneous</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/05_canvas/">Canvas</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
-                </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../01_designing_experiments/05_canvas/">Canvas</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -112,17 +131,23 @@
             
     <li class="toctree-l2"><a href="#workflow">Workflow</a></li>
     
-        <ul>
-        
-            <li><a class="toctree-l3" href="#1-source-files">(1) Source files</a></li>
-        
-            <li><a class="toctree-l3" href="#2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</a></li>
-        
-            <li><a class="toctree-l3" href="#3-merge-into-master">(3) Merge into master</a></li>
-        
-            <li><a class="toctree-l3" href="#4-publish-to-npm">(4) Publish to npm</a></li>
-        
-        </ul>
+
+    <li class="toctree-l2"><a href="#1-source-files">(1) Source files</a></li>
+    
+
+    <li class="toctree-l2"><a href="#2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</a></li>
+    
+
+    <li class="toctree-l2"><a href="#option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</a></li>
+    
+
+    <li class="toctree-l2"><a href="#option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</a></li>
+    
+
+    <li class="toctree-l2"><a href="#3-merge-into-master">(3) Merge into master</a></li>
+    
+
+    <li class="toctree-l2"><a href="#4-publish-to-npm">(4) Publish to npm</a></li>
     
 
     </ul>
@@ -166,13 +191,13 @@
             <div class="section">
               
                 <p>To get the development version of the _babe package, clone this repository and install the dependencies by running <code>npm install</code> in the terminal.</p>
-<h4 id="workflow">Workflow</h4>
+<h6 id="workflow">Workflow</h6>
 <p>branches:</p>
 <ul>
 <li>master - Current stable version.</li>
 <li>development - Development version. This is where new featues or bug fixes are pushed. When the version is stable, the branch is merged into master.</li>
 </ul>
-<h5 id="1-source-files">(1) Source files</h5>
+<h6 id="1-source-files">(1) Source files</h6>
 <ul>
 <li>
 <p>src/</p>
@@ -190,18 +215,18 @@
 <p><code>babe.css</code></p>
 </li>
 </ul>
-<h5 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h5>
+<h6 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h6>
 <h6 id="option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</h6>
 <p>Use <code>npm run watch</code> command from the <code>babe-project</code> folder to start a process which watches for changes in the files in <code>src</code> and builds (updates) <code>babe.js</code> and <code>babe.full.js</code>. This commands builds both <code>babe.js</code> and <code>babe.full.js</code> when a file  in <code>src</code> is saved.</p>
 <h6 id="option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</h6>
 <p>Run <code>npm run concat</code> from the <code>babe-project</code> folder. This command builds both <code>babe.js</code> and <code>babe.full.js</code>.</p>
-<h5 id="3-merge-into-master">(3) Merge into master</h5>
+<h6 id="3-merge-into-master">(3) Merge into master</h6>
 <ul>
 <li>include a changelog information in the README</li>
 <li>merge to master</li>
 <li><a href="https://docs.npmjs.com/about-semantic-versioning">update the version of _babe</a> in <code>package.json</code></li>
 </ul>
-<h5 id="4-publish-to-npm">(4) Publish to npm</h5>
+<h6 id="4-publish-to-npm">(4) Publish to npm</h6>
 <p>Run <code>npm publish</code> from the <code>babe-project</code> folder to publish the new version of _babe.</p>
               
             </div>

@@ -50,42 +50,61 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">designing experiments</span>
+    <a class="" href="../01_views/">Designing experiments</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Template views</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../01_views/">Template views</a>
+    <a class="" href="../02a_wrapping_views/">Wrapping views</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../02_template_views/">Custom views</a>
+    <a class="" href="../02b_trial_views/">Trial views</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../02c_SPR/">Self-paced reading</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Custom views</span>
+    <ul class="subnav">
                 <li class="">
                     
     <a class="" href="../03_custom_views/">Miscellaneous</a>
                 </li>
-                <li class=" current">
-                    
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
     <a class="current" href="./">Life cycles & hooks</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#life-cycle">Life cycle</a></li>
+    <li class="toctree-l2"><a href="#life-cycle">Life cycle</a></li>
     
 
-    <li class="toctree-l3"><a href="#hooks">Hooks</a></li>
+    <li class="toctree-l2"><a href="#hooks">Hooks</a></li>
     
 
     </ul>
-                </li>
-                <li class="">
-                    
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../05_canvas/">Canvas</a>
-                </li>
-                <li class="">
-                    
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../06_complex_experiments/">Complex experiments</a>
-                </li>
-    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -145,10 +164,6 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>designing experiments &raquo;</li>
-        
-      
     
     <li>Life cycles & hooks</li>
     <li class="wy-breadcrumbs-aside">
@@ -161,7 +176,7 @@
             <div class="section">
               
                 <p>All trial views have a fixed life cycle that you can use to manipulate the timing of events during a trial. You can insert custom functions, so-called 'hooks' to massage template views into style.</p>
-<h3 id="life-cycle">Life cycle</h3>
+<h5 id="life-cycle">Life cycle</h5>
 <p>All the trial views go through 4 steps.</p>
 <ol>
 <li>
@@ -190,7 +205,7 @@
 <li>interactions are enabled - the participant can interact with the view (respond, read the sentence etc.)</li>
 </ol>
 <p>The views you created do not need to use these timeouts, however, each trial view still goes through these steps on the background and you can still <a href="#trial-view-hooks">hook</a> and call locally defined functions</p>
-<h3 id="hooks">Hooks</h3>
+<h5 id="hooks">Hooks</h5>
 <p>You can create functions in your local js files and hook these functions to the trial view. To understand how hooks work, first learn about babe's <a href="#trial-views-lifecycle">trial views lifecycle</a></p>
 <p><strong>Hooks</strong></p>
 <ul>
@@ -200,7 +215,7 @@
 </li>
 <li>
 <p>after the fixation point hides
-    enable with <code>hook.after_fin_point: _function_</code></p>
+    enable with <code>hook.after_fix_point: _function_</code></p>
 </li>
 <li>
 <p>after the stimulus is shown
