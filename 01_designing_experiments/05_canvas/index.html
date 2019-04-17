@@ -25,6 +25,8 @@
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -50,7 +52,13 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../01_views/">Designing experiments</a>
+    <span class="caption-text">Designing experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../01_views/">Overview</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -103,10 +111,6 @@
             <li><a class="toctree-l3" href="#obligatory-properties">obligatory properties</a></li>
         
             <li><a class="toctree-l3" href="#optional-properties">optional properties</a></li>
-        
-            <li><a class="toctree-l3" href="#grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</a></li>
-        
-            <li><a class="toctree-l3" href="#split-grid-extra-properties">Split Grid extra properties</a></li>
         
             <li><a class="toctree-l3" href="#canvas-element-settings">canvas element settings</a></li>
         
@@ -206,7 +210,7 @@
 <li><strong>split grid placement</strong></li>
 </ol>
 <p><img src='../../images/canvas_samples/split_grid.png' alt='split grid placement example' height='auto' width='600' /></p>
-<h5 id="how-to-use-babe-canvas">How to use babe canvas</h5>
+<h2 id="how-to-use-babe-canvas">How to use babe canvas</h2>
 <p>To generate a picture of shapes, all you need is to have <code>canvas</code> object with some properties in the data your views use.</p>
 <p>For example:</p>
 <pre><code>let trials = [
@@ -230,8 +234,8 @@
 ];
 </code></pre>
 
-<h5 id="data-format">Data format</h5>
-<h6 id="obligatory-properties">obligatory properties</h6>
+<h2 id="data-format">Data format</h2>
+<h3 id="obligatory-properties">obligatory properties</h3>
 <ul>
 <li>
 <p><code>sort</code> - the way the elements are arranged on the canvas.</p>
@@ -270,8 +274,8 @@
 </li>
 </ul>
 <p>The number of the other elements is total - focal.number</p>
-<h6 id="optional-properties">optional properties</h6>
-<h6 id="grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</h6>
+<h3 id="optional-properties">optional properties</h3>
+<h4 id="grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</h4>
 <ul>
 <li>
 <p><code>rows</code> the number of grid rows. Placed in one row of not given.</p>
@@ -291,7 +295,7 @@
 </ul>
 </li>
 </ul>
-<h6 id="split-grid-extra-properties">Split Grid extra properties</h6>
+<h4 id="split-grid-extra-properties">Split Grid extra properties</h4>
 <ul>
 <li>
 <p><code>gap</code> - the gap between the two sides. The default <code>gap</code> is 1.5 * <code>elemSize</code></p>
@@ -311,7 +315,7 @@
 </ul>
 </li>
 </ul>
-<h6 id="canvas-element-settings">canvas element settings</h6>
+<h3 id="canvas-element-settings">canvas element settings</h3>
 <p>You can add a <code>canvasSettings</code> object to your <code>canvas</code> if you want to set the height, width and background of the canvas.</p>
 <p>for example:</p>
 <pre><code>canvas: {
@@ -335,7 +339,7 @@
 - height is 300 (300px)
 - width is 500 (500px)
 - background is 'white'</p>
-<h5 id="examples">Examples</h5>
+<h2 id="examples">Examples</h2>
 <p><img src='../../images/canvas_samples/samples_1.png' alt='sample' height='auto' width='500' /></p>
 <pre><code>canvas: {
     canvasSettings: {

@@ -25,6 +25,8 @@
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -50,7 +52,13 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../01_designing_experiments/01_views/">Designing experiments</a>
+    <span class="caption-text">Designing experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../01_designing_experiments/01_views/">Overview</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -131,23 +139,17 @@
             
     <li class="toctree-l2"><a href="#workflow">Workflow</a></li>
     
-
-    <li class="toctree-l2"><a href="#1-source-files">(1) Source files</a></li>
-    
-
-    <li class="toctree-l2"><a href="#2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</a></li>
-    
-
-    <li class="toctree-l2"><a href="#option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</a></li>
-    
-
-    <li class="toctree-l2"><a href="#option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</a></li>
-    
-
-    <li class="toctree-l2"><a href="#3-merge-into-master">(3) Merge into master</a></li>
-    
-
-    <li class="toctree-l2"><a href="#4-publish-to-npm">(4) Publish to npm</a></li>
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1-source-files">(1) Source files</a></li>
+        
+            <li><a class="toctree-l3" href="#2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</a></li>
+        
+            <li><a class="toctree-l3" href="#3-merge-into-master">(3) Merge into master</a></li>
+        
+            <li><a class="toctree-l3" href="#4-publish-to-npm">(4) Publish to npm</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -191,13 +193,13 @@
             <div class="section">
               
                 <p>To get the development version of the _babe package, clone this repository and install the dependencies by running <code>npm install</code> in the terminal.</p>
-<h6 id="workflow">Workflow</h6>
+<h3 id="workflow">Workflow</h3>
 <p>branches:</p>
 <ul>
 <li>master - Current stable version.</li>
 <li>development - Development version. This is where new featues or bug fixes are pushed. When the version is stable, the branch is merged into master.</li>
 </ul>
-<h6 id="1-source-files">(1) Source files</h6>
+<h4 id="1-source-files">(1) Source files</h4>
 <ul>
 <li>
 <p>src/</p>
@@ -215,18 +217,18 @@
 <p><code>babe.css</code></p>
 </li>
 </ul>
-<h6 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h6>
-<h6 id="option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</h6>
+<h4 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h4>
+<h5 id="option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</h5>
 <p>Use <code>npm run watch</code> command from the <code>babe-project</code> folder to start a process which watches for changes in the files in <code>src</code> and builds (updates) <code>babe.js</code> and <code>babe.full.js</code>. This commands builds both <code>babe.js</code> and <code>babe.full.js</code> when a file  in <code>src</code> is saved.</p>
-<h6 id="option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</h6>
+<h5 id="option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</h5>
 <p>Run <code>npm run concat</code> from the <code>babe-project</code> folder. This command builds both <code>babe.js</code> and <code>babe.full.js</code>.</p>
-<h6 id="3-merge-into-master">(3) Merge into master</h6>
+<h4 id="3-merge-into-master">(3) Merge into master</h4>
 <ul>
 <li>include a changelog information in the README</li>
 <li>merge to master</li>
 <li><a href="https://docs.npmjs.com/about-semantic-versioning">update the version of _babe</a> in <code>package.json</code></li>
 </ul>
-<h6 id="4-publish-to-npm">(4) Publish to npm</h6>
+<h4 id="4-publish-to-npm">(4) Publish to npm</h4>
 <p>Run <code>npm publish</code> from the <code>babe-project</code> folder to publish the new version of _babe.</p>
               
             </div>

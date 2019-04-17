@@ -25,6 +25,8 @@
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -50,7 +52,13 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../01_views/">Designing experiments</a>
+    <span class="caption-text">Designing experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../01_views/">Overview</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -166,7 +174,7 @@
           <div role="main">
             <div class="section">
               
-                <h4 id="progress-bars">Progress bars</h4>
+                <h1 id="progress-bars">Progress bars</h1>
 <p><img src='../../images/progress_samples/pb_default.png' alt='progress bar sample' height='auto' width='700' /></p>
 <pre><code>progress_bar: {
     in: [
@@ -212,7 +220,7 @@
 // 20 trials overall, each trial fills part of its corresponding chunk. Each type of view has a separate progress bar and all progress bars are displayed.
 </code></pre>
 
-<h4 id="global-information">Global information</h4>
+<h1 id="global-information">Global information</h1>
               
             </div>
           </div>

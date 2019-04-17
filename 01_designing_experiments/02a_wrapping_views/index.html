@@ -25,6 +25,8 @@
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -50,7 +52,13 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../01_views/">Designing experiments</a>
+    <span class="caption-text">Designing experiments</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../01_views/">Overview</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -189,13 +197,7 @@
             <div class="section">
               
                 <p>Wrapping views are short, usually one-trial views that structure your experiment. They can provide a welcome message, instructions or collect post-survey data. The most important wrapping view is the <em>thanks</em> view. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong></p>
-<p>All wrapping views have two <strong>obligatory fields</strong>:</p>
-<ol>
-<li><code>trials: int</code> - the number of trials this view will appear</li>
-<li><code>name: string</code> - the name of the view</li>
-</ol>
-<p>Different types of wrapping views have more optional fields, as documented below. </p>
-<h4 id="intro-view">Intro view</h4>
+<h1 id="intro-view">Intro view</h1>
 <p>Instantiate with <code>babeViews.intro</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -214,7 +216,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="instructions-view">Instructions view</h4>
+<h1 id="instructions-view">Instructions view</h1>
 <p>Instantiate with <code>babeViews.instructions</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -233,7 +235,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="begin-view">Begin view</h4>
+<h1 id="begin-view">Begin view</h1>
 <p>Instantiate with <code>babeViews.begin</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -252,7 +254,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="posttest-view">PostTest view</h4>
+<h1 id="posttest-view">PostTest view</h1>
 <p>Instantiate with <code>babeViews.postTest</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -326,7 +328,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="thanks-view">Thanks view</h4>
+<h1 id="thanks-view">Thanks view</h1>
 <p>Instantiate with <code>babeViews.thanks</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
 <ul>
 <li><code>title: string</code><ul>
@@ -350,7 +352,7 @@
         <a href="../02b_trial_views/" class="btn btn-neutral float-right" title="Trial views">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../01_views/" class="btn btn-neutral" title="Designing experiments"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../01_views/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
