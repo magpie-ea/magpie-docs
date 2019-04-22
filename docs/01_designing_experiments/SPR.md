@@ -1,4 +1,6 @@
-# Self-paced reading with forced choice response
+# SPR
+
+## Self-paced reading with forced choice response
 
 * **Obligatory Fields**
     * `sentence: string`
@@ -37,7 +39,7 @@ const spr_trials = [
 ];
 ```
 
-# Self-paced reading task with rating scale response
+## Self-paced reading task with rating scale response
 
 
 

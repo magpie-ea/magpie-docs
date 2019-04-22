@@ -1,7 +1,9 @@
+# Trial Views
+
 Trial views are the parts of your experiment which are (usually) instantiated several times (realizing different trials of your, say, main experimental task). They usually collect the data and often rely on additional information (e.g., the picture to be displayed in trial 27, or the question and answer options for trial 13).
 
 
-# Forced-choice task
+## Forced-choice task
 
 Instantiate with `babeView.forcedChoice`. Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.
 
@@ -29,7 +31,7 @@ const forced_choice_trials = [
     }
 ];
 ```
-# Sentence Choice task
+## Sentence Choice task
 
 Instantiate with `babeViews.sentenceChoice`. Similar to the `forcedChoice` view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.
 
@@ -68,9 +70,9 @@ const sentence_choice_trials = [
 ];
 ```
 
-# Image Selection task
+## Image Selection task
 
-Instantiate with `babeViews.imageSelection`. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. 
+Instantiate with `babeViews.imageSelection`. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures.
 
 <img src='../../images/views_samples/view_is.png' alt='sample' height='auto' width='auto' style="border:2px solid black" />
 
@@ -105,9 +107,9 @@ const image_selection_trials = [
 ];
 ```
 
-# Textbox Input task
+## Textbox Input task
 
-Instantiate with `babeViews.textboxInput`. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the `next` button appears. 
+Instantiate with `babeViews.textboxInput`. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the `next` button appears.
 
 <img src='../../images/views_samples/view_ti.png' alt='sample' height='auto' width='auto' style="border:2px solid black" />
 
@@ -138,7 +140,7 @@ const textbox_input_trials = [
 ];
 ```
 
-# Slider Rating task
+## Slider Rating task
 
 Instantiate with `babeViews.sliderRating`. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The `next` button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.
 
@@ -172,7 +174,7 @@ const slider_rating_trials = [
 ];
 ```
 
-# Dropdown Choice task
+## Dropdown Choice task
 
 Instantiate with `babeViews.dropdownChoice`. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.
 
@@ -208,7 +210,7 @@ const dropdown_choice_trials = [
 ];
 ```
 
-# Rating Scale task
+## Rating Scale task
 
 Instantiate with `babeViews.ratingScale`. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.
 
@@ -244,7 +246,7 @@ const rating_scale_trials = [
 ];
 ```
 
-# Key Press task
+## Key Press task
 
 Instantiate with `babeViews.keyPress`. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.
 
@@ -285,4 +287,3 @@ const key_press_trials = [
     }
 ];
 ```
-
