@@ -10,6 +10,7 @@
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Wrapping views - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
@@ -25,8 +26,8 @@
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/elixir.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -47,120 +48,233 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
+	<ul class="tocbase current">
+    
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Designing experiments</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Designing experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../01_views/">Overview</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Template views</span>
-    <ul class="subnav">
-                <li class=" current">
-                    
-    <a class="current" href="./">Wrapping views</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#intro-view">Intro view</a></li>
-    
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Template views</p>
+  </li>
 
-    <li class="toctree-l3"><a href="#instructions-view">Instructions view</a></li>
-    
 
-    <li class="toctree-l3"><a href="#begin-view">Begin view</a></li>
-    
+  
 
-    <li class="toctree-l3"><a href="#posttest-view">PostTest view</a></li>
-    
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
 
-    <li class="toctree-l3"><a href="#thanks-view">Thanks view</a></li>
-    
 
-    </ul>
-                </li>
-                <li class="">
-                    
+  
+    
+    <li class="navtree toctree-l3 page current">
+      <a class="current" href="./">
+        Wrapping views
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l3 current with-children">
+    <a href="#intro-view">
+      Intro view
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l3">
+    <a href="#instructions-view">
+      Instructions view
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l3">
+    <a href="#begin-view">
+      Begin view
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l3">
+    <a href="#posttest-view">
+      PostTest view
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l3">
+    <a href="#thanks-view">
+      Thanks view
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../02b_trial_views/">Trial views</a>
-                </li>
-                <li class="">
-                    
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../02c_SPR/">Self-paced reading</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+        
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Custom views</span>
-    <ul class="subnav">
-                <li class="">
-                    
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Custom views</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../03_custom_views/">Miscellaneous</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+        
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../04_lifecycles_hooks/">Life cycles & hooks</a>
-	    </li>
+  </li>
+        
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../05_canvas/">Canvas</a>
-	    </li>
+  </li>
+        
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../06_complex_experiments/">Complex experiments</a>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">server app</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">server app</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../02_using_the_server_app/01_installation/">Installation</a>
-                </li>
-                <li class="">
-                    
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../02_using_the_server_app/02_use/">Use</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">deploying experiments</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">deploying experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../03_deploying_experiments/01_hosting_on_netlify/">Hosting on netlify</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
     <a class="" href="../../04_development/">Development</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
     <a class="" href="../../05_about/">About</a>
-	    </li>
-          
-        </ul>
+  </li>
+    
+  </ul>
       </div>
       &nbsp;
     </nav>
@@ -185,9 +299,16 @@
           <li>Template views &raquo;</li>
         
       
+        
+          <li>Designing experiments &raquo;</li>
+        
+      
     
     <li>Wrapping views</li>
     <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/02a_wrapping_views.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -197,7 +318,7 @@
             <div class="section">
               
                 <p>Wrapping views are short, usually one-trial views that structure your experiment. They can provide a welcome message, instructions or collect post-survey data. The most important wrapping view is the <em>thanks</em> view. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong></p>
-<h1 id="intro-view">Intro view</h1>
+<h4 id="intro-view">Intro view</h4>
 <p>Instantiate with <code>babeViews.intro</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -216,7 +337,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="instructions-view">Instructions view</h1>
+<h4 id="instructions-view">Instructions view</h4>
 <p>Instantiate with <code>babeViews.instructions</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -235,7 +356,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="begin-view">Begin view</h1>
+<h4 id="begin-view">Begin view</h4>
 <p>Instantiate with <code>babeViews.begin</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -254,7 +375,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="posttest-view">PostTest view</h1>
+<h4 id="posttest-view">PostTest view</h4>
 <p>Instantiate with <code>babeViews.postTest</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
@@ -328,7 +449,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="thanks-view">Thanks view</h1>
+<h4 id="thanks-view">Thanks view</h4>
 <p>Instantiate with <code>babeViews.thanks</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
 <ul>
 <li><code>title: string</code><ul>
@@ -378,6 +499,8 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../01_views/" style="color: #fcfcfc;">&laquo; Previous</a></span>

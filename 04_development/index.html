@@ -10,6 +10,7 @@
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Development - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
@@ -25,8 +26,8 @@
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/elixir.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -47,120 +48,255 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Designing experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/01_views/">Overview</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Template views</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/02a_wrapping_views/">Wrapping views</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/02b_trial_views/">Trial views</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/02c_SPR/">Self-paced reading</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Custom views</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../01_designing_experiments/03_custom_views/">Miscellaneous</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../01_designing_experiments/05_canvas/">Canvas</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">server app</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../02_using_the_server_app/01_installation/">Installation</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../02_using_the_server_app/02_use/">Use</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">deploying experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../03_deploying_experiments/01_hosting_on_netlify/">Hosting on netlify</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Development</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#workflow">Workflow</a></li>
+	<ul class="tocbase current">
     
-        <ul>
-        
-            <li><a class="toctree-l3" href="#1-source-files">(1) Source files</a></li>
-        
-            <li><a class="toctree-l3" href="#2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</a></li>
-        
-            <li><a class="toctree-l3" href="#3-merge-into-master">(3) Merge into master</a></li>
-        
-            <li><a class="toctree-l3" href="#4-publish-to-npm">(4) Publish to npm</a></li>
-        
-        </ul>
     
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Designing experiments</p>
+  </li>
 
-    </ul>
-	    </li>
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../01_designing_experiments/01_views/">Overview</a>
+  </li>
+        
+          
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Template views</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
+    <a class="" href="../01_designing_experiments/02a_wrapping_views/">Wrapping views</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
+    <a class="" href="../01_designing_experiments/02b_trial_views/">Trial views</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
+    <a class="" href="../01_designing_experiments/02c_SPR/">Self-paced reading</a>
+  </li>
+        
+      </ul>
+    </li>
+        
+          
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Custom views</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
+    <a class="" href="../01_designing_experiments/03_custom_views/">Miscellaneous</a>
+  </li>
+        
+      </ul>
+    </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../01_designing_experiments/04_lifecycles_hooks/">Life cycles & hooks</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../01_designing_experiments/05_canvas/">Canvas</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../01_designing_experiments/06_complex_experiments/">Complex experiments</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">server app</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../02_using_the_server_app/01_installation/">Installation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../02_using_the_server_app/02_use/">Use</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">deploying experiments</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../03_deploying_experiments/01_hosting_on_netlify/">Hosting on netlify</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  
+    
+    <li class="navtree toctree-l1 page current">
+      <a class="current" href="./">
+        Development
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l1 current with-children">
+    <a href="#workflow">
+      Workflow
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#1-source-files">
+      (1) Source files
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#2-create-babejs-and-babefulljs">
+      (2) Create babe.js and babe.full.js
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#option-1-build-the-95babe-package-files-while-developing">
+      Option 1: Build the _babe package files while developing
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#option-2-make-changes-to-the-files-and-then-build-the-95babe-files">
+      Option 2: Make changes to the files and then build the _babe files
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#3-merge-into-master">
+      (3) Merge into master
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l1">
+    <a href="#4-publish-to-npm">
+      (4) Publish to npm
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+
+  
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
     <a class="" href="../05_about/">About</a>
-	    </li>
-          
-        </ul>
+  </li>
+    
+  </ul>
       </div>
       &nbsp;
     </nav>
@@ -185,6 +321,9 @@
     <li>Development</li>
     <li class="wy-breadcrumbs-aside">
       
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/04_development.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
   <hr/>
@@ -193,13 +332,13 @@
             <div class="section">
               
                 <p>To get the development version of the _babe package, clone this repository and install the dependencies by running <code>npm install</code> in the terminal.</p>
-<h3 id="workflow">Workflow</h3>
+<h6 id="workflow">Workflow</h6>
 <p>branches:</p>
 <ul>
 <li>master - Current stable version.</li>
 <li>development - Development version. This is where new featues or bug fixes are pushed. When the version is stable, the branch is merged into master.</li>
 </ul>
-<h4 id="1-source-files">(1) Source files</h4>
+<h6 id="1-source-files">(1) Source files</h6>
 <ul>
 <li>
 <p>src/</p>
@@ -217,18 +356,18 @@
 <p><code>babe.css</code></p>
 </li>
 </ul>
-<h4 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h4>
-<h5 id="option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</h5>
+<h6 id="2-create-babejs-and-babefulljs">(2) Create babe.js and babe.full.js</h6>
+<h6 id="option-1-build-the-95babe-package-files-while-developing">Option 1: Build the _babe package files while developing</h6>
 <p>Use <code>npm run watch</code> command from the <code>babe-project</code> folder to start a process which watches for changes in the files in <code>src</code> and builds (updates) <code>babe.js</code> and <code>babe.full.js</code>. This commands builds both <code>babe.js</code> and <code>babe.full.js</code> when a file  in <code>src</code> is saved.</p>
-<h5 id="option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</h5>
+<h6 id="option-2-make-changes-to-the-files-and-then-build-the-95babe-files">Option 2: Make changes to the files and then build the _babe files</h6>
 <p>Run <code>npm run concat</code> from the <code>babe-project</code> folder. This command builds both <code>babe.js</code> and <code>babe.full.js</code>.</p>
-<h4 id="3-merge-into-master">(3) Merge into master</h4>
+<h6 id="3-merge-into-master">(3) Merge into master</h6>
 <ul>
 <li>include a changelog information in the README</li>
 <li>merge to master</li>
 <li><a href="https://docs.npmjs.com/about-semantic-versioning">update the version of _babe</a> in <code>package.json</code></li>
 </ul>
-<h4 id="4-publish-to-npm">(4) Publish to npm</h4>
+<h6 id="4-publish-to-npm">(4) Publish to npm</h6>
 <p>Run <code>npm publish</code> from the <code>babe-project</code> folder to publish the new version of _babe.</p>
               
             </div>
@@ -266,6 +405,8 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../03_deploying_experiments/01_hosting_on_netlify/" style="color: #fcfcfc;">&laquo; Previous</a></span>

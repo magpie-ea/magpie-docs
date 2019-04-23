@@ -10,6 +10,7 @@
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Canvas - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
@@ -25,8 +26,8 @@
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/elixir.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -47,124 +48,243 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
+	<ul class="tocbase current">
+    
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Designing experiments</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Designing experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../01_views/">Overview</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Template views</span>
-    <ul class="subnav">
-                <li class="">
-                    
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Template views</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../02a_wrapping_views/">Wrapping views</a>
-                </li>
-                <li class="">
-                    
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../02b_trial_views/">Trial views</a>
-                </li>
-                <li class="">
-                    
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../02c_SPR/">Self-paced reading</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+        
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Custom views</span>
-    <ul class="subnav">
-                <li class="">
-                    
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Custom views</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../03_custom_views/">Miscellaneous</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+        
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../04_lifecycles_hooks/">Life cycles & hooks</a>
-	    </li>
+  </li>
+        
           
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Canvas</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#how-to-use-babe-canvas">How to use babe canvas</a></li>
-    
 
-    <li class="toctree-l2"><a href="#data-format">Data format</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#obligatory-properties">obligatory properties</a></li>
-        
-            <li><a class="toctree-l3" href="#optional-properties">optional properties</a></li>
-        
-            <li><a class="toctree-l3" href="#canvas-element-settings">canvas element settings</a></li>
-        
-        </ul>
-    
 
-    <li class="toctree-l2"><a href="#examples">Examples</a></li>
+  
     
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Canvas
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
 
+  <li class="toctree-l2 current with-children">
+    <a href="#how-to-use-babe-canvas">
+      How to use babe canvas
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+      
+
+  <li class="toctree-l2">
+    <a href="#data-format">
+      Data format
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#obligatory-properties">obligatory properties</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#optional-properties">optional properties</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#split-grid-extra-properties">Split Grid extra properties</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#canvas-element-settings">canvas element settings</a>
+        </li>
+    
     </ul>
-	    </li>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#examples">
+      Examples
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+
+  
+        
           
-            <li class="toctree-l1">
-		
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../06_complex_experiments/">Complex experiments</a>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">server app</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">server app</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../02_using_the_server_app/01_installation/">Installation</a>
-                </li>
-                <li class="">
-                    
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../02_using_the_server_app/02_use/">Use</a>
-                </li>
-    </ul>
-	    </li>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">deploying experiments</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
           
-            <li class="toctree-l1">
-		
-    <span class="caption-text">deploying experiments</span>
-    <ul class="subnav">
-                <li class="">
-                    
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../03_deploying_experiments/01_hosting_on_netlify/">Hosting on netlify</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
     <a class="" href="../../04_development/">Development</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
     <a class="" href="../../05_about/">About</a>
-	    </li>
-          
-        </ul>
+  </li>
+    
+  </ul>
       </div>
       &nbsp;
     </nav>
@@ -185,9 +305,16 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Designing experiments &raquo;</li>
+        
+      
     
     <li>Canvas</li>
     <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/05_canvas.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -210,7 +337,7 @@
 <li><strong>split grid placement</strong></li>
 </ol>
 <p><img src='../../images/canvas_samples/split_grid.png' alt='split grid placement example' height='auto' width='600' /></p>
-<h2 id="how-to-use-babe-canvas">How to use babe canvas</h2>
+<h5 id="how-to-use-babe-canvas">How to use babe canvas</h5>
 <p>To generate a picture of shapes, all you need is to have <code>canvas</code> object with some properties in the data your views use.</p>
 <p>For example:</p>
 <pre><code>let trials = [
@@ -234,8 +361,8 @@
 ];
 </code></pre>
 
-<h2 id="data-format">Data format</h2>
-<h3 id="obligatory-properties">obligatory properties</h3>
+<h5 id="data-format">Data format</h5>
+<h6 id="obligatory-properties">obligatory properties</h6>
 <ul>
 <li>
 <p><code>sort</code> - the way the elements are arranged on the canvas.</p>
@@ -274,8 +401,8 @@
 </li>
 </ul>
 <p>The number of the other elements is total - focal.number</p>
-<h3 id="optional-properties">optional properties</h3>
-<h4 id="grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</h4>
+<h6 id="optional-properties">optional properties</h6>
+<h6 id="grid-placement-and-split-grid-placement-extra-properties">Grid placement and split Grid Placement extra properties</h6>
 <ul>
 <li>
 <p><code>rows</code> the number of grid rows. Placed in one row of not given.</p>
@@ -295,7 +422,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="split-grid-extra-properties">Split Grid extra properties</h4>
+<h6 id="split-grid-extra-properties">Split Grid extra properties</h6>
 <ul>
 <li>
 <p><code>gap</code> - the gap between the two sides. The default <code>gap</code> is 1.5 * <code>elemSize</code></p>
@@ -315,7 +442,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="canvas-element-settings">canvas element settings</h3>
+<h6 id="canvas-element-settings">canvas element settings</h6>
 <p>You can add a <code>canvasSettings</code> object to your <code>canvas</code> if you want to set the height, width and background of the canvas.</p>
 <p>for example:</p>
 <pre><code>canvas: {
@@ -339,7 +466,7 @@
 - height is 300 (300px)
 - width is 500 (500px)
 - background is 'white'</p>
-<h2 id="examples">Examples</h2>
+<h5 id="examples">Examples</h5>
 <p><img src='../../images/canvas_samples/samples_1.png' alt='sample' height='auto' width='500' /></p>
 <pre><code>canvas: {
     canvasSettings: {
@@ -495,6 +622,8 @@ canvas: {
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../04_lifecycles_hooks/" style="color: #fcfcfc;">&laquo; Previous</a></span>
