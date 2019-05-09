@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Self-paced reading - _babe documentation</title>
+  <title>Progress bars - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Self-paced reading";
-    var mkdocs_page_input_path = "01_designing_experiments/02c_SPR.md";
+    var mkdocs_page_name = "Progress bars";
+    var mkdocs_page_input_path = "designing_experiments/03_miscellaneous.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -67,28 +67,28 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../01_template_views/">Template views</a>
+    <a class="" href="../../01_designing_experiments/01_template_views/">Template views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../03_custom_views/">Custom views</a>
+    <a class="" href="../../01_designing_experiments/03_custom_views/">Custom views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../04_lifecycles_hooks/">Life cycles and hooks</a>
+    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles and hooks</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../05_canvas/">Canvas</a>
+    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
   </li>
         
       </ul>
@@ -179,10 +179,10 @@
     
       
     
-    <li>Self-paced reading</li>
+    <li>Progress bars</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/02c_SPR.md"
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/designing_experiments/03_miscellaneous.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -192,100 +192,53 @@
           <div role="main">
             <div class="section">
               
-                <h4 id="self-paced-reading">Self-paced reading</h4>
-<p>There are templates for realizing self-paced reading tasks too.</p>
-<h5 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h5>
-<ul>
-<li>
-<p><strong>Obligatory Fields</strong></p>
-<ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>option1: string</code></li>
-<li><code>option2: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Optional Fields</strong></p>
-<ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code><ul>
-<li>instructions to press SPACE above the spr sentence lines</li>
-<li>default - <em>Press the SPACE bar to reveal the words</em></li>
-</ul>
-</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Sample data</strong></p>
-</li>
-</ul>
-<pre><code>const spr_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'just press SPACE',
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;all | of | the | yellow | marbles | are | inside | the | case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;
-    }
-];
+                <h4 id="progress-bars">Progress bars</h4>
+<p><img src='../../images/progress_samples/pb_default.png' alt='progress bar sample' height='auto' width='700' /></p>
+<pre><code>progress_bar: {
+    in: [
+        'forced_choice',    // 6 trials
+        'dropdown_choice'   // 10 trials
+        'slider_rating',    // 4 trials
+    ],
+    style: &quot;default&quot;,
+    width: 120          // 120 pixels
+}
+
+
+// 20 trials overall, each trial fills 10 pixels (120/20) part of the progress bar
 </code></pre>
 
-<h5 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h5>
-<ul>
-<li>
-<p><strong>Obligatory Fields</strong></p>
-<ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>optionLeft: string</code></li>
-<li><code>optionRight: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Optional Fields</strong></p>
-<ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code> - SPACE press text above the spr sentence</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
-</ul>
-</li>
-</ul>
-<pre><code>const spr_rc_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'SPACEEEE',
-        sentence: &quot;all | of the | yellow marbles | are | inside | the case.'&quot;,
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;
-    }
-];
+<p><img src='../../images/progress_samples/pb_separate.png' alt='progress bar sample' height='auto' width='700' /></p>
+<pre><code>progress_bar: {
+    in: [
+        'forced_choice',    // 6 trials
+        'dropdown_choice'   // 10 trials
+        'slider_rating',    // 4 trials
+    ],
+    style: &quot;separate&quot;,
+    width: 120          // 120 pixels
+}
+
+
+// 20 trials overall, each trial fills (120/total trials) pixels part of the progress bar. Each type of view has a separate progress bar.
 </code></pre>
+
+<p><img src='../../images/progress_samples/pb_chunks.png' alt='progress bar sample' height='auto' width='700' /></p>
+<pre><code>progress_bar: {
+    in: [
+        'forced_choice',    // 6 trials
+        'dropdown_choice'   // 10 trials
+        'slider_rating',    // 4 trials
+    ],
+    style: &quot;chunks&quot;,
+    width: 60           // 60 pixels
+}
+
+
+// 20 trials overall, each trial fills part of its corresponding chunk. Each type of view has a separate progress bar and all progress bars are displayed.
+</code></pre>
+
+<h4 id="global-information">Global information</h4>
               
             </div>
           </div>

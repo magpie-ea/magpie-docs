@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Self-paced reading - _babe documentation</title>
+  <title>04 lifecycles hooks - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Self-paced reading";
-    var mkdocs_page_input_path = "01_designing_experiments/02c_SPR.md";
+    var mkdocs_page_name = "04 lifecycles hooks";
+    var mkdocs_page_input_path = "designing_experiments/04_lifecycles_hooks.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -67,28 +67,28 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../01_template_views/">Template views</a>
+    <a class="" href="../../01_designing_experiments/01_template_views/">Template views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../03_custom_views/">Custom views</a>
+    <a class="" href="../../01_designing_experiments/03_custom_views/">Custom views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../04_lifecycles_hooks/">Life cycles and hooks</a>
+    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles and hooks</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../05_canvas/">Canvas</a>
+    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
   </li>
         
       </ul>
@@ -179,10 +179,10 @@
     
       
     
-    <li>Self-paced reading</li>
+    <li>04 lifecycles hooks</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/02c_SPR.md"
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/designing_experiments/04_lifecycles_hooks.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -192,99 +192,104 @@
           <div role="main">
             <div class="section">
               
-                <h4 id="self-paced-reading">Self-paced reading</h4>
-<p>There are templates for realizing self-paced reading tasks too.</p>
-<h5 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h5>
-<ul>
+                <p>All trial views have a fixed life cycle that you can use to manipulate the timing of events during a trial. You can insert custom functions, so-called 'hooks' to massage template views into style.</p>
+<h5 id="life-cycle">Life cycle</h5>
+<p>All the trial views go through 4 steps.</p>
+<ol>
 <li>
-<p><strong>Obligatory Fields</strong></p>
+<p>pause step - blank screen</p>
 <ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>option1: string</code></li>
-<li><code>option2: string</code></li>
+<li>enable by passing <code>pause: number (in miliseconds)</code> (will show a pause for after number amount of time)</li>
+<li>shows nothing but a blank screen and the <code>QUD</code> if there is such</li>
 </ul>
 </li>
 <li>
-<p><strong>Optional Fields</strong></p>
+<p>fixation point step - a cross in the middle where the stimulus appears</p>
 <ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code><ul>
-<li>instructions to press SPACE above the spr sentence lines</li>
-<li>default - <em>Press the SPACE bar to reveal the words</em></li>
-</ul>
-</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
+<li>passed to the trial view as <code>fix_duration: number (in miliseconds)</code></li>
+<li>shows a cross in the middle of the stimulus and the <code>QUD</code> if there is such</li>
 </ul>
 </li>
 <li>
-<p><strong>Sample data</strong></p>
+<p>stimulus shown step - stimulus appears</p>
+</li>
+</ol>
+<p>3.5 (optional) stimulus hidden step - hides the stimulus from the screen
+    * hide the stimulus after certain amount of time by passing <code>stim_duration: number (in miliseconds)</code> to the view creation
+    * hide the stimulus when SPACE gets pressed with <code>stim_duration: 'space'</code>
+    * skip this step by not defining <code>stim_duration</code></p>
+<ol>
+<li>interactions are enabled - the participant can interact with the view (respond, read the sentence etc.)</li>
+</ol>
+<p>The views you created do not need to use these timeouts, however, each trial view still goes through these steps on the background and you can still <a href="#trial-view-hooks">hook</a> and call locally defined functions</p>
+<h5 id="hooks">Hooks</h5>
+<p>You can create functions in your local js files and hook these functions to the trial view. To understand how hooks work, first learn about babe's <a href="#trial-views-lifecycle">trial views lifecycle</a></p>
+<p><strong>Hooks</strong></p>
+<ul>
+<li>
+<p>after the pause is finished
+    enable with <code>hook.after_pause: _function_</code></p>
+</li>
+<li>
+<p>after the fixation point hides
+    enable with <code>hook.after_fix_point: _function_</code></p>
+</li>
+<li>
+<p>after the stimulus is shown
+    enable with <code>hook.after_stim_shown: _function_</code></p>
+</li>
+<li>
+<p>after the stimulus hides
+    enable with <code>hook.after_stim_hidden: _function_</code></p>
+</li>
+<li>
+<p>after the interactions are enabled
+    enable with <code>hook.after_response_enabled: _function_</code></p>
 </li>
 </ul>
-<pre><code>const spr_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'just press SPACE',
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;all | of | the | yellow | marbles | are | inside | the | case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;
-    }
-];
+<p>Your custom functions get the trial <code>data</code> for each trial view and <code>next</code> as arguments. You can use the <code>data</code> if you need to. To proceed to the next step of the lifecycle, you have to call <code>next()</code></p>
+<p><strong>Full lifecycle - hook sample</strong></p>
+<ol>
+<li>pause shows</li>
+<li>pause finishes</li>
+<li>after_pause function called</li>
+<li>fixation point shows</li>
+<li>fixation point disappears</li>
+<li>after_fix_point function called</li>
+<li>stimulus shows</li>
+<li>after_stim_shown function called</li>
+<li>stimlus hides</li>
+<li>after_stim_hidden function called</li>
+<li>response is enabled</li>
+<li>after_response_enabled function called</li>
+</ol>
+<p><strong>Real example</strong></p>
+<p>Imagine you want to tell the participants whether their repsonse was correct while they are getting familiar with the experiment, for example in the practice trial view. To do that you need to get the answer they chose and check it for correctness. You can define a funciton that gets their response and hook to the trial view after the response is enabled. In the example below, assume that <code>option1</code> is always the correct answer.</p>
+<pre><code>// compares the chosen answer to the value of `option1`
+function checkResponse(data, next) {
+    $('input[name=answer]').on('change', function(e) {
+        if (e.target.value === data.option1) {
+            alert('Your answer is correct! Yey!');
+        } else {
+            alert('Sorry, this answer is incorrect :(');
+        }
+        next();
+    })
+}
 </code></pre>
 
-<h5 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h5>
-<ul>
-<li>
-<p><strong>Obligatory Fields</strong></p>
-<ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>optionLeft: string</code></li>
-<li><code>optionRight: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Optional Fields</strong></p>
-<ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code> - SPACE press text above the spr sentence</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
-</ul>
-</li>
-</ul>
-<pre><code>const spr_rc_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'SPACEEEE',
-        sentence: &quot;all | of the | yellow marbles | are | inside | the case.'&quot;,
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;
+<p>and add a <code>after_response_enabled</code> hook to the view:</p>
+<pre><code>const practice = babeViews.forcedChoice({
+    trials: 20,
+    name: 'practice',
+    trial_type: 'practice',
+    data: practice_trials.forcedChoice,
+    fix_duration: 500,
+    pause: 500,
+    hook: {
+        after_response_enabled: checkResponse
     }
-];
+});
 </code></pre>
               
             </div>

@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Life cycles & hooks - _babe documentation</title>
+  <title>Life cycles and hooks - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -19,7 +19,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Life cycles & hooks";
+    var mkdocs_page_name = "Life cycles and hooks";
     var mkdocs_page_input_path = "01_designing_experiments/04_lifecycles_hooks.md";
     var mkdocs_page_url = null;
   </script>
@@ -54,7 +54,7 @@
     
       
   <li class="navtree toctree-l1 label">
-    <p class="caption">Designing experiments</p>
+    <p class="caption">Designing Experiments</p>
   </li>
 
 
@@ -67,64 +67,15 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../01_views/">Overview</a>
-  </li>
-        
-          
-  <li class="navtree toctree-l2 label">
-    <p class="caption">Template views</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l2 group">
-      <ul class="navtree subnav-l2 current">
-          
-
-
-  <li class="navtree toctree-l3 inactive">
-    <a class="" href="../02a_wrapping_views/">Wrapping views</a>
+    <a class="" href="../01_template_views/">Template views</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l3 inactive">
-    <a class="" href="../02b_trial_views/">Trial views</a>
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../03_custom_views/">Custom views</a>
   </li>
-        
-          
-
-
-  <li class="navtree toctree-l3 inactive">
-    <a class="" href="../02c_SPR/">Self-paced reading</a>
-  </li>
-        
-      </ul>
-    </li>
-        
-          
-  <li class="navtree toctree-l2 label">
-    <p class="caption">Custom views</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l2 group">
-      <ul class="navtree subnav-l2 current">
-          
-
-
-  <li class="navtree toctree-l3 inactive">
-    <a class="" href="../03_custom_views/">Miscellaneous</a>
-  </li>
-        
-      </ul>
-    </li>
         
           
 
@@ -133,32 +84,30 @@
     
     <li class="navtree toctree-l2 page current">
       <a class="current" href="./">
-        Life cycles & hooks
+        Life cycles and hooks
           <span class="toctree-expand"></span>
       </a>
     </li>
     
       
 
-  <li class="toctree-l2 current with-children">
-    <a href="#life-cycle">
-      Life cycle
-      <span class="toctree-expand"></span>
-    </a>
-  </li>
 
 
-
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
       
-
-  <li class="toctree-l2">
-    <a href="#hooks">
-      Hooks
-      <span class="toctree-expand"></span>
-    </a>
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#life-cycle">Life cycle</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#hooks">Hooks</a>
+        </li>
+    
+    </ul>
   </li>
-
-
 
 
   
@@ -168,13 +117,6 @@
 
   <li class="navtree toctree-l2 inactive">
     <a class="" href="../05_canvas/">Canvas</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../06_complex_experiments/">Complex experiments</a>
   </li>
         
       </ul>
@@ -265,11 +207,11 @@
     
       
         
-          <li>Designing experiments &raquo;</li>
+          <li>Designing Experiments &raquo;</li>
         
       
     
-    <li>Life cycles & hooks</li>
+    <li>Life cycles and hooks</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/04_lifecycles_hooks.md"
@@ -282,7 +224,8 @@
           <div role="main">
             <div class="section">
               
-                <p>All trial views have a fixed life cycle that you can use to manipulate the timing of events during a trial. You can insert custom functions, so-called 'hooks' to massage template views into style.</p>
+                <h4 id="life-cycles-and-hooks">Life cycles and hooks</h4>
+<p>All trial views have a fixed life cycle that you can use to manipulate the timing of events during a trial. You can insert custom functions, so-called 'hooks' to massage template views into style.</p>
 <h5 id="life-cycle">Life cycle</h5>
 <p>All the trial views go through 4 steps.</p>
 <ol>
@@ -391,7 +334,7 @@ function checkResponse(data, next) {
         <a href="../05_canvas/" class="btn btn-neutral float-right" title="Canvas">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../03_custom_views/" class="btn btn-neutral" title="Miscellaneous"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../03_custom_views/" class="btn btn-neutral" title="Custom views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
