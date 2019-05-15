@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Wrapping Views - _babe documentation</title>
+  <title>Progress bars - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Wrapping Views";
-    var mkdocs_page_input_path = "01_designing_experiments/Wrapping Views.md";
+    var mkdocs_page_name = "Progress bars";
+    var mkdocs_page_input_path = "01_designing_experiments/06_progress_bars.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -91,6 +91,25 @@
     <a class="" href="../05_canvas/">Canvas</a>
   </li>
         
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Progress bars
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+
+
+
+  
+        
       </ul>
     </li>
     
@@ -144,18 +163,32 @@
     </li>
     
       
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Misc</p>
+  </li>
 
 
-  <li class="navtree toctree-l1 inactive">
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../04_development/">Development</a>
   </li>
-    
-      
+        
+          
 
 
-  <li class="navtree toctree-l1 inactive">
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../../05_about/">About</a>
   </li>
+        
+      </ul>
+    </li>
     
   </ul>
       </div>
@@ -178,11 +211,15 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Designing Experiments &raquo;</li>
+        
+      
     
-    <li>Wrapping Views</li>
+    <li>Progress bars</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/Wrapping Views.md"
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/06_progress_bars.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -192,157 +229,90 @@
           <div role="main">
             <div class="section">
               
-                <h4 id="wrapping-views">Wrapping Views</h4>
-<p>Wrapping views are short, usually one-trial views that structure your experiment. They can provide a welcome message, instructions or collect post-survey data. The most important wrapping view is the <em>thanks</em> view. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong></p>
-<h5 id="intro-view">Intro view</h5>
-<p>Instantiate with <code>babeViews.intro</code>. Optional fields:</p>
+                <h4 id="progress-bars">Progress bars</h4>
+<p>_babe provides the option to include progress bars in selected views. For example, when you have defined views for variables <code>practice</code> and <code>main</code>, you can include progress bars for these views by specifying this information during the creation of the _babe object, like so:</p>
+<pre><code>$(&quot;document&quot;).ready(function() {
+    babeInit({
+        ...
+        progress_bar: {
+            in: [
+                practice.name,
+                main.name
+            ],                  // only the practice and the main view will have progress bars in this experiment
+            style: &quot;chunks&quot;,    // there will be two chunks - one for the practice and one for the main view
+            width: 100          // each one of the two chunks will be 100 pixels long
+        }
+    });
+});
+</code></pre>
+
+<p>Notice that the array <code>progress.in</code> requires not the variables, but the view's names (as strings). It is therefore important that each view receives its own unique name.</p>
+<p>You can use one of the following 3 styles (see pictues below):</p>
 <ul>
-<li><code>buttonText: string</code><ul>
-<li>the text of the button that takes the participant to the next view</li>
-<li>default: 'Next'</li>
+<li><code>separate</code> - shows a single bar which tracks progress within the current view</li>
+<li><code>default</code> - shows a single bar which tracks progress within the whole experiment (all views designated for progress tracking)</li>
+<li><code>chunks</code> - shows multiple bars, one for each progress-tracked view</li>
 </ul>
-</li>
-<li><code>title: string</code><ul>
-<li>the title of the view</li>
-<li>default: 'Welcome!'</li>
-</ul>
-</li>
-<li><code>text: string</code><ul>
-<li>the text of the view</li>
-<li>default: <em>there is no default</em></li>
-</ul>
-</li>
-</ul>
-<h5 id="instructions-view">Instructions view</h5>
-<p>Instantiate with <code>babeViews.instructions</code>. Optional fields:</p>
-<ul>
-<li><code>buttonText: string</code><ul>
-<li>the text of the button that takes the participant to the next view</li>
-<li>default: 'Next'</li>
-</ul>
-</li>
-<li><code>title: string</code><ul>
-<li>the title of the view</li>
-<li>default: 'Instructions'</li>
-</ul>
-</li>
-<li><code>text: string</code><ul>
-<li>the text of the view</li>
-<li>default: <em>there is no default</em></li>
-</ul>
-</li>
-</ul>
-<h5 id="begin-view">Begin view</h5>
-<p>Instantiate with <code>babeViews.begin</code>. Optional fields:</p>
-<ul>
-<li><code>buttonText: string</code><ul>
-<li>the text of the button that takes the participant to the next view</li>
-<li>default: 'Next'</li>
-</ul>
-</li>
-<li><code>title: string</code><ul>
-<li>the title of the view</li>
-<li>default: 'Begin'</li>
-</ul>
-</li>
-<li><code>text: string</code><ul>
-<li>the text of the view</li>
-<li>default: <em>there is no default</em></li>
-</ul>
-</li>
-</ul>
-<h5 id="posttest-view">PostTest view</h5>
-<p>Instantiate with <code>babeViews.postTest</code>. Optional fields:</p>
-<ul>
-<li><code>buttonText: string</code><ul>
-<li>the text of the button that takes the participant to the next view</li>
-<li>default: 'Next'</li>
-</ul>
-</li>
-<li><code>title: string</code><ul>
-<li>the title of the view</li>
-<li>default: 'Additional Information'</li>
-</ul>
-</li>
-<li><code>text: string</code><ul>
-<li>the text of the view</li>
-<li>default: <em>there is no default</em></li>
-</ul>
-</li>
-<li><code>age_question: string</code><ul>
-<li>question about participant's age</li>
-<li>default: 'Age',</li>
-</ul>
-</li>
-<li><code>gender_question: string</code><ul>
-<li>question about participant's gender</li>
-<li>default: 'Gender'</li>
-</ul>
-</li>
-<li><code>gender_male: string</code><ul>
-<li>answer option for the gender question</li>
-<li>default: 'male'</li>
-</ul>
-</li>
-<li><code>gender_female: string</code><ul>
-<li>answer option for the gender question</li>
-<li>default: 'female'</li>
-</ul>
-</li>
-<li><code>gender_other: string</code><ul>
-<li>answer option for the gender question</li>
-<li>default: 'other'</li>
-</ul>
-</li>
-<li><code>edu_question: string</code><ul>
-<li>question about participant's level of education</li>
-<li>default: 'Level of Education'</li>
-</ul>
-</li>
-<li><code>edu_graduated_high_school: string</code><ul>
-<li>answer option for the education question</li>
-<li>default: 'Graduated High School'</li>
-</ul>
-</li>
-<li><code>edu_graduated_college: string</code><ul>
-<li>answer option for the education question</li>
-<li>default: 'Graduated College'</li>
-</ul>
-</li>
-<li><code>edu_higher_degree: string</code><ul>
-<li>answer option for the education question</li>
-<li>default: 'Higher Degree'</li>
-</ul>
-</li>
-<li><code>languages_question: string</code><ul>
-<li>question about participant's native languages</li>
-<li>default: 'Native Languages'</li>
-</ul>
-</li>
-<li><code>languages_more: string</code><ul>
-<li>more info about what native languages are</li>
-<li>default: '(i.e. the language(s) spoken at home when you were a child)'</li>
-</ul>
-</li>
-</ul>
-<h5 id="thanks-view">Thanks view</h5>
-<p>Instantiate with <code>babeViews.thanks</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
-<ul>
-<li><code>title: string</code><ul>
-<li>the title of the view</li>
-<li>default: 'Thank you for taking part in this experiment!'</li>
-</ul>
-</li>
-<li><code>prolificConfirmText: string</code><ul>
-<li>text asking the participant to press the 'confirm' button</li>
-<li>default: 'Please press the button below to confirm that you completed the experiment with Prolific'</li>
-</ul>
-</li>
-</ul>
+<p>Use <code>progress_bar.width</code> to set the width (in pixels** of the progress bars.</p>
+<p><strong>Examples</strong></p>
+<pre><code>progress_bar: {
+    in: [
+        forced_choice.name,    // 6 trials
+        dropdown_choice.name   // 10 trials
+        slider_rating.name,    // 4 trials
+    ],
+    style: &quot;default&quot;,
+    width: 120          // 120 pixels
+}
+
+
+// 20 trials overall, each trial fills 10 pixels (120/20) part of the progress bar
+</code></pre>
+
+<p><img src='../../images/progress_samples/pb_default.png' alt='progress bar sample' height='auto' width='600' /></p>
+<pre><code>progress_bar: {
+    in: [
+        forced_choice.name,    // 6 trials
+        dropdown_choice.name   // 10 trials
+        slider_rating.name,    // 4 trials
+    ],
+    style: &quot;separate&quot;,
+    width: 120          // 120 pixels
+}
+
+
+// 20 trials overall, each trial fills (120/total trials) pixels part of the progress bar. Each type of view has a separate progress bar.
+</code></pre>
+
+<p><img src='../../images/progress_samples/pb_separate.png' alt='progress bar sample' height='auto' width='600' /></p>
+<pre><code>progress_bar: {
+    in: [
+        forced_choice.name,    // 6 trials
+        dropdown_choice.name   // 10 trials
+        slider_rating.name,    // 4 trials
+    ],
+    style: &quot;chunks&quot;,
+    width: 60           // 60 pixels
+}
+
+
+// 20 trials overall, each trial fills part of its corresponding chunk. Each type of view has a separate progress bar and all progress bars are displyed.
+</code></pre>
+
+<p><img src='../../images/progress_samples/pb_chunks.png' alt='progress bar sample' height='auto' width='600' /></p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../02_using_the_server_app/01_installation/" class="btn btn-neutral float-right" title="Installation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../05_canvas/" class="btn btn-neutral" title="Canvas"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -370,6 +340,10 @@
           <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
+        <span><a href="../05_canvas/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../02_using_the_server_app/01_installation/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
