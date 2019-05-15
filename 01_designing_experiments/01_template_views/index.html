@@ -114,7 +114,7 @@
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#posttest-view">PostTest view</a>
+          <a class="toctree-l5" href="#post_test-view">Post_test view</a>
         </li>
     
       
@@ -373,8 +373,19 @@
                 <h4 id="template-views">Template views</h4>
 <h5 id="wrapping-views">Wrapping views</h5>
 <p>Wrapping views are short, usually one-trial views that structure your experiment. They can provide a welcome message, instructions or collect post-survey data. The most important wrapping view is the <em>thanks</em> view. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong></p>
+<p>All wrapping views have two <strong>obligatory fields</strong>:</p>
+<ul>
+<li><code>trials: int</code><ul>
+<li>the number of trials this view will be cycled through</li>
+</ul>
+</li>
+<li><code>name: string</code><ul>
+<li>the unique name of this view instance</li>
+</ul>
+</li>
+</ul>
 <h6 id="intro-view">Intro view</h6>
-<p>Instantiate with <code>babeViews.intro</code>. Optional fields:</p>
+<p>Instantiate with <code>babeViews.view_generator('intro', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -393,7 +404,7 @@
 </li>
 </ul>
 <h6 id="instructions-view">Instructions view</h6>
-<p>Instantiate with <code>babeViews.instructions</code>. Optional fields:</p>
+<p>Instantiate with <code>babeViews.view_generator('instructions', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -412,7 +423,7 @@
 </li>
 </ul>
 <h6 id="begin-view">Begin view</h6>
-<p>Instantiate with <code>babeViews.begin</code>. Optional fields:</p>
+<p>Instantiate with <code>babeViews.view_generator('begin, ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -430,8 +441,8 @@
 </ul>
 </li>
 </ul>
-<h6 id="posttest-view">PostTest view</h6>
-<p>Instantiate with <code>babeViews.postTest</code>. Optional fields:</p>
+<h6 id="post_test-view">Post_test view</h6>
+<p>Instantiate with <code>babeViews.view_generator('post_test', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -505,7 +516,7 @@
 </li>
 </ul>
 <h6 id="thanks-view">Thanks view</h6>
-<p>Instantiate with <code>babeViews.thanks</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
+<p>Instantiate with <code>babeViews.view_generator('thanks', ...)</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
 <ul>
 <li><code>title: string</code><ul>
 <li>the title of the view</li>
@@ -521,14 +532,23 @@
 <h5 id="trial-views">Trial views</h5>
 <p>Trial views are the parts of your experiment which are (usually) instantiated several times (realizing different trials of your, say, main experimental task). They usually collect the data and often rely on additional information (e.g., the picture to be displayed in trial 27, or the question and answer options for trial 13).</p>
 <p>All trial views have three <strong>obligatory fields</strong>:</p>
-<ol>
-<li><code>trials: int</code> - the number of trials this view will appear</li>
-<li><code>name: string</code> - the name of the view</li>
-<li><code>data: array</code> - list of objects, each with information for each consecutive trial</li>
-</ol>
+<ul>
+<li><code>trials: int</code> <ul>
+<li>the number of trials this view will appear</li>
+</ul>
+</li>
+<li><code>name: string</code><ul>
+<li>the name of the view</li>
+</ul>
+</li>
+<li><code>data: array</code><ul>
+<li>list of objects, each with information for each consecutive trial</li>
+</ul>
+</li>
+</ul>
 <p>Different types of wrapping views have more optional fields, as documented below. </p>
 <h6 id="forced-choice-task">Forced-choice task</h6>
-<p>Instantiate with <code>babeView.forcedChoice</code>. Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
+<p>Instantiate with <code>babeViews.view_generator('forced_choice', ...)</code> Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
 <p><img src='../../images/views_samples/view_fc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -562,7 +582,7 @@
 </code></pre>
 
 <h6 id="sentence-choice-task">Sentence Choice task</h6>
-<p>Instantiate with <code>babeViews.sentenceChoice</code>. Similar to the <code>forcedChoice</code> view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.</p>
+<p>Instantiate with <code>babeViews.view_generator('sentence_choice', ...)</code>. Similar to the <code>forcedChoice</code> view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.</p>
 <p><img src='../../images/views_samples/view_ss.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -606,7 +626,7 @@
 </code></pre>
 
 <h6 id="image-selection-task">Image Selection task</h6>
-<p>Instantiate with <code>babeViews.imageSelection</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
+<p>Instantiate with <code>babeViews.view_generator('image_seletion', ...)</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
 <p><img src='../../images/views_samples/view_is.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -648,7 +668,7 @@
 </code></pre>
 
 <h6 id="textbox-input-task">Textbox Input task</h6>
-<p>Instantiate with <code>babeViews.textboxInput</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
+<p>Instantiate with <code>babeViews.view_generator('textbox_input', ...)</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
 <p><img src='../../images/views_samples/view_ti.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -688,7 +708,7 @@
 </code></pre>
 
 <h6 id="slider-rating-task">Slider Rating task</h6>
-<p>Instantiate with <code>babeViews.sliderRating</code>. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The <code>next</code> button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.</p>
+<p>Instantiate with <code>babeViews.view_generator('slider_rating', ...)</code>. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The <code>next</code> button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.</p>
 <p><img src='../../images/views_samples/view_sr.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -727,7 +747,7 @@
 </code></pre>
 
 <h6 id="dropdown-choice-task">Dropdown Choice task</h6>
-<p>Instantiate with <code>babeViews.dropdownChoice</code>. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.</p>
+<p>Instantiate with <code>babeViews.view_generator(drowdown_choice', ...)</code>. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.</p>
 <p><img src='../../images/views_samples/view_dc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -767,7 +787,7 @@
 </code></pre>
 
 <h6 id="rating-scale-task">Rating Scale task</h6>
-<p>Instantiate with <code>babeViews.ratingScale</code>. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.</p>
+<p>Instantiate with <code>babeViews.view_generator('rating_scale', ...)</code>. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.</p>
 <p><img src='../../images/views_samples/view_rc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -806,7 +826,7 @@
 </code></pre>
 
 <h6 id="key-press-task">Key Press task</h6>
-<p>Instantiate with <code>babeViews.keyPress</code>. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.</p>
+<p>Instantiate with <code>babeViews.view_generator('key_press', ...)</code>. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.</p>
 <p><img src='../../images/views_samples/view_kp.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -855,6 +875,7 @@
 <h5 id="self-paced-reading">Self-paced reading</h5>
 <p>There are templates for realizing self-paced reading tasks too.</p>
 <h6 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h6>
+<p>Instantiate with <code>babeViews.view_generator('self_paced_reading', ...)</code>.</p>
 <ul>
 <li>
 <p><strong>Obligatory Fields</strong></p>
@@ -905,6 +926,7 @@
 </code></pre>
 
 <h6 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h6>
+<p>Instantiate with <code>babeViews.view_generator('self_paced_reading_rating_scale', ...)</code>.</p>
 <ul>
 <li>
 <p><strong>Obligatory Fields</strong></p>

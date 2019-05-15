@@ -248,37 +248,53 @@
                 <h4 id="life-cycles-and-hooks">Life cycles and hooks</h4>
 <p>All trial views have a fixed life cycle that you can use to manipulate the timing of events during a trial. You can insert custom functions, so-called 'hooks' to massage template views into style.</p>
 <h5 id="life-cycle">Life cycle</h5>
-<p>All the trial views go through 4 steps.</p>
+<p>All the trial views go through the following steps.</p>
 <ol>
 <li>
-<p>pause step - blank screen</p>
+<p><strong>pause step</strong> :: show a blank screen for specified time</p>
 <ul>
-<li>enable by passing <code>pause: number (in miliseconds)</code> (will show a pause for after number amount of time)</li>
+<li>enable by passing <code>pause: number (in miliseconds)</code></li>
+<li>defaults to <code>pause: 0</code></li>
 <li>shows nothing but a blank screen and the <code>QUD</code> if there is such</li>
 </ul>
 </li>
 <li>
-<p>fixation point step - a cross in the middle where the stimulus appears</p>
+<p><strong>fixation point step</strong> :: show fixation cross in the middle where the stimulus appears for specified time</p>
 <ul>
-<li>passed to the trial view as <code>fix_duration: number (in miliseconds)</code></li>
+<li>enabled by setting <code>fix_duration: number (in miliseconds)</code></li>
+<li>defaults to <code>fix_duration: 0</code></li>
 <li>shows a cross in the middle of the stimulus and the <code>QUD</code> if there is such</li>
 </ul>
 </li>
 <li>
-<p>stimulus shown step - stimulus appears</p>
+<p><strong>stimulus shown step</strong> :: stimulus appears</p>
+</li>
+<li>
+<p><strong>stimulus hidden step</strong> :: hides the stimulus from the screen</p>
+<ul>
+<li>set by passing <code>stim_duration: number (in miliseconds)</code></li>
+<li>defaults to <code>stim_duration: Infinity</code></li>
+<li>hide the stimulus when SPACE gets pressed with <code>stim_duration: 'space'</code></li>
+<li>skip this step by not defining <code>stim_duration</code></li>
+</ul>
+</li>
+<li>
+<p><strong>response enabled step</strong> :: the participant can interact with the view (respond, read the sentence etc.**</p>
 </li>
 </ol>
-<p>3.5 (optional) stimulus hidden step - hides the stimulus from the screen
-    * hide the stimulus after certain amount of time by passing <code>stim_duration: number (in miliseconds)</code> to the view creation
-    * hide the stimulus when SPACE gets pressed with <code>stim_duration: 'space'</code>
-    * skip this step by not defining <code>stim_duration</code></p>
-<ol>
-<li>interactions are enabled - the participant can interact with the view (respond, read the sentence etc.)</li>
-</ol>
-<p>The views you created do not need to use these timeouts, however, each trial view still goes through these steps on the background and you can still <a href="#trial-view-hooks">hook</a> and call locally defined functions</p>
+<p><strong>Example</strong></p>
+<p>Suppose you want to add a 1000 ms inter-stimulus break between two trials and show a fixation cross for 250 ms. You could realize this when instantiating your view like this:</p>
+<pre><code>const forced_choice_2A = babeViews.view_generator(&quot;key_press&quot;, {
+    trials: trial_info.forced_choice.length,
+    name: 'forced_choice_2A',
+    data: trial_info.forced_choice,
+    pause: 1000,
+    fix_duration: 250
+});
+</code></pre>
+
 <h5 id="hooks">Hooks</h5>
-<p>You can create functions in your local js files and hook these functions to the trial view. To understand how hooks work, first learn about babe's <a href="#trial-views-lifecycle">trial views lifecycle</a></p>
-<p><strong>Hooks</strong></p>
+<p>For minor customization of the template views, you can create functions, ideally in file <code>02_custom_functions.js</code> and hook these functions to specific steps in the life cycle of a trial view. The following <strong>hooks</strong> exist where your custom functions could attach:</p>
 <ul>
 <li>
 <p>after the pause is finished
@@ -317,32 +333,31 @@
 <li>response is enabled</li>
 <li>after_response_enabled function called</li>
 </ol>
-<p><strong>Real example</strong></p>
-<p>Imagine you want to tell the participants whether their repsonse was correct while they are getting familiar with the experiment, for example in the practice trial view. To do that you need to get the answer they chose and check it for correctness. You can define a funciton that gets their response and hook to the trial view after the response is enabled. In the example below, assume that <code>option1</code> is always the correct answer.</p>
-<pre><code>// compares the chosen answer to the value of `option1`
-function checkResponse(data, next) {
-    $('input[name=answer]').on('change', function(e) {
-        if (e.target.value === data.option1) {
-            alert('Your answer is correct! Yey!');
-        } else {
-            alert('Sorry, this answer is incorrect :(');
-        }
-        next();
-    })
-}
+<p><strong>Concrete example</strong></p>
+<p>Imagine you want to tell the participants that they have lingered too long on a given trial. We could do that with hooking a simple time-out function after the response-enabled step. We therefore first define the hook-function, ideally in file <code>02_custom_functions.js</code>.</p>
+<pre><code>// Error feedback if participants exceeds the time for responding
+const time_limit = function(data, next) {
+    if (typeof window.timeout === 'undefined'){
+        window.timeout = [];
+    }
+    // Add timeouts to the timeoutarray
+    // Reminds the participant to respond after 5 seconds
+    window.timeout.push(setTimeout(function(){
+        alert('Please answer more quickly!');
+    }, 5000));
+    next();
+};
 </code></pre>
 
-<p>and add a <code>after_response_enabled</code> hook to the view:</p>
-<pre><code>const practice = babeViews.forcedChoice({
-    trials: 20,
-    name: 'practice',
-    trial_type: 'practice',
-    data: practice_trials.forcedChoice,
-    fix_duration: 500,
-    pause: 500,
+<p>We then add this function to be called after the relevant step when creating the relevant view:</p>
+<pre><code>const forced_choice_2A = babeViews.view_generator(&quot;key_press&quot;, {
+    trials: trial_info.forced_choice.length,
+    name: 'forced_choice_2A',
+    data: trial_info.forced_choice,
     hook: {
-        after_response_enabled: checkResponse
+        after_response_enabled: time_limit
     }
+
 });
 </code></pre>
               
