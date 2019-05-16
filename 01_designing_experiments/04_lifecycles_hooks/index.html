@@ -333,20 +333,39 @@
 <li>response is enabled</li>
 <li>after_response_enabled function called</li>
 </ol>
-<p><strong>Concrete example</strong></p>
-<p>Imagine you want to tell the participants that they have lingered too long on a given trial. We could do that with hooking a simple time-out function after the response-enabled step. We therefore first define the hook-function, ideally in file <code>02_custom_functions.js</code>.</p>
-<pre><code>// Error feedback if participants exceeds the time for responding
-const time_limit = function(data, next) {
-    if (typeof window.timeout === 'undefined'){
-        window.timeout = [];
-    }
-    // Add timeouts to the timeoutarray
-    // Reminds the participant to respond after 5 seconds
-    window.timeout.push(setTimeout(function(){
-        alert('Please answer more quickly!');
-    }, 5000));
-    next();
-};
+<p><strong>Example: response check</strong></p>
+<p>Imagine you want to tell the participants whether their choice was right or wrong, e.g., during practice trials. We could realize this with a function  which checks the answer for correctness which is hooked to the "response-enabled step". Of course, your data for each trial needs to include the information which answer is correct. For the Departure-Point example, we could add this information to <code>04_trials.js</code> like so:</p>
+<pre><code class="javascript">    forced_choice: [
+        {
+            question: &quot;What's on the bread?&quot;,
+            picture: &quot;images/question_mark_02.png&quot;,
+            option1: 'jam',
+            option2: 'ham',
+            correct: 'jam' // which option is correct?
+        },
+        {
+            question: &quot;What's the weather like?&quot;,
+            picture: &quot;images/weather.jpg&quot;,
+            option1: &quot;shiny&quot;,
+            option2: &quot;rainbow&quot;,
+            correct: &quot;shiny&quot; // which option is correct?
+        }
+    ]
+
+</code></pre>
+
+<p>We then define the function to be hooked, ideally in file <code>02_custom_functions.js</code>:</p>
+<pre><code>// compares the chosen answer to the value of `option1`
+check_response = function(data, next) {
+    $('input[name=answer]').on('change', function(e) {
+        if (e.target.value === data.correct) {
+            alert('Your answer is correct! Yey!');
+        } else {
+            alert('Sorry, this answer is incorrect :( The correct answer was ' + data.correct);
+        }
+        next();
+    })
+}
 </code></pre>
 
 <p>We then add this function to be called after the relevant step when creating the relevant view:</p>
@@ -355,7 +374,7 @@ const time_limit = function(data, next) {
     name: 'forced_choice_2A',
     data: trial_info.forced_choice,
     hook: {
-        after_response_enabled: time_limit
+        after_response_enabled: check_response
     }
 
 });
