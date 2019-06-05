@@ -135,6 +135,22 @@
 
 
 
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#managing-experiments">Managing experiments</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#creating-new-experiments">Creating new experiments</a>
+        </li>
+    
+    </ul>
+  </li>
+
 
   
         
@@ -163,7 +179,21 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../03_deploying_experiments/02_hosting_on_netlify/">Hosting on netlify</a>
+    <a class="" href="../../03_deploying_experiments/02_recruitment_MTurk/">Recruitment via MTurk</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../03_deploying_experiments/03_recruitment_Prolific/">Recruitment via Prolific</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../03_deploying_experiments/04_hosting_on_netlify/">Hosting on netlify</a>
   </li>
         
       </ul>
@@ -238,6 +268,8 @@
               
                 <h4 id="use">Use</h4>
 <p>After installation you can visit the server app in a browser, with the username and password you previously specified. For Heroku deployment, you may do so by running <code>heroku open</code> in the command line or find the app URL in your Heroku account. For local deployment, the URL is by default http://localhost:4000.</p>
+<p>There is an example demo of the server app available at <a href="https://babe-demo.herokuapp.com">https://babe-demo.herokuapp.com</a>.</p>
+<h5 id="managing-experiments">Managing experiments</h5>
 <p>The server app shows a list of experiments whose data may be stored in a database. It
 shows the experiments ID, its name, its author, the number of submissions retrieved so far,
 date information, as well as whether the experiment is currently active or not. If an
@@ -255,10 +287,27 @@ can set a maximum number of submissions after which the experiment automatically
 activity status off. Any submission made by a participant to a non-active experiment is just
 lost and will not be recorded. This is to protect your database from pollution or attacks, but
 if used unwisely could also cause you loss of relevant data.</p>
-<p>Finally, the server app allows you to create and manage new experiments. Click on the
-"New" button to do this. The interface for creating a new experiment is parallel to editing an
-existing experiment. Importantly, you need to give some required information about a
-new experiment (name and author). If you want to use dynamic retrieval of experiment data (documented <a href="../experiments/09dynamics">here</a>), you must specify which fields should be available to be retrieved by your API calls. This allows you to expose only the relevant fields, since the dynamic retrieval API is not password protected by default.</p>
+<h5 id="creating-new-experiments">Creating new experiments</h5>
+<p>Click on the "New" button under "Manage Experiments" to set up a new data base for your
+experiment. The interface for creating a new experiment is very similar to editing an existing
+experiment. Importantly, you need to give some required information about a new experiment
+(name and author). If you want to use dynamic retrieval of experiment data (<a href="fill_me">documentation
+pending</a>), you must specify which fields should be available to be retrieved by your
+API calls. This allows you to expose only the relevant fields, since the dynamic retrieval API
+is not password protected by default.</p>
+<p>After you have created your experiment, there are two pieces of information that are important for later use. When you <a href="/03_deploying_experiments/01_configuration/#changing-deploy-information">specify the deploy information</a>, you must supply the ID which the server app allocates to your experiment and you must specify the URL (possibly local) of the server app itself. You find these pieces of information when you click on "Edit" for your newly created experiment.</p>
+<p><img src="../../images/edit_exp_screenshot.png" width="80%"></p>
+<p>You need to specify the ID in field <code>experimentID</code> and the server URL for submissions <strong>without the ID</strong> in the field <code>serverAppURL</code>. So, in the case above, you would initialize your experiment with the following information:</p>
+<pre><code class="javascript"> babeInit({
+        ...
+        deploy: {
+            experimentID: &quot;1&quot;,
+            serverAppURL: &quot;https://babe-demo.herokuapp.com/api/submit_experiment/&quot;,
+            ...
+        }
+        ...
+    });
+</code></pre>
               
             </div>
           </div>

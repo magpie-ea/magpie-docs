@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Self-paced reading - _babe documentation</title>
+  <title>Recruitment via Prolific - _babe documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Self-paced reading";
-    var mkdocs_page_input_path = "01_designing_experiments/02c_SPR.md";
+    var mkdocs_page_name = "Recruitment via Prolific";
+    var mkdocs_page_input_path = "03_deploying_experiments/03_recruitment_Prolific.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -67,35 +67,35 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../01_template_views/">Template views</a>
+    <a class="" href="../../01_designing_experiments/01_template_views/">Template views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../03_custom_views/">Custom views</a>
+    <a class="" href="../../01_designing_experiments/03_custom_views/">Custom views</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../04_lifecycles_hooks/">Life cycles and hooks</a>
+    <a class="" href="../../01_designing_experiments/04_lifecycles_hooks/">Life cycles and hooks</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../05_canvas/">Canvas</a>
+    <a class="" href="../../01_designing_experiments/05_canvas/">Canvas</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../06_progress_bars/">Progress bars</a>
+    <a class="" href="../../01_designing_experiments/06_progress_bars/">Progress bars</a>
   </li>
         
       </ul>
@@ -144,28 +144,40 @@
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../03_deploying_experiments/01_configuration/">Deploy configuration</a>
+    <a class="" href="../01_configuration/">Deploy configuration</a>
   </li>
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../03_deploying_experiments/02_recruitment_MTurk/">Recruitment via MTurk</a>
+    <a class="" href="../02_recruitment_MTurk/">Recruitment via MTurk</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../03_deploying_experiments/03_recruitment_Prolific/">Recruitment via Prolific</a>
-  </li>
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Recruitment via Prolific
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+
+
+
+  
         
           
 
 
   <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../03_deploying_experiments/04_hosting_on_netlify/">Hosting on netlify</a>
+    <a class="" href="../04_hosting_on_netlify/">Hosting on netlify</a>
   </li>
         
       </ul>
@@ -220,11 +232,15 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>deploying experiments &raquo;</li>
+        
+      
     
-    <li>Self-paced reading</li>
+    <li>Recruitment via Prolific</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/02c_SPR.md"
+        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/03_deploying_experiments/03_recruitment_Prolific.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -234,104 +250,37 @@
           <div role="main">
             <div class="section">
               
-                <h4 id="self-paced-reading">Self-paced reading</h4>
-<p>There are templates for realizing self-paced reading tasks too.</p>
-<h5 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h5>
-<ul>
-<li>
-<p><strong>Obligatory Fields</strong></p>
-<ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>option1: string</code></li>
-<li><code>option2: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Optional Fields</strong></p>
-<ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code><ul>
-<li>instructions to press SPACE above the spr sentence lines</li>
-<li>default - <em>Press the SPACE bar to reveal the words</em></li>
-</ul>
-</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Sample data</strong></p>
-</li>
-</ul>
-<pre><code>const spr_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'just press SPACE',
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;all | of | the | yellow | marbles | are | inside | the | case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;
-    }
-];
+                <h5 id="recruitment-via-prolific">Recruitment via Prolific</h5>
+<p>The following assumes that you are familiar with how to
+operate experiments with <a href="https://www.prolific.ac">Prolific</a>. </p>
+<p>Go to the Prolific website and create a new experiment. Make a note of the <strong>completion URL</strong> that is provided by Prolific.</p>
+<p><img src="https://raw.githubusercontent.com/babe-project/ProlificDeployTemplate/master/images/readme/prolific_url.png" width="100%" ></p>
+<p>Enter the completion URL in the field <code>prolificURL</code> when creating your experiment, as follows:</p>
+<pre><code class="javascript"> babeInit({
+        ...
+        deploy: {
+            deployMethod: &quot;Prolific&quot;,
+            prolificURL: &quot;https://app.prolific.ac/submissions/complete?cc=SAMPLE1234&quot;
+        }
+        ...
+    });
 </code></pre>
 
-<h5 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h5>
-<ul>
-<li>
-<p><strong>Obligatory Fields</strong></p>
-<ul>
-<li><code>sentence: string</code><ul>
-<li>the spr parts are separated by ' | '</li>
-</ul>
-</li>
-<li><code>optionLeft: string</code></li>
-<li><code>optionRight: string</code></li>
-</ul>
-</li>
-<li>
-<p><strong>Optional Fields</strong></p>
-<ul>
-<li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>help_text: string</code> - SPACE press text above the spr sentence</li>
-<li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
-<li><code>question: string</code></li>
-</ul>
-</li>
-</ul>
-<pre><code>const spr_rc_trials = [
-    {
-        QUD: &quot;Johnny says: 'I want you to bring me the box where ...&quot;,
-        picture: &quot;images/all-false3.png&quot;
-        help_text: 'SPACEEEE',
-        sentence: &quot;all | of the | yellow marbles | are | inside | the case.'&quot;,
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;,
-    },
-    {
-        question: &quot;Should you bring Johnny this box or not?&quot;,
-        sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
-        optionLeft: &quot;Bring it&quot;,
-        optionRight: &quot;Leave it&quot;
-    }
-];
-</code></pre>
+<p>Use deploy method <code>Prolific</code> has two consequences. For one, it will insert a text input field in the introduction view of your experiment. For another, it will supply a <code>confirm</code> button at the end of the experiment, which takes participants to the Prolific website where they are supplied with their completion code.</p>
+<p>The data from your experiment will <em>not</em> be stored by Prolific, but recorded by the _babe server app. Before launching the study on Prolific, double-check that the database on the back end is set up and the necessary information (<code>experimentID</code>, server URL) are set. Also do not forget to update a web-site version of your experiment so that it includes the correct information in <code>prolificURL</code> before running the study.</p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../04_hosting_on_netlify/" class="btn btn-neutral float-right" title="Hosting on netlify">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../02_recruitment_MTurk/" class="btn btn-neutral" title="Recruitment via MTurk"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -359,6 +308,10 @@
           <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
+        <span><a href="../02_recruitment_MTurk/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../04_hosting_on_netlify/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
