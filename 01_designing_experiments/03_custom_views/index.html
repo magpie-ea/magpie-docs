@@ -82,6 +82,61 @@
       </a>
     </li>
     
+      
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#customizing-template-views">Customizing template views</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#predefined-view-elements">
+      Predefined view elements
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#stimulus-container-generators">Stimulus container generators</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#answer-container-generators">Answer container generators</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#handle-response-functions">Handle response functions</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#defining-a-custom-view-from-scratch">Defining a custom view from scratch</a>
+        </li>
+    
+    </ul>
+  </li>
+
 
   
         
@@ -246,7 +301,800 @@
           <div role="main">
             <div class="section">
               
-                <p>... information to be added soon ...</p>
+                <h4 id="custom-views">Custom views</h4>
+<p>When the template views are not enough for your purposes, you can define your own custom views. There are two ways of doing this. The first possibility is to <a href="#customizing-template-views">customize the template views</a>. You would then keep the basic structure and design of a template view and change selected parts of it. Since all predefined template views consist of modular <a href="#predefined-view-elements">predefined view elements</a>, you can often modularly assemble and tweak your desired view functionality based on slight changes of the template views. The other, more radical method is to <a href="#defining-a-custom-view-from-scratch">define a completely new view from scratch</a>.</p>
+<h5 id="customizing-template-views">Customizing template views</h5>
+<p>Each template view consists of three elements, which jointly define its appearance and functionality:</p>
+<ol>
+<li><strong>stimulus container</strong>: defines the top part of the screen, containing stuff like title, the QUD, the stimulus to be shown etc.</li>
+<li><strong>answer container</strong>: defines the lower part of the screen, containing the answer options, 'next' buttons, etc.</li>
+<li><strong>handle response function</strong>: function that is called when a response is given</li>
+</ol>
+<p>Each one of these elements is independently customizable. Indeed, when a template view is created by _babe "behind the scenes", it simply uses defaults for these three elements which are appropriate for the template view to be created. For example, we would normally create a template <code>forced_choice</code> view like so:</p>
+<pre><code class="javascript">const forced_choice_instance = babeViews.view_generator(
+    'forced_choice', 
+    // config information
+    {
+        trials: part_one_trial_info.forced_choice.length,
+        name: 'rebuilt_FC',
+        data: part_one_trial_info.forced_choice
+    }
+    );
+</code></pre>
+
+<p>Equivalently, we could write this: </p>
+<pre><code class="javascript">const forced_choice_instance = babeViews.view_generator(
+   'forced_choice', 
+   // config information
+    {
+        trials: part_one_trial_info.forced_choice.length,
+        name: 'rebuilt_FC',
+        data: part_one_trial_info.forced_choice
+    },
+    // custom generator functions
+    {
+        stimulus_container_generator: stimulus_container_generators.basic_stimulus,
+        answer_container_generator: answer_container_generators.button_choice,
+        handle_response_function: handle_response_functions.button_choice
+    }
+   );
+</code></pre>
+
+<p>Here, we supply a third object with custom generator functions, one for each of the three elements. Since the second code box just uses the defaults which are implicit in the first, the two calls are equivalent. The description of <a href="../01_template_views/">template views</a> lists which view elements each template view uses. All predefined view elements are listed and shown <a href="#predefined-view-elements">below</a>.</p>
+<p>The stimulus generator function used by the template <code>forced_choice</code> view is this:</p>
+<pre><code class="javascript">function (config, CT) {
+        return `&lt;div class='babe-view'&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;p class='babe-view-question babe-view-qud'&gt;${config.data[CT].QUD}&lt;/p&gt;
+                    &lt;div class='babe-view-stimulus-container'&gt;
+                        &lt;div class='babe-view-stimulus babe-nodisplay'&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;`;
+</code></pre>
+
+<p>Generally, the function supplied to <code>stimulus_container_generator</code> must take the <code>config</code> object and a <code>CT</code> argument. The latter is the current trial, and it is supplied by _babe internally. The function should then return HTML code as a string, which governs the appearance of the upper part of the view screen. You can use information from <code>config</code> and <code>CT</code>, so that when we write <code>${config.data[CT].QUD}</code> in the HTML string to be returned this is replaced by the QUD information stored in <code>config</code> for the current trial. Notice that the picture element is inserted automatically by _babe in the <code>babe-view-stimulus</code> container. </p>
+<p>We can specify whatever we'd like to appear in the stimulus container. For example, let's insert the same picture twice. This can be done by instantiating a customized template view like so:</p>
+<pre><code class="javascript">const forced_choice_custonmized = babeViews.view_generator(
+    &quot;forced_choice&quot;,
+    // config information
+    {
+        trials: part_one_trial_info.forced_choice.length,
+        name: 'rebuilt_FC',
+        data: part_one_trial_info.forced_choice
+    },
+    // custom generator functions
+    {
+        stimulus_container_generator: function (config, CT) {
+            return `&lt;div class='babe-view'&gt;
+                      &lt;div class='babe-view-stimulus-container'&gt;
+                        &lt;img src=&quot;${config.data[CT].picture}&quot; height=&quot;42&quot; width=&quot;42&quot;&gt;
+                        &lt;img src=&quot;${config.data[CT].picture}&quot; height=&quot;42&quot; width=&quot;42&quot;&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;`;}
+    }
+);
+</code></pre>
+
+<p>We can also change the design and behavior of the part of the view that deals with the response. Per default, the <code>forced_choice</code> view uses a predefined function <code>button_choice</code> to have the user select one of two buttons. Suppose we wanted to have a third button. We could then use code like the following (which only works, if we define <code>option3</code> in <code>04_trials.js</code> as well, of course):</p>
+<pre><code class="javascript">const forced_choice_customized = babeViews.view_generator(
+    &quot;forced_choice&quot;,
+    // config information
+    {
+        trials: part_one_trial_info.forced_choice.length,
+        name: 'rebuilt_FC',
+        data: part_one_trial_info.forced_choice
+    },
+    // custom generator functions
+    {
+      answer_container_generator: function (config, CT) {
+       return `&lt;div class='babe-view-answer-container'&gt;
+               &lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+               &lt;label for='o1' class='babe-response-buttons'&gt;${config.data[CT].option1}&lt;/label&gt;
+               &lt;input type='radio' name='answer' id='o1' value=${config.data[CT].option1} /&gt;
+               &lt;label for='o2' class='babe-response-buttons'&gt;${config.data[CT].option2}&lt;/label&gt;
+               &lt;input type='radio' name='answer' id='o2' value=${config.data[CT].option2} /&gt;
+               &lt;label for='o2' class='babe-response-buttons'&gt;${config.data[CT].option3}&lt;/label&gt;
+               &lt;input type='radio' name='answer' id='o3' value=${config.data[CT].option3} /&gt;
+               &lt;/div&gt;`;
+  }
+    }
+);
+</code></pre>
+
+<p>It is possible to supply a completely new type of response variable via the function specified for <code>answer_container_generator</code>. However, you might need to make sure that the data is handled correctly. This is the job of the final third element you can use to customize a template view, namely <code>handle_response_function</code>. In other words, often the two design elements <code>answer_container_generator</code> and <code>handle_response_function</code> might need to be adjusted to each other.</p>
+<p>The <code>handle_response_function</code> used per default in the <code>forced_choice</code> view is this:</p>
+<pre><code class="javascript">function(config, CT, babe, answer_container_generator, startingTime) {
+
+    // create the answer container
+    $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+    // attaches an event listener to the radio button input
+    // when an input is selected a response property with a value equal
+    // to the answer is added to the trial object
+    // as well as a readingTimes property with value
+    $(&quot;input[name=answer]&quot;).on(&quot;change&quot;, function() {
+    const RT = Date.now() - startingTime;
+    let trial_data = {
+        trial_name: config.name,
+        trial_number: CT + 1,
+        response: $(&quot;input[name=answer]:checked&quot;).val(),
+        RT: RT
+    };
+    trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+    babe.trial_data.push(trial_data);
+    babe.findNextView();
+    });
+
+}    
+</code></pre>
+
+<p>When this function is called (automatically by _babe) it first creates the answer container. It also adds an event listener. Here, it reacts when a button is pressed, but this behavior needs to be coordinated with whatever you define in the <code>answer_container_generator</code> part. It then records the trial time and assembles the data to be recorded in the variable <code>trial_data</code>. By default, _babe automatically adds all the data for the current trial to this object and then pushes this to its internal representation of the accumulated data so far which is in <code>babe.trial_data</code>. The function <code>babe.findNextView</code> is then called and takes you to the next trial or view.</p>
+<p>When you write your own custom <code>handle_response_function</code> you should supply the same arguments as the function above. You should also make sure to record the data and call <code>babe.findNextView</code> eventually. Other than this, you could implement a more dynamic display of different pictures and response options, using the interplay of <code>answer_container_generator</code> and <code>handle_response_function</code>, for example.</p>
+<p>If you write longer custom functions for customization, it is good practice to put these into the file <code>02_custom_functions.js</code>. An example is presented in the <a href="https://github.com/babe-project/showroom">showroom</a>.</p>
+<h5 id="predefined-view-elements">Predefined view elements</h5>
+<h6 id="stimulus-container-generators">Stimulus container generators</h6>
+<p>The following predefined stimulus container generators are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _babe all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
+<pre><code class="javascript">// The view template dict contains a generator function for every view type we support
+// The generator gets the config dict and CT as input and will generate the babe-view HTML code
+// (Some view templates are the same, e.g. forced_choice and sliderRating)
+const stimulus_container_generators = {
+    basic_stimulus: function (config, CT) {
+        return `&lt;div class='babe-view'&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;p class='babe-view-question babe-view-qud'&gt;${config.data[CT].QUD}&lt;/p&gt;
+                    &lt;div class='babe-view-stimulus-container'&gt;
+                        &lt;div class='babe-view-stimulus babe-nodisplay'&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;`;
+    },
+    key_press: function(config, CT) {
+        return `&lt;div class=&quot;babe-view&quot;&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;p class='babe-response-keypress-header'&gt;
+                    &lt;strong&gt;${config.data[CT].key1}&lt;/strong&gt; = ${config.data[CT][config.data[CT].key1]}, 
+                    &lt;strong&gt;${config.data[CT].key2}&lt;/strong&gt; = ${config.data[CT][config.data[CT].key2]}&lt;/p&gt;
+                    &lt;div class='babe-view-stimulus-container'&gt;
+                        &lt;div class='babe-view-stimulus babe-nodisplay'&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;`;
+    },
+    fixed_text: function(config, CT) {
+        return `&lt;div class='babe-view'&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;section class=&quot;babe-text-container&quot;&gt;
+                        &lt;p class=&quot;babe-view-text&quot;&gt;${config.text}&lt;/p&gt;
+                    &lt;/section&gt;
+                &lt;/div&gt;`;
+    },
+    post_test: function(config, CT) {
+        return `&lt;div class='babe-view babe-post-test-view'&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;section class=&quot;babe-text-container&quot;&gt;
+                        &lt;p class=&quot;babe-view-text&quot;&gt;${config.text}&lt;/p&gt;
+                    &lt;/section&gt;
+                &lt;/div&gt;`;
+    },
+    empty: function(config, CT) {
+        return ``;
+    },
+    self_paced_reading: function(config, CT) {
+        const helpText = config.data[CT].help_text !== undefined ?
+            config.data[CT].help_text : &quot;Press the SPACE bar to reveal the words&quot;;
+        return `&lt;div class='babe-view'&gt;
+                    &lt;h1 class='babe-view-title'&gt;${config.title}&lt;/h1&gt;
+                    &lt;p class='babe-view-question babe-view-qud'&gt;${config.data[CT].QUD}&lt;/p&gt;
+                    &lt;div class='babe-view-stimulus-container'&gt;
+                        &lt;div class='babe-view-stimulus babe-nodisplay'&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;p class='babe-help-text babe-nodisplay'&gt;${helpText}&lt;/p&gt;
+                    &lt;p class='babe-spr-sentence'&gt;&lt;/p&gt;
+                &lt;/div&gt;`;
+    }
+};
+</code></pre>
+
+<h6 id="answer-container-generators">Answer container generators</h6>
+<p>The following predefined answer container generators are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _babe all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
+<pre><code class="javascript">// The answer container dict contains a generator function for every view type we support
+// The generator gets the config dict and CT as input and will generate the babe-view-answer-container HTML code
+// (Some answer container elements should be the same, e.g. slider rating and SPR-slider rating)
+const answer_container_generators = {
+    button_choice: function (config, CT) {
+        return `&lt;div class='babe-view-answer-container'&gt;
+                    &lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                    &lt;label for='o1' class='babe-response-buttons'&gt;${config.data[CT].option1}&lt;/label&gt;
+                    &lt;input type='radio' name='answer' id='o1' value=${config.data[CT].option1} /&gt;
+                    &lt;input type='radio' name='answer' id='o2' value=${config.data[CT].option2} /&gt;
+                    &lt;label for='o2' class='babe-response-buttons'&gt;${config.data[CT].option2}&lt;/label&gt;
+                &lt;/div&gt;`;
+    },
+    question: function(config, CT) {
+        return `&lt;div class='babe-view-answer-container'&gt;
+                        &lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;`;
+    },
+    one_button: function (config, CT) {
+        return `&lt;button id=&quot;next&quot; class='babe-view-button' class=&quot;babe-nodisplay&quot;&gt;${
+            config.button
+            }&lt;/button&gt;`
+    },
+    post_test: function(config, CT) {
+        const quest = babeUtils.view.fill_defaults_post_test(config);
+        return `&lt;form&gt;
+                    &lt;p class='babe-view-text'&gt;
+                        &lt;label for=&quot;age&quot;&gt;${quest.age.title}:&lt;/label&gt;
+                        &lt;input type=&quot;number&quot; name=&quot;age&quot; min=&quot;18&quot; max=&quot;110&quot; id=&quot;age&quot; /&gt;
+                    &lt;/p&gt;
+                    &lt;p class='babe-view-text'&gt;
+                        &lt;label for=&quot;gender&quot;&gt;${quest.gender.title}:&lt;/label&gt;
+                        &lt;select id=&quot;gender&quot; name=&quot;gender&quot;&gt;
+                            &lt;option&gt;&lt;/option&gt;
+                            &lt;option value=&quot;${quest.gender.male}&quot;&gt;${quest.gender.male}&lt;/option&gt;
+                            &lt;option value=&quot;${quest.gender.female}&quot;&gt;${quest.gender.female}&lt;/option&gt;
+                            &lt;option value=&quot;${quest.gender.other}&quot;&gt;${quest.gender.other}&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/p&gt;
+                    &lt;p class='babe-view-text'&gt;
+                        &lt;label for=&quot;education&quot;&gt;${quest.edu.title}:&lt;/label&gt;
+                        &lt;select id=&quot;education&quot; name=&quot;education&quot;&gt;
+                            &lt;option&gt;&lt;/option&gt;
+                            &lt;option value=&quot;${quest.edu.graduated_high_school}&quot;&gt;${quest.edu.graduated_high_school}&lt;/option&gt;
+                            &lt;option value=&quot;${quest.edu.graduated_college}&quot;&gt;${quest.edu.graduated_college}&lt;/option&gt;
+                            &lt;option value=&quot;${quest.edu.higher_degree}&quot;&gt;${quest.edu.higher_degree}&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/p&gt;
+                    &lt;p class='babe-view-text'&gt;
+                        &lt;label for=&quot;languages&quot; name=&quot;languages&quot;&gt;${quest.langs.title}:&lt;br /&gt;&lt;span&gt;${quest.langs.text}&lt;/&lt;/span&gt;&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; id=&quot;languages&quot;/&gt;
+                    &lt;/p&gt;
+                    &lt;p class=&quot;babe-view-text&quot;&gt;
+                        &lt;label for=&quot;comments&quot;&gt;${quest.comments.title}&lt;/label&gt;
+                        &lt;textarea name=&quot;comments&quot; id=&quot;comments&quot; rows=&quot;6&quot; cols=&quot;40&quot;&gt;&lt;/textarea&gt;
+                    &lt;/p&gt;
+                    &lt;button id=&quot;next&quot; class='babe-view-button'&gt;${config.button}&lt;/button&gt;
+            &lt;/form&gt;`
+    },
+    empty: function(config, CT) {
+        return ``;
+    },
+    slider_rating: function(config, CT) {
+        const option1 = config.data[CT].optionLeft;
+        const option2 = config.data[CT].optionRight;
+        return `&lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                &lt;div class='babe-view-answer-container'&gt;
+                    &lt;span class='babe-response-slider-option'&gt;${option1}&lt;/span&gt;
+                    &lt;input type='range' id='response' class='babe-response-slider' min='0' max='100' value='50'/&gt;
+                    &lt;span class='babe-response-slider-option'&gt;${option2}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;button id=&quot;next&quot; class='babe-view-button babe-nodisplay'&gt;Next&lt;/button&gt;`;
+    },
+    textbox_input: function(config, CT) {
+        return `&lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                    &lt;div class='babe-view-answer-container'&gt;
+                        &lt;textarea name='textbox-input' rows=10 cols=50 class='babe-response-text' /&gt;
+                    &lt;/div&gt;
+                    &lt;button id='next' class='babe-view-button babe-nodisplay'&gt;next&lt;/button&gt;`;
+    },
+    dropdown_choice: function(config, CT) {
+        const question_left_part =
+            config.data[CT].question_left_part === undefined ? &quot;&quot; : config.data[CT].question_left_part;
+        const question_right_part =
+            config.data[CT].question_right_part === undefined ? &quot;&quot; : config.data[CT].question_right_part;
+        const option1 = config.data[CT].option1;
+        const option2 = config.data[CT].option2;
+        return `&lt;div class='babe-view-answer-container babe-response-dropdown'&gt;
+                    ${question_left_part}
+                    &lt;select id='response' name='answer'&gt;
+                        &lt;option disabled selected&gt;&lt;/option&gt;
+                        &lt;option value=${option1}&gt;${option1}&lt;/option&gt;
+                        &lt;option value=${option2}&gt;${option2}&lt;/option&gt;
+                    &lt;/select&gt;
+                    ${question_right_part}
+                    &lt;/p&gt;
+                    &lt;button id='next' class='babe-view-button babe-nodisplay'&gt;Next&lt;/button&gt;
+                &lt;/div&gt;`;
+
+    },
+    rating_scale: function(config, CT) {
+        return `&lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                &lt;div class='babe-view-answer-container'&gt;
+                    &lt;strong class='babe-response-rating-option babe-view-text'&gt;${config.data[CT].optionLeft}&lt;/strong&gt;
+                    &lt;label for=&quot;1&quot; class='babe-response-rating'&gt;1&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;1&quot; value=&quot;1&quot; /&gt;
+                    &lt;label for=&quot;2&quot; class='babe-response-rating'&gt;2&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;2&quot; value=&quot;2&quot; /&gt;
+                    &lt;label for=&quot;3&quot; class='babe-response-rating'&gt;3&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;3&quot; value=&quot;3&quot; /&gt;
+                    &lt;label for=&quot;4&quot; class='babe-response-rating'&gt;4&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;4&quot; value=&quot;4&quot; /&gt;
+                    &lt;label for=&quot;5&quot; class='babe-response-rating'&gt;5&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;5&quot; value=&quot;5&quot; /&gt;
+                    &lt;label for=&quot;6&quot; class='babe-response-rating'&gt;6&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;6&quot; value=&quot;6&quot; /&gt;
+                    &lt;label for=&quot;7&quot; class='babe-response-rating'&gt;7&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;7&quot; value=&quot;7&quot; /&gt;
+                    &lt;strong class='babe-response-rating-option babe-view-text'&gt;${config.data[CT].optionRight}&lt;/strong&gt;
+                &lt;/div&gt;`;
+    },
+    sentence_choice: function(config, CT) {
+        return `&lt;div class='babe-view-answer-container'&gt;
+                    &lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                    &lt;label for='s1' class='babe-response-sentence'&gt;${config.data[CT].option1}&lt;/label&gt;
+                    &lt;input type='radio' name='answer' id='s1' value=&quot;${config.data[CT].option1}&quot; /&gt;
+                    &lt;label for='s2' class='babe-response-sentence'&gt;${config.data[CT].option2}&lt;/label&gt;
+                    &lt;input type='radio' name='answer' id='s2' value=&quot;${config.data[CT].option2}&quot; /&gt;
+                &lt;/div&gt;`;
+    },
+    image_selection: function(config, CT) {
+        $(&quot;.babe-view-stimulus-container&quot;).addClass(&quot;babe-nodisplay&quot;);
+        return    `&lt;div class='babe-view-answer-container'&gt;
+                        &lt;p class='babe-view-question'&gt;${config.data[CT].question}&lt;/p&gt;
+                        &lt;label for=&quot;img1&quot; class='babe-view-picture babe-response-picture'&gt;&lt;img src=${config.data[CT].picture1}&gt;&lt;/label&gt;
+                        &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;img1&quot; value=&quot;${config.data[CT].option1}&quot; /&gt;
+                        &lt;input type=&quot;radio&quot; name=&quot;answer&quot; id=&quot;img2&quot; value=&quot;${config.data[CT].option2}&quot; /&gt;
+                        &lt;label for=&quot;img2&quot; class='babe-view-picture babe-response-picture'&gt;&lt;img src=${config.data[CT].picture2}&gt;&lt;/label&gt;
+                    &lt;/div&gt;`;
+    }
+};
+</code></pre>
+
+<h6 id="handle-response-functions">Handle response functions</h6>
+<p>The following predefined handle response functions are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _babe all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
+<pre><code class="javascript">// The enable response dict contains a generator function for every view type we support
+// The generator gets the config dict, CT, the answer_container_generator and the startingTime as input
+const handle_response_functions = {
+    button_choice: function(config, CT, babe, answer_container_generator, startingTime) {
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        // attaches an event listener to the yes / no radio inputs
+        // when an input is selected a response property with a value equal
+        // to the answer is added to the trial object
+        // as well as a readingTimes property with value
+        $(&quot;input[name=answer]&quot;).on(&quot;change&quot;, function() {
+            const RT = Date.now() - startingTime;
+            let trial_data = {
+                trial_name: config.name,
+                trial_number: CT + 1,
+                response: $(&quot;input[name=answer]:checked&quot;).val(),
+                RT: RT
+            };
+
+            trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+            babe.trial_data.push(trial_data);
+            babe.findNextView();
+        });
+    },
+    key_press: function (config, CT, babe, answer_container_generator, startingTime) {
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        const handleKeyPress = function(e) {
+            const keyPressed = String.fromCharCode(
+                e.which
+            ).toLowerCase();
+
+            if (keyPressed === config.data[CT].key1 || keyPressed === config.data[CT].key2) {
+                let correctness;
+                const RT = Date.now() - startingTime; // measure RT before anything else
+
+                if (
+                    config.data[CT].expected ===
+                    config.data[CT][keyPressed.toLowerCase()]
+                ) {
+                    correctness = &quot;correct&quot;;
+                } else {
+                    correctness = &quot;incorrect&quot;;
+                }
+
+                let trial_data = {
+                    trial_name: config.name,
+                    trial_number: CT + 1,
+                    key_pressed: keyPressed,
+                    correctness: correctness,
+                    RT: RT
+                };
+
+                trial_data[config.data[CT].key1] =
+                    config.data[CT][config.data[CT].key1];
+                trial_data[config.data[CT].key2] =
+                    config.data[CT][config.data[CT].key2];
+
+                trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+                babe.trial_data.push(trial_data);
+                $(&quot;body&quot;).off(&quot;keydown&quot;, handleKeyPress);
+                babe.findNextView();
+            }
+        };
+
+        $(&quot;body&quot;).on(&quot;keydown&quot;, handleKeyPress);
+    },
+    intro: function(config, CT, babe, answer_container_generator, startingTime) {
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        let prolificId;
+        const prolificForm = `&lt;p id=&quot;prolific-id-form&quot;&gt;
+                    &lt;label for=&quot;prolific-id&quot;&gt;Please, enter your Prolific ID&lt;/label&gt;
+                    &lt;input type=&quot;text&quot; id=&quot;prolific-id&quot; /&gt;
+                &lt;/p&gt;`;
+
+        const next = $(&quot;#next&quot;);
+
+        function showNextBtn() {
+            if (prolificId.val().trim() !== &quot;&quot;) {
+                next.removeClass(&quot;babe-nodisplay&quot;);
+            } else {
+                next.addClass(&quot;babe-nodisplay&quot;);
+            }
+        }
+
+        if (babe.deploy.deployMethod === &quot;Prolific&quot;) {
+            $(&quot;.babe-text-container&quot;).append(prolificForm);
+            next.addClass(&quot;babe-nodisplay&quot;);
+            prolificId = $(&quot;#prolific-id&quot;);
+
+            prolificId.on(&quot;keyup&quot;, function() {
+                showNextBtn();
+            });
+
+            prolificId.on(&quot;focus&quot;, function() {
+                showNextBtn();
+            });
+        }
+
+        // moves to the next view
+        next.on(&quot;click&quot;, function() {
+            if (babe.deploy.deployMethod === &quot;Prolific&quot;) {
+                babe.global_data.prolific_id = prolificId.val().trim();
+            }
+
+            babe.findNextView();
+        });
+    },
+    one_click: function(config, CT, babe, answer_container_generator, startingTime) {
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        $(&quot;#next&quot;).on(&quot;click&quot;, function() {
+            babe.findNextView();
+        });
+    },
+    post_test: function(config, CT, babe, answer_container_generator, startingTime) {
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        $(&quot;#next&quot;).on(&quot;click&quot;, function(e) {
+            // prevents the form from submitting
+            e.preventDefault();
+
+            // records the post test info
+            babe.global_data.age = $(&quot;#age&quot;).val();
+            babe.global_data.gender = $(&quot;#gender&quot;).val();
+            babe.global_data.education = $(&quot;#education&quot;).val();
+            babe.global_data.languages = $(&quot;#languages&quot;).val();
+            babe.global_data.comments = $(&quot;#comments&quot;)
+            .val()
+            .trim();
+            babe.global_data.endTime = Date.now();
+            babe.global_data.timeSpent =
+                (babe.global_data.endTime -
+                    babe.global_data.startTime) /
+                60000;
+
+            // moves to the next view
+            babe.findNextView();
+        });
+    },
+    thanks: function(config, CT, babe, answer_container_generator, startingTime) {
+        const prolificConfirmText = babeUtils.view.setter.prolificConfirmText(config.prolificConfirmText,
+            &quot;Please press the button below to confirm that you completed the experiment with Prolific&quot;);
+        if (
+            babe.deploy.is_MTurk ||
+            babe.deploy.deployMethod === &quot;directLink&quot; ||
+            babe.deploy.deployMethod === &quot;localServer&quot;
+        ) {
+            // updates the fields in the hidden form with info for the MTurk's server
+            $(&quot;#main&quot;).html(
+                `&lt;div class='babe-view babe-thanks-view'&gt;
+                            &lt;h2 id='warning-message' class='babe-warning'&gt;Submitting the data
+                                &lt;p class='babe-view-text'&gt;please do not close the tab&lt;/p&gt;
+                                &lt;div class='babe-loader'&gt;&lt;/div&gt;
+                            &lt;/h2&gt;
+                            &lt;h1 id='thanks-message' class='babe-thanks babe-nodisplay'&gt;${
+                    config.title
+                    }&lt;/h1&gt;
+                        &lt;/div&gt;`
+            );
+        } else if (babe.deploy.deployMethod === &quot;Prolific&quot;) {
+            $(&quot;#main&quot;).html(
+                `&lt;div class='babe-view babe-thanks-view'&gt;
+                            &lt;h2 id='warning-message' class='babe-warning'&gt;Submitting the data
+                                &lt;p class='babe-view-text'&gt;please do not close the tab&lt;/p&gt;
+                                &lt;div class='babe-loader'&gt;&lt;/div&gt;
+                            &lt;/h2&gt;
+                            &lt;h1 id='thanks-message' class='babe-thanks babe-nodisplay'&gt;${
+                    config.title
+                    }&lt;/h1&gt;
+                            &lt;p id='extra-message' class='babe-view-text babe-nodisplay'&gt;
+                                ${prolificConfirmText}
+                                &lt;a href=&quot;${
+                    babe.deploy.prolificURL
+                    }&quot; class=&quot;babe-view-button prolific-url&quot;&gt;Confirm&lt;/a&gt;
+                            &lt;/p&gt;
+                        &lt;/div&gt;`
+            );
+        } else if (babe.deploy.deployMethod === &quot;debug&quot;) {
+            $(&quot;main&quot;).html(
+                `&lt;div id='babe-debug-table-container' class='babe-view babe-thanks-view'&gt;
+                            &lt;h1 class='babe-view-title'&gt;Debug Mode&lt;/h1&gt;
+                        &lt;/div&gt;`
+            );
+        } else {
+            console.error(&quot;No such babe.deploy.deployMethod&quot;);
+        }
+
+        babe.submission.submit(babe);
+    },
+    slider_rating: function(config, CT, babe, answer_container_generator, startingTime){
+        let response;
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        response = $(&quot;#response&quot;);
+        // checks if the slider has been changed
+        response.on(&quot;change&quot;, function() {
+            $(&quot;#next&quot;).removeClass(&quot;babe-nodisplay&quot;);
+        });
+        response.on(&quot;click&quot;, function() {
+            $(&quot;#next&quot;).removeClass(&quot;babe-nodisplay&quot;);
+        });
+
+        $(&quot;#next&quot;).on(&quot;click&quot;, function() {
+            const RT = Date.now() - startingTime; // measure RT before anything else
+            let trial_data = {
+                trial_name: config.name,
+                trial_number: CT + 1,
+                response: response.val(),
+                RT: RT
+            };
+
+            trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+            babe.trial_data.push(trial_data);
+            babe.findNextView();
+        });
+    },
+    textbox_input: function(config, CT, babe, answer_container_generator, startingTime) {
+        let next;
+        let textInput;
+        const minChars = config.data[CT].min_chars === undefined ? 10 : config.data[CT].min_chars;
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        next = $(&quot;#next&quot;);
+        textInput = $(&quot;textarea&quot;);
+
+        // attaches an event listener to the textbox input
+        textInput.on(&quot;keyup&quot;, function() {
+            // if the text is longer than (in this case) 10 characters without the spaces
+            // the 'next' button appears
+            if (textInput.val().trim().length &gt; minChars) {
+                next.removeClass(&quot;babe-nodisplay&quot;);
+            } else {
+                next.addClass(&quot;babe-nodisplay&quot;);
+            }
+        });
+
+        // the trial data gets added to the trial object
+        next.on(&quot;click&quot;, function() {
+            const RT = Date.now() - startingTime; // measure RT before anything else
+            let trial_data = {
+                trial_name: config.name,
+                trial_number: CT + 1,
+                response: textInput.val().trim(),
+                RT: RT
+            };
+
+            trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+            babe.trial_data.push(trial_data);
+            babe.findNextView();
+        });
+    },
+    dropdown_choice: function(config, CT, babe, answer_container_generator, startingTime){
+        let response;
+
+        const question_left_part =
+            config.data[CT].question_left_part === undefined ? &quot;&quot; : config.data[CT].question_left_part;
+        const question_right_part =
+            config.data[CT].question_right_part === undefined ? &quot;&quot; : config.data[CT].question_right_part;
+
+        $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+        response = $(&quot;#response&quot;);
+
+        response.on(&quot;change&quot;, function() {
+            $(&quot;#next&quot;).removeClass(&quot;babe-nodisplay&quot;);
+        });
+
+
+        $(&quot;#next&quot;).on(&quot;click&quot;, function() {
+            const RT = Date.now() - startingTime; // measure RT before anything else
+            let trial_data = {
+                trial_name: config.name,
+                trial_number: CT + 1,
+                question: question_left_part.concat(&quot;...answer here...&quot;).concat(question_right_part),
+                response: response.val(),
+                RT: RT
+            };
+
+            trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+            babe.trial_data.push(trial_data);
+            babe.findNextView();
+        });
+    },
+    self_paced_reading: function(config, CT, babe, answer_container_generator, startingTime){
+
+        const sentenceList = config.data[CT].sentence.trim().split(&quot; | &quot;);
+        let spaceCounter = 0;
+        let wordList;
+        let readingTimes = [];
+
+        // shows the sentence word by word on SPACE press
+        const handle_key_press = function(e) {
+
+            if (e.which === 32 &amp;&amp; spaceCounter &lt; wordList.length) {
+                wordList[spaceCounter].classList.remove(
+                    &quot;spr-word-hidden&quot;
+                );
+
+                if (spaceCounter === 0) {
+                    $(&quot;.babe-help-text&quot;).addClass(&quot;babe-invisible&quot;);
+                }
+
+                if (spaceCounter &gt; 0) {
+                    wordList[spaceCounter - 1].classList.add(
+                        &quot;spr-word-hidden&quot;
+                    );
+                }
+
+                readingTimes.push(Date.now());
+                spaceCounter++;
+            } else if (
+                e.which === 32 &amp;&amp;
+                spaceCounter === wordList.length
+            ) {
+                wordList[spaceCounter - 1].classList.add(
+                    &quot;spr-word-hidden&quot;
+                );
+
+                $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
+
+                $(&quot;input[name=answer]&quot;).on(&quot;change&quot;, function() {
+                    const RT = Date.now() - startingTime;
+                    let reactionTimes = readingTimes
+                    .reduce((result, current, idx) =&gt; {
+                        return result.concat(
+                            readingTimes[idx + 1] - readingTimes[idx]
+                        );
+                    }, [])
+                    .filter((item) =&gt; isNaN(item) === false);
+                    let trial_data = {
+                        trial_name: config.name,
+                        trial_number: CT + 1,
+                        response: $(&quot;input[name=answer]:checked&quot;).val(),
+                        reaction_times: reactionTimes,
+                        time_spent: RT
+                    };
+
+                    trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+                    babe.trial_data.push(trial_data);
+                    babe.findNextView();
+                });
+                readingTimes.push(Date.now());
+                spaceCounter++;
+            }
+        };
+        // shows the help text
+        $(&quot;.babe-help-text&quot;).removeClass(&quot;babe-nodisplay&quot;);
+
+        // creates the sentence
+        sentenceList.map((word) =&gt; {
+            $(&quot;.babe-spr-sentence&quot;).append(
+                `&lt;span class='spr-word spr-word-hidden'&gt;${word}&lt;/span&gt;`
+            );
+        });
+
+        // creates an array of spr word elements
+        wordList = $(&quot;.spr-word&quot;).toArray();
+
+        // attaches an eventListener to the body for space
+        $(&quot;body&quot;).on(&quot;keydown&quot;, handle_key_press);
+
+    }
+};
+</code></pre>
+
+<h5 id="defining-a-custom-view-from-scratch">Defining a custom view from scratch</h5>
+<p>You can also define a custom view from scratch. To do this, create a view template, ideally in file <code>03_custom_views_templates.js</code>. A view template gets a <code>config</code> object information as input (with relevant information, e.g., URLs for pictures, text to show on each trial etc.). The view template function then returns a view.</p>
+<p>Here's a basic scaffolding of a view template:</p>
+<pre><code class="javascript">const custom_view_template = function(config) {
+    const view = {
+        name: config.name,
+        CT: 0,
+        trials: config.trials,
+        // The render functions gets the babe object as well as the current trial in view counter as input
+        render: function (CT, babe) {
+            // Here, you can do whatever you want, eventually you should call babe.findNextView()
+            // to proceed to the next view and if it is an trial type view,
+            // you should save the trial information with babe.trial_data.push(trial_data)
+        }
+    };
+    // We have to return the view, so that it can be used in 05_views.js
+    return view;
+};
+</code></pre>
+
+<p>A view is an object, that obligatorily has the properties:</p>
+<ul>
+<li><code>name</code>: the view's name</li>
+<li><code>CT</code>: the view's current trial (the counter of how many times this view occurred in the experiment, initialized to 0)</li>
+<li><code>trials</code>: the maximum number of times this view is repeated</li>
+<li><code>render</code>: a function that is called to create each trial of the view</li>
+</ul>
+<p>The most important part is the <code>render</code> function. It gets <code>CT</code> and the babe-object itself as input.  has to call <code>babe.findNextView()</code> eventually to proceed to the next view (or the next trial in this view). If data is to be saved from any given trial, you would need to collect the data as an object, e.g., named <code>trial_data</code> and store it for later output by calling <code>babe.trial_data.push(trial_data)</code>.</p>
+<p>Here's a full example from the <a href="https://github.com/babe-project/showroom">showroom</a>:</p>
+<pre><code class="javascript">// In this view the user can click on one of two buttons
+const custom_press_a_button = function(config) {
+    const view = {
+        name: config.name,
+        CT: 0,
+        trials: config.trials,
+        // The render functions gets the babe object as well as the current trial in view counter as input
+        render: function (CT, babe) {
+            // Here, you can do whatever you want, eventually you should call babe.findNextView()
+            // to proceed to the next view and if it is an trial type view,
+            // you should save the trial information with babe.trial_data.push(trial_data)
+
+            // Normally, you want to display some kind of html, to do this you append your html to the main element
+            // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators[&quot;&lt;view_name&gt;&quot;](config, CT)
+            $(&quot;main&quot;).html(`&lt;div class='babe-view'&gt;
+                &lt;h1 class='babe-view-title'&gt;Click on one of the buttons!&lt;/h1&gt;
+                &lt;button id=&quot;first&quot; class='babe-view-button'&gt;First Button&lt;/button&gt;
+                &lt;button id=&quot;second&quot; class='babe-view-button'&gt;Second Button&lt;/button&gt;
+                &lt;/div&gt;`);
+
+            // This function will handle  the response
+            const handle_click = function(e) {
+                // We will just save the response and continue to the next view
+                let trial_data = {
+                    trial_name: config.name,
+                    trial_number: CT + 1,
+                    response: e.target.id
+                };
+                // Often it makes sense to also save the config information
+                // trial_data = babeUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+                // Here, we save the trial_data
+                babe.trial_data.push(trial_data);
+
+                // Now, we will continue with the next view
+                babe.findNextView();
+            };
+
+            // We will add the handle_click functions to both buttons
+            $('#first').on(&quot;click&quot;, handle_click);
+            $('#second').on(&quot;click&quot;, handle_click);
+
+            // That's everything for this view
+        }
+    };
+    // We have to return the view, so that it can be used in 05_views.js
+    return view;
+};
+</code></pre>
               
             </div>
           </div>

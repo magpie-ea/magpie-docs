@@ -144,17 +144,17 @@
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#forced-choice-task">Forced-choice task</a>
+          <a class="toctree-l5" href="#forced-choice-2-alternatives">Forced choice (2 alternatives)</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#sentence-choice-task">Sentence Choice task</a>
+          <a class="toctree-l5" href="#sentence-choice">Sentence choice</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#image-selection-task">Image Selection task</a>
+          <a class="toctree-l5" href="#image-selection">Image selection</a>
         </li>
     
       
@@ -164,22 +164,22 @@
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#slider-rating-task">Slider Rating task</a>
+          <a class="toctree-l5" href="#slider-rating">Slider rating</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#dropdown-choice-task">Dropdown Choice task</a>
+          <a class="toctree-l5" href="#dropdown-choice">Dropdown choice</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#rating-scale-task">Rating Scale task</a>
+          <a class="toctree-l5" href="#rating-scale">Rating scale</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#key-press-task">Key Press task</a>
+          <a class="toctree-l5" href="#key-press">Key press</a>
         </li>
     
     </ul>
@@ -424,6 +424,12 @@
 </ul>
 </li>
 </ul>
+<p>The intro view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>fixed text</code></li>
+<li>answer_container_generator: <code>one_button</code></li>
+<li>handle_response_function: <code>intro</code></li>
+</ul>
 <h6 id="instructions-view">Instructions view</h6>
 <p>Instantiate with <code>babeViews.view_generator('instructions', ...)</code>. Optional fields:</p>
 <ul>
@@ -443,6 +449,12 @@
 </ul>
 </li>
 </ul>
+<p>The intro view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>fixed text</code></li>
+<li>answer_container_generator: <code>one_button</code></li>
+<li>handle_response_function: <code>one_click</code></li>
+</ul>
 <h6 id="begin-view">Begin view</h6>
 <p>Instantiate with <code>babeViews.view_generator('begin, ...)</code>. Optional fields:</p>
 <ul>
@@ -461,6 +473,12 @@
 <li>default: <em>there is no default</em></li>
 </ul>
 </li>
+</ul>
+<p>The begin view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>fixed text</code></li>
+<li>answer_container_generator: <code>one_button</code></li>
+<li>handle_response_function: <code>one_click</code></li>
 </ul>
 <h6 id="post_test-view">Post_test view</h6>
 <p>Instantiate with <code>babeViews.view_generator('post_test', ...)</code>. Optional fields:</p>
@@ -536,6 +554,12 @@
 </ul>
 </li>
 </ul>
+<p>The post test view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>post_test</code></li>
+<li>answer_container_generator: <code>post_test</code></li>
+<li>handle_response_function: <code>post_test</code></li>
+</ul>
 <h6 id="thanks-view">Thanks view</h6>
 <p>Instantiate with <code>babeViews.view_generator('thanks', ...)</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
 <ul>
@@ -549,6 +573,12 @@
 <li>default: 'Please press the button below to confirm that you completed the experiment with Prolific'</li>
 </ul>
 </li>
+</ul>
+<p>The thanks view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>empty</code></li>
+<li>answer_container_generator: <code>empty</code></li>
+<li>handle_response_function: <code>empty</code></li>
 </ul>
 <h5 id="trial-views">Trial views</h5>
 <p>Trial views are the parts of your experiment which are (usually) instantiated several times (realizing different trials of your, say, main experimental task). They usually collect the data and often rely on additional information (e.g., the picture to be displayed in trial 27, or the question and answer options for trial 13).</p>
@@ -568,7 +598,7 @@
 </li>
 </ul>
 <p>Different types of wrapping views have more optional fields, as documented below. </p>
-<h6 id="forced-choice-task">Forced-choice task</h6>
+<h6 id="forced-choice-2-alternatives">Forced choice (2 alternatives)</h6>
 <p>Instantiate with <code>babeViews.view_generator('forced_choice', ...)</code> Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
 <p><img src='../../images/views_samples/view_fc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -602,7 +632,13 @@
 ];
 </code></pre>
 
-<h6 id="sentence-choice-task">Sentence Choice task</h6>
+<p>The forced_choice view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>button_choice</code></li>
+<li>handle_response_function: <code>button_choice</code></li>
+</ul>
+<h6 id="sentence-choice">Sentence choice</h6>
 <p>Instantiate with <code>babeViews.view_generator('sentence_choice', ...)</code>. Similar to the <code>forcedChoice</code> view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.</p>
 <p><img src='../../images/views_samples/view_ss.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -646,7 +682,13 @@
 ];
 </code></pre>
 
-<h6 id="image-selection-task">Image Selection task</h6>
+<p>The sentence_choice view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>sentence_choice</code></li>
+<li>handle_response_function: <code>button_choice</code></li>
+</ul>
+<h6 id="image-selection">Image selection</h6>
 <p>Instantiate with <code>babeViews.view_generator('image_seletion', ...)</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
 <p><img src='../../images/views_samples/view_is.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -688,6 +730,12 @@
 ];
 </code></pre>
 
+<p>The image_selection view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>image_selection</code></li>
+<li>handle_response_function: <code>button_choice</code></li>
+</ul>
 <h6 id="textbox-input-task">Textbox Input task</h6>
 <p>Instantiate with <code>babeViews.view_generator('textbox_input', ...)</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
 <p><img src='../../images/views_samples/view_ti.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
@@ -728,7 +776,13 @@
 ];
 </code></pre>
 
-<h6 id="slider-rating-task">Slider Rating task</h6>
+<p>The forced_choice view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>textbox_input</code></li>
+<li>handle_response_function: <code>textbox_input</code></li>
+</ul>
+<h6 id="slider-rating">Slider rating</h6>
 <p>Instantiate with <code>babeViews.view_generator('slider_rating', ...)</code>. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The <code>next</code> button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.</p>
 <p><img src='../../images/views_samples/view_sr.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -767,7 +821,13 @@
 ];
 </code></pre>
 
-<h6 id="dropdown-choice-task">Dropdown Choice task</h6>
+<p>The slider_rating view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>slider_rating</code></li>
+<li>handle_response_function: <code>slider_rating</code></li>
+</ul>
+<h6 id="dropdown-choice">Dropdown choice</h6>
 <p>Instantiate with <code>babeViews.view_generator(drowdown_choice', ...)</code>. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.</p>
 <p><img src='../../images/views_samples/view_dc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -807,7 +867,13 @@
 ];
 </code></pre>
 
-<h6 id="rating-scale-task">Rating Scale task</h6>
+<p>The dropdown_choice view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>dropdown_choice</code></li>
+<li>handle_response_function: <code>dropdown_choice</code></li>
+</ul>
+<h6 id="rating-scale">Rating scale</h6>
 <p>Instantiate with <code>babeViews.view_generator('rating_scale', ...)</code>. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.</p>
 <p><img src='../../images/views_samples/view_rc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -846,7 +912,13 @@
 ];
 </code></pre>
 
-<h6 id="key-press-task">Key Press task</h6>
+<p>The rating_scale view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>basic_stimulus</code></li>
+<li>answer_container_generator: <code>rating_scale</code></li>
+<li>handle_response_function: <code>button_choice</code></li>
+</ul>
+<h6 id="key-press">Key press</h6>
 <p>Instantiate with <code>babeViews.view_generator('key_press', ...)</code>. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.</p>
 <p><img src='../../images/views_samples/view_kp.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
@@ -893,6 +965,12 @@
 ];
 </code></pre>
 
+<p>The key_press view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>key_press</code></li>
+<li>answer_container_generator: <code>question</code></li>
+<li>handle_response_function: <code>key_press</code></li>
+</ul>
 <h5 id="self-paced-reading">Self-paced reading</h5>
 <p>There are templates for realizing self-paced reading tasks too.</p>
 <h6 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h6>
@@ -946,6 +1024,12 @@
 ];
 </code></pre>
 
+<p>The self_paced_reading view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>self_paced_reading</code></li>
+<li>answer_container_generator: <code>button_choice</code></li>
+<li>handle_response_function: <code>self_paced_reading</code></li>
+</ul>
 <h6 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h6>
 <p>Instantiate with <code>babeViews.view_generator('self_paced_reading_rating_scale', ...)</code>.</p>
 <ul>
@@ -989,6 +1073,13 @@
     }
 ];
 </code></pre>
+
+<p>The self_paced_reading_rating_scale view uses the following <a href="../03_custom_views/#predefined-view-elements">predefined view elements</a>:</p>
+<ul>
+<li>stimulus_container_generator: <code>self_paced_reading</code></li>
+<li>answer_container_generator: <code>rating_choice</code></li>
+<li>handle_response_function: <code>self_paced_reading</code></li>
+</ul>
               
             </div>
           </div>
