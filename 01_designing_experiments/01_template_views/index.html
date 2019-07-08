@@ -578,7 +578,7 @@
 <ul>
 <li>stimulus_container_generator: <code>empty</code></li>
 <li>answer_container_generator: <code>empty</code></li>
-<li>handle_response_function: <code>empty</code></li>
+<li>handle_response_function: <code>thanks</code></li>
 </ul>
 <h5 id="trial-views">Trial views</h5>
 <p>Trial views are the parts of your experiment which are (usually) instantiated several times (realizing different trials of your, say, main experimental task). They usually collect the data and often rely on additional information (e.g., the picture to be displayed in trial 27, or the question and answer options for trial 13).</p>
@@ -999,6 +999,16 @@
 <li><code>picture: string</code></li>
 <li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
 <li><code>question: string</code></li>
+<li><code>wordPos: "next" or "same"</code><ul>
+<li>option how to display the spr parts, if "next" every spr part is displayed next to each other, as in a sentence, if "same" every spr part is displayed at the same place</li>
+<li>default: "next"</li>
+</ul>
+</li>
+<li><code>underline: "words", "sentence" or "none"</code><ul>
+<li>option how to underline the spr parts, if "words" every part is underlined separately,  if "sentence" the complete sentence is underlined, if "none" there is no underline </li>
+<li>default: "words"</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -1014,12 +1024,14 @@
         sentence: &quot;all | of | the | yellow | marbles | are | inside | the | case.'&quot;,
         option1: &quot;Bring it&quot;,
         option2: &quot;Leave it&quot;,
+        wordPos: &quot;same&quot;
     },
     {
         question: &quot;Should you bring Johnny this box or not?&quot;,
         sentence: &quot;some | of the | black marbles | are | inside | the case.'&quot;,
         option1: &quot;Bring it&quot;,
-        option2: &quot;Leave it&quot;
+        option2: &quot;Leave it&quot;,
+        underline: &quot;none&quot;
     }
 ];
 </code></pre>
@@ -1052,6 +1064,16 @@
 <li><code>picture: string</code></li>
 <li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
 <li><code>question: string</code></li>
+<li><code>wordPos: "next" or "same"</code><ul>
+<li>option how to display the spr parts, if "next" every spr part is displayed next to each other, as in a sentence, if "same" every spr part is displayed at the same place</li>
+<li>default: "next"</li>
+</ul>
+</li>
+<li><code>underline: "words", "sentence" or "none"</code><ul>
+<li>option how to underline the spr parts, if "words" every part is underlined separately,  if "sentence" the complete sentence is underlined, if "none" there is no underline</li>
+<li>default: "words"</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

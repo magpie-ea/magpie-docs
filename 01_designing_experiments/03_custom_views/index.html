@@ -308,7 +308,7 @@
 <ol>
 <li><strong>stimulus container</strong>: defines the top part of the screen, containing stuff like title, the QUD, the stimulus to be shown etc.</li>
 <li><strong>answer container</strong>: defines the lower part of the screen, containing the answer options, 'next' buttons, etc.</li>
-<li><strong>handle response function</strong>: function that is called when a response is given</li>
+<li><strong>handle response function</strong>: function that is called to handle the response</li>
 </ol>
 <p>Each one of these elements is independently customizable. Indeed, when a template view is created by _babe "behind the scenes", it simply uses defaults for these three elements which are appropriate for the template view to be created. For example, we would normally create a template <code>forced_choice</code> view like so:</p>
 <pre><code class="javascript">const forced_choice_instance = babeViews.view_generator(
@@ -940,34 +940,46 @@ const handle_response_functions = {
         let spaceCounter = 0;
         let wordList;
         let readingTimes = [];
+        // wordPos &quot;next&quot; or &quot;same&quot;, if &quot;next&quot; words appear next to each other, if &quot;same&quot; all words appear at the same place
+        // default: &quot;next&quot;
+        let wordPos = config.data[CT].wordPos === undefined ? &quot;next&quot; : config.data[CT].wordPos;
+        let showNeighbor = wordPos === &quot;next&quot;;
+        // underline &quot;words&quot;, &quot;sentence&quot; or &quot;none&quot;, if &quot;words&quot; every word gets underlined, if &quot;sentence&quot; the sentence gets
+        // underlined, if &quot;none&quot; there is no underline
+        // default: &quot;words&quot;
+        let underline = config.data[CT].underline === undefined ? &quot;words&quot; : config.data[CT].underline;
+        let not_underline = underline === &quot;none&quot;;
+        let one_line = underline === &quot;sentence&quot;;
 
         // shows the sentence word by word on SPACE press
         const handle_key_press = function(e) {
 
-            if (e.which === 32 &amp;&amp; spaceCounter &lt; wordList.length) {
-                wordList[spaceCounter].classList.remove(
-                    &quot;spr-word-hidden&quot;
-                );
+            if (e.which === 32 &amp;&amp; spaceCounter &lt; sentenceList.length) {
+                if (showNeighbor) {
+                    wordList[spaceCounter].classList.remove(&quot;spr-word-hidden&quot;);
+                } else {
+                    $(&quot;.babe-spr-sentence&quot;).html(`&lt;span class='spr-word'&gt;${sentenceList[spaceCounter]}&lt;/span&gt;`);
+                    if (not_underline){
+                        $('.babe-spr-sentence .spr-word').addClass('no-line');
+                    }
+                }
 
                 if (spaceCounter === 0) {
                     $(&quot;.babe-help-text&quot;).addClass(&quot;babe-invisible&quot;);
                 }
 
-                if (spaceCounter &gt; 0) {
-                    wordList[spaceCounter - 1].classList.add(
-                        &quot;spr-word-hidden&quot;
-                    );
+                if (spaceCounter &gt; 0 &amp;&amp; showNeighbor) {
+                    wordList[spaceCounter - 1].classList.add(&quot;spr-word-hidden&quot;);
                 }
 
                 readingTimes.push(Date.now());
                 spaceCounter++;
-            } else if (
-                e.which === 32 &amp;&amp;
-                spaceCounter === wordList.length
-            ) {
-                wordList[spaceCounter - 1].classList.add(
-                    &quot;spr-word-hidden&quot;
-                );
+            } else if (e.which === 32 &amp;&amp; spaceCounter === sentenceList.length) {
+                if (showNeighbor) {
+                    wordList[spaceCounter - 1].classList.add(&quot;spr-word-hidden&quot;);
+                } else {
+                    $(&quot;.babe-spr-sentence&quot;).html(&quot;&quot;);
+                }
 
                 $(&quot;.babe-view&quot;).append(answer_container_generator(config, CT));
 
@@ -1000,15 +1012,24 @@ const handle_response_functions = {
         // shows the help text
         $(&quot;.babe-help-text&quot;).removeClass(&quot;babe-nodisplay&quot;);
 
-        // creates the sentence
-        sentenceList.map((word) =&gt; {
-            $(&quot;.babe-spr-sentence&quot;).append(
-                `&lt;span class='spr-word spr-word-hidden'&gt;${word}&lt;/span&gt;`
-            );
-        });
+        if (showNeighbor) {
+            // creates the sentence
+            sentenceList.map((word) =&gt; {
+                $(&quot;.babe-spr-sentence&quot;).append(
+                    `&lt;span class='spr-word spr-word-hidden'&gt;${word}&lt;/span&gt;`
+                );
+            });
 
-        // creates an array of spr word elements
-        wordList = $(&quot;.spr-word&quot;).toArray();
+            // creates an array of spr word elements
+            wordList = $(&quot;.spr-word&quot;).toArray();
+        }
+
+        if (not_underline){
+            $('.babe-spr-sentence .spr-word').addClass('no-line');
+        }
+        if (one_line){
+            $('.babe-spr-sentence .spr-word').addClass('one-line');
+        }
 
         // attaches an eventListener to the body for space
         $(&quot;body&quot;).on(&quot;keydown&quot;, handle_key_press);
