@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Template views - _babe documentation</title>
+  <title>Template views - _magpie documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -40,7 +40,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> _babe documentation</a>
+        <a href="../.." class="icon icon-home"> _magpie documentation</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -362,7 +362,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">_babe documentation</a>
+        <a href="../..">_magpie documentation</a>
       </nav>
 
       
@@ -381,7 +381,7 @@
     <li>Template views</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/01_designing_experiments/01_template_views.md"
+        <a href="https://github.com/magpie-ea/magpie-docs/edit/master/docs/01_designing_experiments/01_template_views.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -406,7 +406,7 @@
 </li>
 </ul>
 <h6 id="intro-view">Intro view</h6>
-<p>Instantiate with <code>babeViews.view_generator('intro', ...)</code>. Optional fields:</p>
+<p>Instantiate with <code>magpieViews.view_generator('intro', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -431,7 +431,7 @@
 <li>handle_response_function: <code>intro</code></li>
 </ul>
 <h6 id="instructions-view">Instructions view</h6>
-<p>Instantiate with <code>babeViews.view_generator('instructions', ...)</code>. Optional fields:</p>
+<p>Instantiate with <code>magpieViews.view_generator('instructions', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -456,7 +456,7 @@
 <li>handle_response_function: <code>one_click</code></li>
 </ul>
 <h6 id="begin-view">Begin view</h6>
-<p>Instantiate with <code>babeViews.view_generator('begin, ...)</code>. Optional fields:</p>
+<p>Instantiate with <code>magpieViews.view_generator('begin, ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -481,7 +481,7 @@
 <li>handle_response_function: <code>one_click</code></li>
 </ul>
 <h6 id="post_test-view">Post_test view</h6>
-<p>Instantiate with <code>babeViews.view_generator('post_test', ...)</code>. Optional fields:</p>
+<p>Instantiate with <code>magpieViews.view_generator('post_test', ...)</code>. Optional fields:</p>
 <ul>
 <li><code>buttonText: string</code><ul>
 <li>the text of the button that takes the participant to the next view</li>
@@ -561,7 +561,7 @@
 <li>handle_response_function: <code>post_test</code></li>
 </ul>
 <h6 id="thanks-view">Thanks view</h6>
-<p>Instantiate with <code>babeViews.view_generator('thanks', ...)</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
+<p>Instantiate with <code>magpieViews.view_generator('thanks', ...)</code>. <strong>The <em>thanks</em> view must always be included in your experiment because it wraps up and processes the data collected during the experiment.</strong> Optional fields:</p>
 <ul>
 <li><code>title: string</code><ul>
 <li>the title of the view</li>
@@ -599,7 +599,7 @@
 </ul>
 <p>Different types of wrapping views have more optional fields, as documented below. </p>
 <h6 id="forced-choice-2-alternatives">Forced choice (2 alternatives)</h6>
-<p>Instantiate with <code>babeViews.view_generator('forced_choice', ...)</code> Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
+<p>Instantiate with <code>magpieViews.view_generator('forced_choice', ...)</code> Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
 <p><img src='../../images/views_samples/view_fc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -614,7 +614,7 @@
 <ul>
 <li><code>question: string</code> - question to be asked</li>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code> - picture to be displayed</li>
 </ul>
 </li>
@@ -639,7 +639,7 @@
 <li>handle_response_function: <code>button_choice</code></li>
 </ul>
 <h6 id="sentence-choice">Sentence choice</h6>
-<p>Instantiate with <code>babeViews.view_generator('sentence_choice', ...)</code>. Similar to the <code>forcedChoice</code> view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.</p>
+<p>Instantiate with <code>magpieViews.view_generator('sentence_choice', ...)</code>. Similar to the <code>forcedChoice</code> view, this view presents two text-based options to click on. This view, however, realizes options on longer buttons arranged vertically. This is better for choice between several longer expressions, like whole sentences.</p>
 <p><img src='../../images/views_samples/view_ss.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -653,7 +653,7 @@
 <p><strong>Optional Fields</strong></p>
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code></li>
 <li><code>question: string</code></li>
 </ul>
@@ -689,7 +689,7 @@
 <li>handle_response_function: <code>button_choice</code></li>
 </ul>
 <h6 id="image-selection">Image selection</h6>
-<p>Instantiate with <code>babeViews.view_generator('image_seletion', ...)</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
+<p>Instantiate with <code>magpieViews.view_generator('image_seletion', ...)</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
 <p><img src='../../images/views_samples/view_is.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -706,7 +706,7 @@
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
 <li><code>question: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 </ul>
 </li>
 <li>
@@ -737,7 +737,7 @@
 <li>handle_response_function: <code>button_choice</code></li>
 </ul>
 <h6 id="textbox-input-task">Textbox Input task</h6>
-<p>Instantiate with <code>babeViews.view_generator('textbox_input', ...)</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
+<p>Instantiate with <code>magpieViews.view_generator('textbox_input', ...)</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
 <p><img src='../../images/views_samples/view_ti.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -750,7 +750,7 @@
 <p><strong>Optional Fields</strong></p>
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code> - picture to be displayed</li>
 <li><code>min_chars: number</code><ul>
 <li>the minumum number of characters in the textarea field before the <code>next</code> button appears</li>
@@ -783,7 +783,7 @@
 <li>handle_response_function: <code>textbox_input</code></li>
 </ul>
 <h6 id="slider-rating">Slider rating</h6>
-<p>Instantiate with <code>babeViews.view_generator('slider_rating', ...)</code>. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The <code>next</code> button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.</p>
+<p>Instantiate with <code>magpieViews.view_generator('slider_rating', ...)</code>. Gives you a single (horizontally oriented) slider, with endpoints whose labels can be specified. The <code>next</code> button only appears when the slider is clicked on or moved at least once. Internally slider values are represented as ranging from 0 to 100 in steps of 1.</p>
 <p><img src='../../images/views_samples/view_sr.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -797,7 +797,7 @@
 <p><strong>Optional Fields</strong></p>
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code></li>
 <li><code>question: string</code></li>
 </ul>
@@ -828,7 +828,7 @@
 <li>handle_response_function: <code>slider_rating</code></li>
 </ul>
 <h6 id="dropdown-choice">Dropdown choice</h6>
-<p>Instantiate with <code>babeViews.view_generator(drowdown_choice', ...)</code>. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.</p>
+<p>Instantiate with <code>magpieViews.view_generator(drowdown_choice', ...)</code>. Prompts the user to select one option from a drop-down menu, which can be embedded into a sentence, e.g., to fill in a word or phrase in a fixed sentence frame.</p>
 <p><img src='../../images/views_samples/view_dc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -842,7 +842,7 @@
 <p><strong>Optional Fields</strong></p>
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code></li>
 <li><code>question_left_part: string</code></li>
 <li><code>question_right_part: string</code></li>
@@ -874,7 +874,7 @@
 <li>handle_response_function: <code>dropdown_choice</code></li>
 </ul>
 <h6 id="rating-scale">Rating scale</h6>
-<p>Instantiate with <code>babeViews.view_generator('rating_scale', ...)</code>. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.</p>
+<p>Instantiate with <code>magpieViews.view_generator('rating_scale', ...)</code>. Realizes a Likert-scale (ordinal) rating task, with button labeled with consecutive numbers. Participants click on these numbered buttons to proceed. Allows labels for endpoints on the scale.</p>
 <p><img src='../../images/views_samples/view_rc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -888,7 +888,7 @@
 <p><strong>Optional Fields</strong></p>
 <ul>
 <li><code>QUD: string</code> - text that is always present on the slide</li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>picture: string (link)</code></li>
 <li><code>question: string</code></li>
 </ul>
@@ -919,7 +919,7 @@
 <li>handle_response_function: <code>button_choice</code></li>
 </ul>
 <h6 id="key-press">Key press</h6>
-<p>Instantiate with <code>babeViews.view_generator('key_press', ...)</code>. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.</p>
+<p>Instantiate with <code>magpieViews.view_generator('key_press', ...)</code>. Offers a 2-alternative forced choice task where choice options are given by pressing keys on the keyboard. Ideal for more accurate reaction time measurements.</p>
 <p><img src='../../images/views_samples/view_kp.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -937,7 +937,7 @@
 <ul>
 <li><code>question: string</code></li>
 <li><code>picture: string (link)</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 </ul>
 </li>
 <li>
@@ -974,7 +974,7 @@
 <h5 id="self-paced-reading">Self-paced reading</h5>
 <p>There are templates for realizing self-paced reading tasks too.</p>
 <h6 id="self-paced-reading-with-forced-choice-response">Self-paced reading with forced choice response</h6>
-<p>Instantiate with <code>babeViews.view_generator('self_paced_reading', ...)</code>.</p>
+<p>Instantiate with <code>magpieViews.view_generator('self_paced_reading', ...)</code>.</p>
 <ul>
 <li>
 <p><strong>Obligatory Fields</strong></p>
@@ -997,7 +997,7 @@
 </ul>
 </li>
 <li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>question: string</code></li>
 <li><code>wordPos: "next" or "same"</code><ul>
 <li>option how to display the spr parts, if "next" every spr part is displayed next to each other, as in a sentence, if "same" every spr part is displayed at the same place</li>
@@ -1043,7 +1043,7 @@
 <li>handle_response_function: <code>self_paced_reading</code></li>
 </ul>
 <h6 id="self-paced-reading-task-with-rating-scale-response">Self-paced reading task with rating scale response</h6>
-<p>Instantiate with <code>babeViews.view_generator('self_paced_reading_rating_scale', ...)</code>.</p>
+<p>Instantiate with <code>magpieViews.view_generator('self_paced_reading_rating_scale', ...)</code>.</p>
 <ul>
 <li>
 <p><strong>Obligatory Fields</strong></p>
@@ -1062,7 +1062,7 @@
 <li><code>QUD: string</code> - text that is always present on the slide</li>
 <li><code>help_text: string</code> - SPACE press text above the spr sentence</li>
 <li><code>picture: string</code></li>
-<li><code>canvas: object</code> - <a href="../05_canvas/">more about babe canvas</a></li>
+<li><code>canvas: object</code> - <a href="../05_canvas/">more about magpie canvas</a></li>
 <li><code>question: string</code></li>
 <li><code>wordPos: "next" or "same"</code><ul>
 <li>option how to display the spr parts, if "next" every spr part is displayed next to each other, as in a sentence, if "same" every spr part is displayed at the same place</li>
@@ -1137,7 +1137,7 @@
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/magpie-ea/magpie-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       

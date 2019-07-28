@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Recruitment via MTurk - _babe documentation</title>
+  <title>Recruitment via MTurk - _magpie documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -40,7 +40,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> _babe documentation</a>
+        <a href="../.." class="icon icon-home"> _magpie documentation</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -221,7 +221,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">_babe documentation</a>
+        <a href="../..">_magpie documentation</a>
       </nav>
 
       
@@ -240,7 +240,7 @@
     <li>Recruitment via MTurk</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/03_deploying_experiments/02_recruitment_MTurk.md"
+        <a href="https://github.com/magpie-ea/magpie-docs/edit/master/docs/03_deploying_experiments/02_recruitment_MTurk.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -251,8 +251,8 @@
             <div class="section">
               
                 <h5 id="recruitment-via-mturk">Recruitment via MTurk</h5>
-<p>You can post a _babe experiment as an external HIT on MTurk. If you are familiar with posting external HITs, the only thing that you need to take into account is that _babe experiments send their collected data to the _babe backend. So, in order to collect the data from your experiment, you would visit the _babe backend to download a CSV file. No need to go via MTurk.</p>
-<p>If you are not familiar with posting external HITs on MTurk, here is a simple method that uses <code>boto3</code>, which is a Python SDK for Amazon's Web Services (AWS). The <a href="https://github.com/babe-project/MTurkDeployTemplate">MTurkDeployTemplate</a> gives a full example of an experiment that uses this method.</p>
+<p>You can post a _magpie experiment as an external HIT on MTurk. If you are familiar with posting external HITs, the only thing that you need to take into account is that _magpie experiments send their collected data to the _magpie backend. So, in order to collect the data from your experiment, you would visit the _magpie backend to download a CSV file. No need to go via MTurk.</p>
+<p>If you are not familiar with posting external HITs on MTurk, here is a simple method that uses <code>boto3</code>, which is a Python SDK for Amazon's Web Services (AWS). The <a href="https://github.com/magpie-ea/MTurkDeployTemplate">MTurkDeployTemplate</a> gives a full example of an experiment that uses this method.</p>
 <p>The method we propose here is easy in the sense that it might require less downloading / installing than other methods. You only need Python and the <code>boto3</code> package. (But <a href="https://github.com/Ciyang/experiment_template">here</a> and <a href="https://cocolab.stanford.edu/mturk-tools.html">there</a> are fully viable alternative methods and resources that provide additional useful information.)</p>
 <p>We assume that you have an MTurk account and that you have your AWS credentials ready at hand. (If not, see <a href="https://github.com/Ciyang/experiment_template">here</a> for instructions on how to setup your account.) Download a recent version of Python (we used 3.6 at the time of writing) and install the <code>boto3</code> package, e.g., using <code>pip</code>. Next, in your homedirectory, create the file:</p>
 <pre><code>~/.aws/config
@@ -266,7 +266,7 @@ aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 
 </code></pre>
 
-<p>Make sure that your _babe experiment is ready for MTurk deployment:</p>
+<p>Make sure that your _magpie experiment is ready for MTurk deployment:</p>
 <ul>
 <li>set the deployment method to <code>MTurk</code></li>
 <li>host the experiment on a web server, e.g., <a href="/03_deploying_experiments/02_hosting_on_netlify/">using Netlify</a></li>
@@ -307,7 +307,7 @@ print(&quot;https://worker.mturk.com/mturk/preview?groupId=&quot; + new_hit['HIT
 print(&quot;HITID = &quot; + new_hit['HIT']['HITId'] + &quot; (for your reference)&quot;)
 </code></pre>
 
-<p>Now execute <code>python create_HIT.py</code>. Make sure you note the HITid that this call returns, because you need it to further identify this experimental run when interacting with MTurk. Download file <code>get_HIT_status.py</code> <a href="https://github.com/babe-project/MTurkDeployTemplate/blob/master/get_HIT_status.py">here</a> and use <code>python get_HIT_status.py YOUR_HIT_ID</code>, where <code>YOUR_HIT_ID</code> is the HITid returned when you posted the HIT, to learn how many workers have completed your work. Download file <code>approve_HIT.py</code> <a href="https://github.com/babe-project/MTurkDeployTemplate/blob/master/approve_HIT.py">here</a> and use <code>python approve_HIT.py YOUR_HIT_ID</code> to reimburse all workers. You can manipulate (expire, extend, ...) your HIT using <code>boto3</code> as described in the  <a href="http://boto3.readthedocs.io/en/latest/index.html">boto3 documentation</a>. For some recurrent manipulations, you can also use <a href="https://manage-hits-individually.s3.amazonaws.com/v4.0/index.html">this web interface</a>.</p>
+<p>Now execute <code>python create_HIT.py</code>. Make sure you note the HITid that this call returns, because you need it to further identify this experimental run when interacting with MTurk. Download file <code>get_HIT_status.py</code> <a href="https://github.com/magpie-ea/MTurkDeployTemplate/blob/master/get_HIT_status.py">here</a> and use <code>python get_HIT_status.py YOUR_HIT_ID</code>, where <code>YOUR_HIT_ID</code> is the HITid returned when you posted the HIT, to learn how many workers have completed your work. Download file <code>approve_HIT.py</code> <a href="https://github.com/magpie-ea/MTurkDeployTemplate/blob/master/approve_HIT.py">here</a> and use <code>python approve_HIT.py YOUR_HIT_ID</code> to reimburse all workers. You can manipulate (expire, extend, ...) your HIT using <code>boto3</code> as described in the  <a href="http://boto3.readthedocs.io/en/latest/index.html">boto3 documentation</a>. For some recurrent manipulations, you can also use <a href="https://manage-hits-individually.s3.amazonaws.com/v4.0/index.html">this web interface</a>.</p>
               
             </div>
           </div>
@@ -345,7 +345,7 @@ print(&quot;HITID = &quot; + new_hit['HIT']['HITId'] + &quot; (for your referenc
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/magpie-ea/magpie-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../01_configuration/" style="color: #fcfcfc;">&laquo; Previous</a></span>

@@ -8,7 +8,7 @@
   
   <meta name="author" content="Michael Franke">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Deploy configuration - _babe documentation</title>
+  <title>Deploy configuration - _magpie documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -40,7 +40,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> _babe documentation</a>
+        <a href="../.." class="icon icon-home"> _magpie documentation</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -232,7 +232,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">_babe documentation</a>
+        <a href="../..">_magpie documentation</a>
       </nav>
 
       
@@ -251,7 +251,7 @@
     <li>Deploy configuration</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/babe-project/babe-docs/edit/master/docs/03_deploying_experiments/01_configuration.md"
+        <a href="https://github.com/magpie-ea/magpie-docs/edit/master/docs/03_deploying_experiments/01_configuration.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -266,27 +266,27 @@
 and how to process its data. For development, you will want to use the <code>debug</code> mode, which
 shows the data collected from the current execution of the experiment in the browser at the end
 of the experiment. </p>
-<p>To actually collect data from participants, _babe uses the babe server app
+<p>To actually collect data from participants, _magpie uses the magpie server app
 to store the data in a data base (and possibly to manage allocation of participants to
 different variants of your experiment). You therefore need to have a running instance of the server app, either online or locally, as described in <a href="/02_using_the_server_app/01_installation/">the server app section on installation</a>.</p>
-<p>There are three deployment modes to collect data via the _babe server app (to be detailed below):</p>
+<p>There are three deployment modes to collect data via the _magpie server app (to be detailed below):</p>
 <ol>
 <li>The <code>directLink</code> mode allows participants to work on your experiment simply by following a link.</li>
 <li>The <code>MTurk</code> mode is used to recruit participants via <a href="https://requester.mturk.com/">Amazon's Mechanical Turk</a>.</li>
 <li>The <code>Prolific</code> mode is used to recruit participants via <a href="https://prolific.ac">Prolific</a>.</li>
 </ol>
-<p>All of these methods require that you have initialized a database on the _babe server app, as described <a href="/02_using_the_server_app/02_use/">here</a>. You need the <code>experimentID</code> (a running number) which the server app creates for your experiment, as well as the URL (possibly local) of your experiment.</p>
+<p>All of these methods require that you have initialized a database on the _magpie server app, as described <a href="/02_using_the_server_app/02_use/">here</a>. You need the <code>experimentID</code> (a running number) which the server app creates for your experiment, as well as the URL (possibly local) of your experiment.</p>
 <p>Unless you run your experiment strictly locally on your own (lab) computer(s), you also need to
 launch the experiment as a website on some hosting service. A possibility for doing so is
 described in the section on <a href="/03_deploying_experiments/02_hosting_on_netlify/">hosting on
 Netlify</a>.</p>
 <h5 id="changing-deploy-information">Changing deploy information</h5>
-<p>Deployment information needs to be given during the initial creation of the _babe-object (e.g., in file <code>06_main.js</code> of the <a href="https://github.com/babe-project/departure-point">Departure Point</a>), by setting the properties of the <code>deploy</code> object, as shown below:</p>
-<pre><code class="javascript"> babeInit({
+<p>Deployment information needs to be given during the initial creation of the _magpie-object (e.g., in file <code>06_main.js</code> of the <a href="https://github.com/magpie-ea/departure-point">Departure Point</a>), by setting the properties of the <code>deploy</code> object, as shown below:</p>
+<pre><code class="javascript"> magpieInit({
         ...
         deploy: {
             experimentID: &quot;INSERT_A_NUMBER&quot;,
-            serverAppURL: &quot;https://babe-demo.herokuapp.com/api/submit_experiment/&quot;,
+            serverAppURL: &quot;https://magpie-demo.herokuapp.com/api/submit_experiment/&quot;,
             // Possible deployment methods are:
             // &quot;debug&quot; and &quot;directLink&quot;
             // As well as &quot;MTurk&quot;, &quot;MTurkSandbox&quot; and &quot;Prolific&quot;
@@ -301,7 +301,7 @@ Netlify</a>.</p>
 <p>None of these fields matter for the <code>debug</code> mode. But for any of the other modes, you should specify appropriate information to the following fields:</p>
 <ul>
 <li><code>contact_email</code> should contain an appropriate email address which will be displayed in an alert box in case of errors, so your participants can directly reach out to you.</li>
-<li><code>experimentID</code> must contain the ID the _babe server app provided for your experiment when created it online (see the <a href="/02_using_the_server_app/02_use/#creating-new-experiments">section on server app use</a> for more information).</li>
+<li><code>experimentID</code> must contain the ID the _magpie server app provided for your experiment when created it online (see the <a href="/02_using_the_server_app/02_use/#creating-new-experiments">section on server app use</a> for more information).</li>
 <li><code>serverAppURL</code> is the URL (possibly local) to your server app instance which handles the data (see the <a href="/02_using_the_server_app/02_use/#creating-new-experiments">section on server app use</a> for more information).</li>
 <li><code>prolificURL</code> needs to be specified only if you use the <code>Prolific</code> deploy mode. In that case you need to enter here the return URL given to you when you create your experiment on the Prolific web site (see information below).</li>
 </ul>
@@ -342,7 +342,7 @@ Netlify</a>.</p>
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/babe-project/babe-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/magpie-ea/magpie-docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../../02_using_the_server_app/02_use/" style="color: #fcfcfc;">&laquo; Previous</a></span>
