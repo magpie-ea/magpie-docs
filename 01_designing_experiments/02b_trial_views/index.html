@@ -95,6 +95,13 @@
 
 
   <li class="navtree toctree-l2 inactive">
+    <a class="" href="../05_mousetracking/">Mouse tracking</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
     <a class="" href="../06_progress_bars/">Progress bars</a>
   </li>
         
@@ -242,7 +249,7 @@
 <li><code>name: string</code> - the name of the view</li>
 <li><code>data: array</code> - list of objects, each with information for each consecutive trial</li>
 </ol>
-<p>Different types of wrapping views have more optional fields, as documented below. </p>
+<p>Different types of wrapping views have more optional fields, as documented below.</p>
 <h5 id="forced-choice-task">Forced-choice task</h5>
 <p>Instantiate with <code>magpieView.forcedChoice</code>. Displays a context, a picture and a question to be answered in a two-alternative forced choice task. Choices are made by clicking on one of two buttons.</p>
 <p><img src='../../images/views_samples/view_fc.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
@@ -322,7 +329,7 @@
 </code></pre>
 
 <h5 id="image-selection-task">Image Selection task</h5>
-<p>Instantiate with <code>magpieViews.imageSelection</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures. </p>
+<p>Instantiate with <code>magpieViews.imageSelection</code>. Realizes another 2-alternative forced choice task, by presenting two pictures (arranged horizontally) and requiring a click on one of the pictures.</p>
 <p><img src='../../images/views_samples/view_is.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -364,7 +371,7 @@
 </code></pre>
 
 <h5 id="textbox-input-task">Textbox Input task</h5>
-<p>Instantiate with <code>magpieViews.textboxInput</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears. </p>
+<p>Instantiate with <code>magpieViews.textboxInput</code>. Requires users to type in text freely in a textbox. Allows to specify a minimum number of characters before the <code>next</code> button appears.</p>
 <p><img src='../../images/views_samples/view_ti.png' alt='sample' height='auto' width='auto' style="border:2px solid black" /></p>
 <ul>
 <li>
@@ -564,6 +571,53 @@
         f: 'ham',
         j: 'jam',
         expected: 'jam'
+    }
+];
+</code></pre>
+
+<h5 id="listen-and-decide-task-with-mousetracking">Listen and decide task with mousetracking</h5>
+<p>This view is identified by <code>listen_and_decide_mousetracking</code>. Initially plays a "question" audio without any visual stimulus. Afterwards, it displays two images, each on one side of the screen, and a start button at the bottom. Once the start button is clicked the "answer" audio is played and the participant has to choose a fitting image.</p>
+<ul>
+<li>
+<p><strong>Configuration</strong></p>
+</li>
+<li>
+<p><code>title: string</code> - The title of the task</p>
+</li>
+<li><code>imagePath: string</code> - A directory path relative to <code>index.html</code> or absolute</li>
+<li><code>audioPath: string</code> - A directory path relative to <code>index.html</code> or absolute</li>
+<li><code>initialDelay: integer</code> - The time to wait before playing the question</li>
+<li>
+<p><code>decisionEvent: string</code> - The DOM event to use for triggering the decision, e.g. <code>click</code>, <code>mouseover</code>, etc.</p>
+</li>
+<li>
+<p><strong>Obligatory Fields</strong></p>
+<ul>
+<li><code>question_file:string</code> - An audio file located relative to <code>audioPath</code></li>
+<li><code>answer_file: string</code> - An audio file located relative to <code>audioPath</code></li>
+<li><code>picture_target: string</code> - The target image</li>
+<li><code>picture_competitor: string</code> - The competitor image</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Fields</strong></p>
+<ul>
+<li><code>response: string</code> - <code>target</code> or <code>competitor</code></li>
+<li><code>mousetrackingTime: int[]</code> - The time coordinates of the mouse path</li>
+<li><code>mousetrackingX: int[]</code> - The x coordinates of the mouse path</li>
+<li><code>mousetrackingY: int[]</code> - The y coordinates of the mouse path</li>
+</ul>
+</li>
+<li>
+<p><strong>Sample data</strong></p>
+</li>
+</ul>
+<pre><code>const listen_and_decide_trials = [
+    {
+        picture_target: &quot;picture_of_mammal.jpg&quot;,
+        picture_competitor: &quot;picture_of_fish.jpg&quot;,
+        question_file: &quot;whale_question.ogg&quot;,
+        answer_file: &quot;whale_answer.ogg&quot;,
     }
 ];
 </code></pre>
