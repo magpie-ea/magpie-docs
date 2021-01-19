@@ -263,7 +263,7 @@ operate experiments with <a href="https://www.prolific.ac">Prolific</a>. </p>
 <p>Go to the Prolific website and create a new experiment. Make a note of the <strong>completion URL</strong> that is provided by Prolific.</p>
 <p><img src="https://raw.githubusercontent.com/magpie-ea/ProlificDeployTemplate/master/images/readme/prolific_url.png" width="100%" ></p>
 <p>Enter the completion URL in the field <code>prolificURL</code> when creating your experiment, as follows:</p>
-<pre><code class="javascript"> magpieInit({
+<pre><code class="language-javascript"> magpieInit({
         ...
         deploy: {
             deployMethod: &quot;Prolific&quot;,
@@ -272,7 +272,6 @@ operate experiments with <a href="https://www.prolific.ac">Prolific</a>. </p>
         ...
     });
 </code></pre>
-
 <p>Use deploy method <code>Prolific</code> has two consequences. For one, it will insert a text input field in the introduction view of your experiment. For another, it will supply a <code>confirm</code> button at the end of the experiment, which takes participants to the Prolific website where they are supplied with their completion code.</p>
 <p>The data from your experiment will <em>not</em> be stored by Prolific, but recorded by the _magpie server app. Before launching the study on Prolific, double-check that the database on the back end is set up and the necessary information (<code>experimentID</code>, server URL) are set. Also do not forget to update a web-site version of your experiment so that it includes the correct information in <code>prolificURL</code> before running the study.</p>
               

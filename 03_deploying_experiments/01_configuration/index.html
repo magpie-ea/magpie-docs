@@ -289,7 +289,7 @@ described in the section on <a href="/03_deploying_experiments/02_hosting_on_net
 Netlify</a>.</p>
 <h5 id="changing-deploy-information">Changing deploy information</h5>
 <p>Deployment information needs to be given during the initial creation of the _magpie-object (e.g., in file <code>06_main.js</code> of the <a href="https://github.com/magpie-ea/departure-point">Departure Point</a>), by setting the properties of the <code>deploy</code> object, as shown below:</p>
-<pre><code class="javascript"> magpieInit({
+<pre><code class="language-javascript"> magpieInit({
         ...
         deploy: {
             experimentID: &quot;INSERT_A_NUMBER&quot;,
@@ -304,7 +304,6 @@ Netlify</a>.</p>
         ...
     });
 </code></pre>
-
 <p>None of these fields matter for the <code>debug</code> mode. But for any of the other modes, you should specify appropriate information to the following fields:</p>
 <ul>
 <li><code>contact_email</code> should contain an appropriate email address which will be displayed in an alert box in case of errors, so your participants can directly reach out to you.</li>

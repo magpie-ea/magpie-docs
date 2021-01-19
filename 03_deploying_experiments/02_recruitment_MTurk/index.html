@@ -264,7 +264,6 @@
 <p>We assume that you have an MTurk account and that you have your AWS credentials ready at hand. (If not, see <a href="https://github.com/Ciyang/experiment_template">here</a> for instructions on how to setup your account.) Download a recent version of Python (we used 3.6 at the time of writing) and install the <code>boto3</code> package, e.g., using <code>pip</code>. Next, in your homedirectory, create the file:</p>
 <pre><code>~/.aws/config
 </code></pre>
-
 <p>Fill this file with the following content, so that <code>boto3</code> knows about your AWS credentials (never post this, host this or share this):</p>
 <pre><code>
 [default]
@@ -272,7 +271,6 @@ aws_access_key_id=YOUR_ACCESS_KEY_ID
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 
 </code></pre>
-
 <p>Make sure that your _magpie experiment is ready for MTurk deployment:</p>
 <ul>
 <li>set the deployment method to <code>MTurk</code></li>
@@ -280,7 +278,7 @@ aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 <li>make sure you have the URL for your web-version of the experiment ready</li>
 </ul>
 <p>Save the following code in a file called <code>create_HIT.py</code>, after inserting the correct URL to your experiment and commenting in/out the relevant lines depending on whether you want a real live experiment or a test version in the sandbox.</p>
-<pre><code class="python">import boto3
+<pre><code class="language-python">import boto3
 
 MTURK_SANDBOX = 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
 
@@ -313,7 +311,6 @@ print(&quot;A new HIT has been created. You can preview it here:&quot;)
 print(&quot;https://worker.mturk.com/mturk/preview?groupId=&quot; + new_hit['HIT']['HITGroupId']) # use this otherwise
 print(&quot;HITID = &quot; + new_hit['HIT']['HITId'] + &quot; (for your reference)&quot;)
 </code></pre>
-
 <p>Now execute <code>python create_HIT.py</code>. Make sure you note the HITid that this call returns, because you need it to further identify this experimental run when interacting with MTurk. Download file <code>get_HIT_status.py</code> <a href="https://github.com/magpie-ea/MTurkDeployTemplate/blob/master/get_HIT_status.py">here</a> and use <code>python get_HIT_status.py YOUR_HIT_ID</code>, where <code>YOUR_HIT_ID</code> is the HITid returned when you posted the HIT, to learn how many workers have completed your work. Download file <code>approve_HIT.py</code> <a href="https://github.com/magpie-ea/MTurkDeployTemplate/blob/master/approve_HIT.py">here</a> and use <code>python approve_HIT.py YOUR_HIT_ID</code> to reimburse all workers. You can manipulate (expire, extend, ...) your HIT using <code>boto3</code> as described in the  <a href="http://boto3.readthedocs.io/en/latest/index.html">boto3 documentation</a>. For some recurrent manipulations, you can also use <a href="https://manage-hits-individually.s3.amazonaws.com/v4.0/index.html">this web interface</a>.</p>
               
             </div>
