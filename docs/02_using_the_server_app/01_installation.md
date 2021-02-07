@@ -23,7 +23,7 @@ There is an [official guide](https://hexdocs.pm/phoenix/heroku.html) from Phoeni
 
 6. Run `heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git`
 
-   (N.B.: Although the command line output tells you to run `git push heroku master`, don't do it yet.)
+       (N.B.: Although the command line output tells you to run `git push heroku master`, don't do it yet.)
 
 7. Run `heroku buildpacks:add https://github.com/chrismcg/heroku-buildpack-elixir-mix-release`
 
@@ -33,25 +33,25 @@ There is an [official guide](https://hexdocs.pm/phoenix/heroku.html) from Phoeni
 
 9. Run
 
-   ```sh
-   heroku addons:create heroku-postgresql:hobby-dev
-   heroku config:set POOL_SIZE=18
-   ```
+       ```
+       heroku addons:create heroku-postgresql:hobby-dev
+       heroku config:set POOL_SIZE=18
+       ```
 
 10. Run `mix deps.get` then `mix phx.gen.secret`. Then run `heroku config:set SECRET_KEY_BASE="OUTPUT"`, where `OUTPUT` should be the output of the `mix phx.gen.secret` step.
 
-    Note: If you don't have Phoenix framework installed on your computer, you may choose to use some other random generator for this step, which essentially asks for a random 64-character secret. On Mac and Linux, you may run `openssl rand -base64 64`. Or you may use an online password generator [such as the one offered by LastPass](https://lastpass.com/generatepassword.php).
+      Note: If you don't have Phoenix framework installed on your computer, you may choose to use some other random generator for this step, which essentially asks for a random 64-character secret. On Mac and Linux, you may run `openssl rand -base64 64`. Or you may use an online password generator [such as the one offered by LastPass](https://lastpass.com/generatepassword.php).
 
 11. Set the environment variables `AUTH_USERNAME` and `AUTH_PASSWORD` for authentication, either in the Heroku web interface or via the command line, i.e.
 
-    ```sh
+    ```
     heroku config:set AUTH_USERNAME="your_username"
     heroku config:set AUTH_PASSWORD="your_password"
     ```
 
     Note: You can also completely disable the basic auth with
 
-    ```sh
+    ```
     heroku config:set MAGPIE_NO_BASIC_AUTH="true"
     ```
 
@@ -99,7 +99,7 @@ The following steps require an internet connection. After they are finished, the
 
 4. For the first-time setup, run in the terminal
 
-   ```sh
+   ```
    docker volume create --name magpie-app-volume -d local
    docker volume create --name magpie-db-volume -d local
    docker-compose run --rm web bash -c "mix deps.get && npm install && node node_modules/brunch/bin/brunch build && mix ecto.migrate"
