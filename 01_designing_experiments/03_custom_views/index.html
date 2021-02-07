@@ -318,7 +318,7 @@
 <li><strong>handle response function</strong>: function that is called to handle the response</li>
 </ol>
 <p>Each one of these elements is independently customizable. Indeed, when a template view is created by _magpie "behind the scenes", it simply uses defaults for these three elements which are appropriate for the template view to be created. For example, we would normally create a template <code>forced_choice</code> view like so:</p>
-<pre><code class="language-javascript">const forced_choice_instance = magpieViews.view_generator(
+<pre><code class="javascript">const forced_choice_instance = magpieViews.view_generator(
     'forced_choice',
     // config information
     {
@@ -328,8 +328,9 @@
     }
     );
 </code></pre>
+
 <p>Equivalently, we could write this:</p>
-<pre><code class="language-javascript">const forced_choice_instance = magpieViews.view_generator(
+<pre><code class="javascript">const forced_choice_instance = magpieViews.view_generator(
    'forced_choice',
    // config information
     {
@@ -345,9 +346,10 @@
     }
    );
 </code></pre>
+
 <p>Here, we supply a third object with custom generator functions, one for each of the three elements. Since the second code box just uses the defaults which are implicit in the first, the two calls are equivalent. The description of <a href="../01_template_views/">template views</a> lists which view elements each template view uses. All predefined view elements are listed and shown <a href="#predefined-view-elements">below</a>.</p>
 <p>The stimulus generator function used by the template <code>forced_choice</code> view is this:</p>
-<pre><code class="language-javascript">function (config, CT) {
+<pre><code class="javascript">function (config, CT) {
         return `&lt;div class='magpie-view'&gt;
                     &lt;h1 class='magpie-view-title'&gt;${config.title}&lt;/h1&gt;
                     &lt;p class='magpie-view-question magpie-view-qud'&gt;${config.data[CT].QUD}&lt;/p&gt;
@@ -356,9 +358,10 @@
                     &lt;/div&gt;
                 &lt;/div&gt;`;
 </code></pre>
+
 <p>Generally, the function supplied to <code>stimulus_container_generator</code> must take the <code>config</code> object and a <code>CT</code> argument. The latter is the current trial, and it is supplied by _magpie internally. The function should then return HTML code as a string, which governs the appearance of the upper part of the view screen. You can use information from <code>config</code> and <code>CT</code>, so that when we write <code>${config.data[CT].QUD}</code> in the HTML string to be returned this is replaced by the QUD information stored in <code>config</code> for the current trial. Notice that the picture element is inserted automatically by _magpie in the <code>magpie-view-stimulus</code> container.</p>
 <p>We can specify whatever we'd like to appear in the stimulus container. For example, let's insert the same picture twice. This can be done by instantiating a customized template view like so:</p>
-<pre><code class="language-javascript">const forced_choice_customized = magpieViews.view_generator(
+<pre><code class="javascript">const forced_choice_customized = magpieViews.view_generator(
     &quot;forced_choice&quot;,
     // config information
     {
@@ -378,8 +381,9 @@
     }
 );
 </code></pre>
+
 <p>We can also change the design and behavior of the part of the view that deals with the response. Per default, the <code>forced_choice</code> view uses a predefined function <code>button_choice</code> to have the user select one of two buttons. Suppose we wanted to have a third button. We could then use code like the following (which only works, if we define <code>option3</code> in <code>04_trials.js</code> as well, of course):</p>
-<pre><code class="language-javascript">const forced_choice_customized = magpieViews.view_generator(
+<pre><code class="javascript">const forced_choice_customized = magpieViews.view_generator(
     &quot;forced_choice&quot;,
     // config information
     {
@@ -403,8 +407,9 @@
     }
 );
 </code></pre>
+
 <p>If we want to have more than one answer within the same view, we can of course also do so. There are only a few things which we have to keep in mind. The id of each input has to be unique, so we have to make sure that we do not use the same ids in both answer blocks. Additionally, the two blocks also need to have different names. Another important thing is that we have to include <code>style='display:none'</code> for each input, so that the formatting does not get lost. Suppose we want to show a sentence with two dropdown menus, which have three choices each, the code could look like this:</p>
-<pre><code class="language-javascript">const multi_choice_customized = magpieViews.view_generator(
+<pre><code class="javascript">const multi_choice_customized = magpieViews.view_generator(
     &quot;multi_choice&quot;,
     // config information
   {
@@ -441,9 +446,10 @@
 );
 
 </code></pre>
+
 <p>It is possible to supply a completely new type of response variable via the function specified for <code>answer_container_generator</code>. However, you might need to make sure that the data is handled correctly. This is the job of the final third element you can use to customize a template view, namely <code>handle_response_function</code>. In other words, often the two design elements <code>answer_container_generator</code> and <code>handle_response_function</code> might need to be adjusted to each other.</p>
 <p>The <code>handle_response_function</code> used per default in the <code>forced_choice</code> view is this:</p>
-<pre><code class="language-javascript">function(config, CT, magpie, answer_container_generator, startingTime) {
+<pre><code class="javascript">function(config, CT, magpie, answer_container_generator, startingTime) {
 
     // create the answer container
     $(&quot;.magpie-view&quot;).append(answer_container_generator(config, CT));
@@ -467,13 +473,14 @@
 
 }    
 </code></pre>
+
 <p>When this function is called (automatically by _magpie) it first creates the answer container. It also adds an event listener. Here, it reacts when a button is pressed, but this behavior needs to be coordinated with whatever you define in the <code>answer_container_generator</code> part. It then records the trial time and assembles the data to be recorded in the variable <code>trial_data</code>. By default, _magpie automatically adds all the data for the current trial to this object and then pushes this to its internal representation of the accumulated data so far which is in <code>magpie.trial_data</code>. The function <code>magpie.findNextView</code> is then called and takes you to the next trial or view.</p>
 <p>When you write your own custom <code>handle_response_function</code> you should supply the same arguments as the function above. You should also make sure to record the data and call <code>magpie.findNextView</code> eventually. Other than this, you could implement a more dynamic display of different pictures and response options, using the interplay of <code>answer_container_generator</code> and <code>handle_response_function</code>, for example.</p>
 <p>If you write longer custom functions for customization, it is good practice to put these into the file <code>02_custom_functions.js</code>. An example is presented in the <a href="https://github.com/magpie-ea/showroom">showroom</a>.</p>
 <h5 id="predefined-view-elements">Predefined view elements</h5>
 <h6 id="stimulus-container-generators">Stimulus container generators</h6>
 <p>The following predefined stimulus container generators are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _magpie all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
-<pre><code class="language-javascript">// The view template dict contains a generator function for every view type we support
+<pre><code class="javascript">// The view template dict contains a generator function for every view type we support
 // The generator gets the config dict and CT as input and will generate the magpie-view HTML code
 // (Some view templates are the same, e.g. forced_choice and sliderRating)
 const stimulus_container_generators = {
@@ -531,9 +538,10 @@ const stimulus_container_generators = {
     }
 };
 </code></pre>
+
 <h6 id="answer-container-generators">Answer container generators</h6>
 <p>The following predefined answer container generators are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _magpie all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
-<pre><code class="language-javascript">// The answer container dict contains a generator function for every view type we support
+<pre><code class="javascript">// The answer container dict contains a generator function for every view type we support
 // The generator gets the config dict and CT as input and will generate the magpie-view-answer-container HTML code
 // (Some answer container elements should be the same, e.g. slider rating and SPR-slider rating)
 const answer_container_generators = {
@@ -674,9 +682,10 @@ const answer_container_generators = {
     }
 };
 </code></pre>
+
 <h6 id="handle-response-functions">Handle response functions</h6>
 <p>The following predefined handle response functions are available. The template <a href="../01_template_views/#wrapping-views">wrapping views</a> and <a href="../01_template_views/#trial-views">trial views</a> defined in _magpie all use one of these, as listed <a href="../01_template_views/">here</a>.</p>
-<pre><code class="language-javascript">// The enable response dict contains a generator function for every view type we support
+<pre><code class="javascript">// The enable response dict contains a generator function for every view type we support
 // The generator gets the config dict, CT, the answer_container_generator and the startingTime as input
 const handle_response_functions = {
     button_choice: function(config, CT, magpie, answer_container_generator, startingTime) {
@@ -1074,10 +1083,11 @@ const handle_response_functions = {
     }
 };
 </code></pre>
+
 <h5 id="defining-a-custom-view-from-scratch">Defining a custom view from scratch</h5>
 <p>You can also define a custom view from scratch. To do this, create a view template, ideally in file <code>03_custom_views_templates.js</code>. A view template gets a <code>config</code> object information as input (with relevant information, e.g., URLs for pictures, text to show on each trial etc.). The view template function then returns a view.</p>
 <p>Here's a basic scaffolding of a view template:</p>
-<pre><code class="language-javascript">const custom_view_template = function(config) {
+<pre><code class="javascript">const custom_view_template = function(config) {
     const view = {
         name: config.name,
         CT: 0,
@@ -1093,6 +1103,7 @@ const handle_response_functions = {
     return view;
 };
 </code></pre>
+
 <p>A view is an object, that obligatorily has the properties:</p>
 <ul>
 <li><code>name</code>: the view's name</li>
@@ -1102,7 +1113,7 @@ const handle_response_functions = {
 </ul>
 <p>The most important part is the <code>render</code> function. It gets <code>CT</code> and the magpie-object itself as input.  has to call <code>magpie.findNextView()</code> eventually to proceed to the next view (or the next trial in this view). If data is to be saved from any given trial, you would need to collect the data as an object, e.g., named <code>trial_data</code> and store it for later output by calling <code>magpie.trial_data.push(trial_data)</code>.</p>
 <p>Here's a full example from the <a href="https://github.com/magpie-ea/showroom">showroom</a>:</p>
-<pre><code class="language-javascript">// In this view the user can click on one of two buttons
+<pre><code class="javascript">// In this view the user can click on one of two buttons
 const custom_press_a_button = function(config) {
     const view = {
         name: config.name,

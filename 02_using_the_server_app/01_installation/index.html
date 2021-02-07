@@ -147,8 +147,8 @@
           
 
   <li class="toctree-l3">
-    <a href="#installation-locally">
-      Installation locally
+    <a href="#local-installation">
+      Local Installation
       <span class="toctree-expand"></span>
     </a>
   </li>
@@ -160,7 +160,17 @@
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#first-time-installation">First time installation</a>
+          <a class="toctree-l5" href="#with-otp-release-new-method">With OTP Release (New method)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#with-docker-old-method">With Docker (Old method)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#first-time-installation-requires-internet-connection">First-time installation (requires internet connection)</a>
         </li>
     
       
@@ -299,15 +309,16 @@
             <div class="section">
               
                 <h4 id="installation">Installation</h4>
-<p>You can install _magpie on a server for online use or locally on your machine. We explain here how to use Heroku as a hosting service for online use, and how to set up the server app locally. </p>
+<p>You can install _magpie on a server for online use or locally on your machine. We explain here how to use Heroku as a hosting service for online use, and how to set up the server app locally.</p>
 <h5 id="installation-on-heroku">Installation on Heroku</h5>
 <p>The _magpie server app can be hosted on any hosting service or your own server. We here describe the process for
 installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
-<p><a href="https://www.heroku.com/">Heroku</a> makes it easy to deploy an web app without having to manually manage the infrastructure. It has a free starter tier, which should be sufficient for the purpose of running experiments.</p>
-<p>There is an <a href="https://hexdocs.pm/phoenix/heroku.html">official guide</a> on how to deploy the Phoenix framework on Heroku. The deployment procedure is based on this guide, but differs in some places.</p>
-<p>{:start="0"}
-0. Ensure that you have <a href="https://hexdocs.pm/phoenix/installation.html">the Phoenix Framework installed</a> and working. However, if you just want to deploy this server and do no development work/change on it at all, you may skip this step.</p>
+<p><a href="https://www.heroku.com/">Heroku</a> makes it easy to deploy an web app without having to manually manage the infrastructure. It has a free starter tier, which should be sufficient for the purpose of running experiments. If Heroku doesn't satisfy your needs, you may take a look at <a href="https://www.gigalixir.com/">Gigalixir</a>, an alternative free hosting service built for Elixir. Or you may want to to deploy the app on your own server.</p>
+<p>There is an <a href="https://hexdocs.pm/phoenix/heroku.html">official guide</a> from Phoenix framework on deploying on Heroku. The deployment procedure is based on this guide, but differs in some places.</p>
 <ol>
+<li>
+<p>Ensure that you have <a href="https://hexdocs.pm/phoenix/installation.html">the Phoenix Framework installed</a> and working. (However, if you just want to deploy this server and do no development work/change on it at all, you may skip this step.)</p>
+</li>
 <li>
 <p>Ensure that you have a <a href="https://signup.heroku.com/">Heroku account</a> already, and have the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a> installed and working on your computer.</p>
 </li>
@@ -322,51 +333,77 @@ installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
 </li>
 <li>
 <p>Run <code>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</code></p>
+</li>
+</ol>
 <p>(N.B.: Although the command line output tells you to run <code>git push heroku master</code>, don't do it yet.)</p>
+<ol>
+<li>
+<p>Run <code>heroku buildpacks:add https://github.com/chrismcg/heroku-buildpack-elixir-mix-release</code></p>
 </li>
 <li>
 <p>You may want to change the application name instead of using the default name. In that case, run <code>heroku apps:rename newname</code>.</p>
 </li>
 <li>
-<p>Edit line 17 of the file <code>config/prod.exs</code>. Replace the part <code>magpie-backend.herokuapp.com</code> after <code>host</code> with the app name (shown when you first ran <code>heroku create</code>, e.g. <code>mysterious-meadow-6277.herokuapp.com</code>, or the app name that you set at step 6, e.g.  <code>newname.herokuapp.com</code>). You shouldn't need to modify anything else.</p>
+<p>Run <code>heroku config:set HOST="[app_name].herokuapp.com" PORT=443</code> where <code>[app_name]</code> is the app name (shown when you first ran <code>heroku create</code>, e.g. <code>mysterious-meadow-6277</code>, or the app name that you set at the previous step, e.g. <code>newname</code>).</p>
 </li>
 <li>
-<p>Ensure that you're at the top-level project directory. Run</p>
-<p><code>heroku addons:create heroku-postgresql:hobby-dev
-heroku config:set POOL_SIZE=18</code></p>
+<p>Run</p>
 </li>
+</ol>
+<p><code>sh
+   heroku addons:create heroku-postgresql:hobby-dev
+   heroku config:set POOL_SIZE=18</code></p>
+<ol>
 <li>
 <p>Run <code>mix deps.get</code> then <code>mix phx.gen.secret</code>. Then run <code>heroku config:set SECRET_KEY_BASE="OUTPUT"</code>, where <code>OUTPUT</code> should be the output of the <code>mix phx.gen.secret</code> step.</p>
-<p>Note: If you don't have the Phoenix framework installed on your computer, you may choose to use some other random generator for this task, which essentially asks for a random 64-character secret. On Mac and Linux, you may run <code>openssl rand -base64 64</code>. Or you may use an online password generator <a href="https://lastpass.com/generatepassword.php">such as the one offered by LastPass</a>.</p>
+<p>Note: If you don't have Phoenix framework installed on your computer, you may choose to use some other random generator for this step, which essentially asks for a random 64-character secret. On Mac and Linux, you may run <code>openssl rand -base64 64</code>. Or you may use an online password generator <a href="https://lastpass.com/generatepassword.php">such as the one offered by LastPass</a>.</p>
 </li>
 <li>
-<p>Run <code>git add config/prod.exs</code>, then <code>git commit -m "Set app URL"</code>.</p>
-</li>
-<li>
-<p>Don't forget to set the environment variables <code>AUTH_USERNAME</code> and <code>AUTH_PASSWORD</code>, either in the Heroku web interface or via the command line, i.e.</p>
-<p><code>heroku config:set AUTH_USERNAME="your_username"
+<p>Set the environment variables <code>AUTH_USERNAME</code> and <code>AUTH_PASSWORD</code> for authentication, either in the Heroku web interface or via the command line, i.e.</p>
+<p><code>sh
+heroku config:set AUTH_USERNAME="your_username"
 heroku config:set AUTH_PASSWORD="your_password"</code></p>
+<p>Note: You can also completely disable the basic auth with</p>
+<p><code>sh
+heroku config:set MAGPIE_NO_BASIC_AUTH="true"</code></p>
 </li>
 <li>
-<p>Run <code>git push heroku master</code>. This will push the repo to the git remote at Heroku (instead of the original remote at Github), and deploy the app.</p>
+<p>Run <code>git push heroku master</code>. This will push the <code>master</code> branch of the repo to the git remote at Heroku, and deploy the app.</p>
 </li>
 <li>
-<p>Run <code>heroku run "POOL_SIZE=2 mix ecto.migrate"</code></p>
+<p>Run <code>heroku run "_build/prod/rel/magpie/bin/magpie eval 'Magpie.ReleaseTasks.db_migrate()'"</code> (Note the <code>'</code> in the command.)</p>
 </li>
 <li>
 <p>Now, <code>heroku open</code> should open the frontpage of the app.</p>
 </li>
 </ol>
-<h5 id="installation-locally">Installation locally</h5>
-<p>The first-time installation requires an internet connection. After it is finished, the server can be launched offline.</p>
-<p>(Note that for local deployment, the default username is <code>default</code> and the default password is <code>password</code>. You can change them in <code>config/dev.exs</code>.)</p>
-<h6 id="first-time-installation">First time installation</h6>
-<p>To begin with, install Docker from <a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a>. You may have to launch the application once in order to let it install its command line tools. Verify the installation by typing <code>docker version</code> in a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows).</p>
-<p>Note:
-- Although the Docker app on Windows and Mac asks for login credentials to Docker Hub, they are not needed for local deployment. You can proceed without creating any Docker account/logging in.
-- Linux users would need to install <code>docker-compose</code> separately. See relevant instructions <a href="https://docs.docker.com/compose/install/">here</a>.</p>
-<p>Once you have Docker installed, follow these steps:</p>
+<h5 id="local-installation">Local Installation</h5>
+<h6 id="with-otp-release-new-method">With OTP Release (New method)</h6>
+<p>From now on, the <em>_magpie</em> backend is available as a one-click executable to be run locally. Just download the archive corresponding to your platform under the Releases tab](https://github.com/magpie-ea/magpie-backend/releases). Then:</p>
+<ul>
+<li>Extract the archive</li>
+<li>Go to the folder <code>bin/</code></li>
+<li>In your terminal, run <code>./magpie console</code></li>
+<li>Open <code>localhost:4000</code> in your browser</li>
+</ul>
+<p>Note that the experiment database lives in the file <code>magpie_db.sqlite3</code>.</p>
+<p>For now, since the database file is bundled with the release itself, whenever you download a new release, it will contain no previous experiment results. For dynamic retrieval, you can manually upload relevant experiment results as custom records. If you want to keep all previous experiments, you may:</p>
+<ul>
+<li>Copy the old <code>magpie_db.sqlite3</code> file from the old release to the old release. However, please note that this method wouldn't work whenever the database schema changes between releases, since <a href="https://stackoverflow.com/questions/8442147/how-to-delete-or-add-column-in-sqlite">Sqlite doesn't support removing columns in migrations</a>.</li>
+</ul>
+<h6 id="with-docker-old-method">With Docker (Old method)</h6>
+<p>If, for whatever reason, the downloaded release fails to run on your system, you may run the <em>_magpie</em> backend via Docker instead. The following are the instructions.</p>
+<h6 id="first-time-installation-requires-internet-connection">First-time installation (requires internet connection)</h6>
+<p>The following steps require an internet connection. After they are finished, the server can be launched offline.</p>
 <ol>
+<li>Install Docker from https://docs.docker.com/install/. You may have to launch the application once in order to let it install its command line tools. Ensure that it's running by typing <code>docker version</code> in a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows).</li>
+</ol>
+<p>Note:</p>
+<ul>
+<li>Although the Docker app on Windows and Mac asks for login credentials to Docker Hub, they are not needed for local deployment . You can proceed without creating any Docker account/logging in.</li>
+<li>
+<p>Linux users would need to install <code>docker-compose</code> separately. See relevant instructions at https://docs.docker.com/compose/install/.</p>
+</li>
 <li>
 <p>Ensure you have <a href="https://git-scm.com/downloads">Git</a> installed. Clone the server repo with <code>git clone https://github.com/magpie-ea/magpie-backend.git</code> or <code>git clone git@github.com:magpie-ea/magpie-backend.git</code>.</p>
 </li>
@@ -374,25 +411,26 @@ heroku config:set AUTH_PASSWORD="your_password"</code></p>
 <p>Open a terminal (e.g., the Terminal app on MacOS or cmd.exe on Windows), <code>cd</code> into the project directory just cloned via git.</p>
 </li>
 <li>
-<p>For the first-time setup, run in the terminal
-  <code>docker volume create --name magpie-app-volume -d local
-  docker volume create --name magpie-db-volume -d local
-  docker-compose run --rm web bash -c "mix deps.get &amp;&amp; npm install &amp;&amp; node node_modules/brunch/bin/brunch build &amp;&amp; mix ecto.migrate"</code></p>
+<p>For the first-time setup, run in the terminal</p>
 </li>
-</ol>
+</ul>
+<p><code>sh
+   docker volume create --name magpie-app-volume -d local
+   docker volume create --name magpie-db-volume -d local
+   docker-compose run --rm web bash -c "mix deps.get &amp;&amp; npm install &amp;&amp; node node_modules/brunch/bin/brunch build &amp;&amp; mix ecto.migrate"</code></p>
 <h6 id="deployment">Deployment</h6>
-<p>After first-time installation, you can launch a local server instance which allows you to manage the experiments in your browser and stores the results.</p>
+<p>After first-time installation, you can launch a local server instance which sets up the experiment in your browser and stores the results.</p>
 <ol>
 <li>
-<p>Run <code>docker-compose up</code> to launch the application every time you want to run the server. Wait until the line <code>web_1  | [info] Running magpie-backend.Endpoint with Cowboy using http://0.0.0.0:4000</code> appears in the terminal.</p>
+<p>Run <code>docker-compose up</code> to launch the application every time you want to run the server. Wait until the line <code>web_1 | [info] Running MAGPIE.Endpoint with Cowboy using http://0.0.0.0:4000</code> appears in the terminal.</p>
 </li>
 <li>
 <p>Visit <code>localhost:4000</code> in your browser. You should see the server up and running.</p>
+</li>
+</ol>
 <p>Note: Windows 7 users who installed <em>Docker Machine</em> might need to find out the IP address used by <code>docker-machine</code> instead of <code>localhost</code>. See <a href="https://docs.docker.com/get-started/part2/#build-the-app">Docker documentation</a> for details.</p>
-</li>
-<li>
-<p>Use <kbd>Ctrl + C</kbd> to shut down the server.</p>
-</li>
+<ol>
+<li>Use <kbd>Ctrl + C</kbd> to shut down the server.</li>
 </ol>
 <p>Note that the database for storing experiment results is stored at <code>/var/lib/docker/volumes/magpie-db-volume/_data</code> folder by default. As long as this folder is preserved, experiment results should persist as well.</p>
               

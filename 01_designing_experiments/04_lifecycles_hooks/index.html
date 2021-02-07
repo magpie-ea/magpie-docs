@@ -320,6 +320,7 @@
     fix_duration: 250
 });
 </code></pre>
+
 <h5 id="hooks">Hooks</h5>
 <p>For minor customization of the template views, you can create functions, ideally in file <code>02_custom_functions.js</code> and hook these functions to specific steps in the life cycle of a trial view. The following <strong>hooks</strong> exist where your custom functions could attach:</p>
 <ul>
@@ -362,7 +363,7 @@
 </ol>
 <p><strong>Example: response check</strong></p>
 <p>Imagine you want to tell the participants whether their choice was right or wrong, e.g., during practice trials. We could realize this with a function  which checks the answer for correctness which is hooked to the "response-enabled step". Of course, your data for each trial needs to include the information which answer is correct. For the Departure-Point example, we could add this information to <code>04_trials.js</code> like so:</p>
-<pre><code class="language-javascript">    forced_choice: [
+<pre><code class="javascript">    forced_choice: [
         {
             question: &quot;What's on the bread?&quot;,
             picture: &quot;images/question_mark_02.png&quot;,
@@ -380,6 +381,7 @@
     ]
 
 </code></pre>
+
 <p>We then define the function to be hooked, ideally in file <code>02_custom_functions.js</code>:</p>
 <pre><code>// compares the chosen answer to the value of `option1`
 check_response = function(data, next) {
@@ -393,6 +395,7 @@ check_response = function(data, next) {
     })
 }
 </code></pre>
+
 <p>We then add this function to be called after the relevant step when creating the relevant view:</p>
 <pre><code>const forced_choice_2A = magpieViews.view_generator(&quot;key_press&quot;, {
     trials: trial_info.forced_choice.length,

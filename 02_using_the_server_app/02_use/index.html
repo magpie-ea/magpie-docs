@@ -305,7 +305,7 @@ is not password protected by default.</p>
 <p>After you have created your experiment, there are two pieces of information that are important for later use. When you <a href="/03_deploying_experiments/01_configuration/#changing-deploy-information">specify the deploy information</a>, you must supply the ID which the server app allocates to your experiment and you must specify the URL (possibly local) of the server app itself. You find these pieces of information when you click on "Edit" for your newly created experiment.</p>
 <p><img src="../../images/edit_exp_screenshot.png" width="80%"></p>
 <p>You need to specify the ID in field <code>experimentID</code> and the server URL for submissions <strong>without the ID</strong> in the field <code>serverAppURL</code>. So, in the case above, you would initialize your experiment with the following information:</p>
-<pre><code class="language-javascript"> magpieInit({
+<pre><code class="javascript"> magpieInit({
         ...
         deploy: {
             experimentID: &quot;1&quot;,

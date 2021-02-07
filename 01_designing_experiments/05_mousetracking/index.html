@@ -314,7 +314,7 @@
 <h5 id="how-to-add-mouse-tracking-to-a-trial">How to add mouse tracking to a trial</h5>
 <p>To record all mouse movement after the stimulus has been presented, regardless of which kind of view, simply add the <code>autostart</code> option to your view configuration.</p>
 <p>For example:</p>
-<pre><code class="language-js">const main_block = magpieViews.view_generator(&quot;forced_choice&quot;, {
+<pre><code class="js">const main_block = magpieViews.view_generator(&quot;forced_choice&quot;, {
   trials: main_trials.length,
   name: 'main_trials',
   data: main_trials,
@@ -323,12 +323,13 @@
   }
 });
 </code></pre>
+
 <p>When implementing custom views, you can start mouse tracking by calling <code>config.data[CT].mousetracking.start()</code>.</p>
 <h6 id="mousetrackingstartorigin-x-int-y-int">mousetracking.start([origin: {x: int, y: int}])</h6>
 <p>The start function optionally takes an origin argument that defines the coordinate origin relative to which mouse coordinates will be recorded.</p>
 <h6 id="tracking-rate">Tracking rate</h6>
 <p>You can specify the minimum temporal resolution for the mouse tracking module in miliseconds using the <code>rate</code> config option. The default is 15ms. This is only the upper limit, however. Magpie may temporarily record data points at a higher rate.</p>
-<pre><code class="language-js">const main_block = magpieViews.view_generator(&quot;forced_choice&quot;, {
+<pre><code class="js">const main_block = magpieViews.view_generator(&quot;forced_choice&quot;, {
   trials: main_trials.length,
   name: 'main_trials',
   data: main_trials,
@@ -338,6 +339,7 @@
   }
 });
 </code></pre>
+
 <h5 id="result-fields">Result fields</h5>
 <p>Whenever mouse tracking is enabled, you will find four new properties in your result data:</p>
 <ul>
