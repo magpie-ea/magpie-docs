@@ -333,10 +333,8 @@ installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
 </li>
 <li>
 <p>Run <code>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</code></p>
-</li>
-</ol>
 <p>(N.B.: Although the command line output tells you to run <code>git push heroku master</code>, don't do it yet.)</p>
-<ol>
+</li>
 <li>
 <p>Run <code>heroku buildpacks:add https://github.com/chrismcg/heroku-buildpack-elixir-mix-release</code></p>
 </li>
@@ -348,24 +346,19 @@ installation on <a href="https://www.heroku.com/">Heroku</a>.</p>
 </li>
 <li>
 <p>Run</p>
-</li>
-</ol>
-<p><code>sh
-   heroku addons:create heroku-postgresql:hobby-dev
+<p><code>heroku addons:create heroku-postgresql:hobby-dev
    heroku config:set POOL_SIZE=18</code></p>
-<ol>
+</li>
 <li>
 <p>Run <code>mix deps.get</code> then <code>mix phx.gen.secret</code>. Then run <code>heroku config:set SECRET_KEY_BASE="OUTPUT"</code>, where <code>OUTPUT</code> should be the output of the <code>mix phx.gen.secret</code> step.</p>
 <p>Note: If you don't have Phoenix framework installed on your computer, you may choose to use some other random generator for this step, which essentially asks for a random 64-character secret. On Mac and Linux, you may run <code>openssl rand -base64 64</code>. Or you may use an online password generator <a href="https://lastpass.com/generatepassword.php">such as the one offered by LastPass</a>.</p>
 </li>
 <li>
 <p>Set the environment variables <code>AUTH_USERNAME</code> and <code>AUTH_PASSWORD</code> for authentication, either in the Heroku web interface or via the command line, i.e.</p>
-<p><code>sh
-heroku config:set AUTH_USERNAME="your_username"
+<p><code>heroku config:set AUTH_USERNAME="your_username"
 heroku config:set AUTH_PASSWORD="your_password"</code></p>
 <p>Note: You can also completely disable the basic auth with</p>
-<p><code>sh
-heroku config:set MAGPIE_NO_BASIC_AUTH="true"</code></p>
+<p><code>heroku config:set MAGPIE_NO_BASIC_AUTH="true"</code></p>
 </li>
 <li>
 <p>Run <code>git push heroku master</code>. This will push the <code>master</code> branch of the repo to the git remote at Heroku, and deploy the app.</p>
@@ -414,8 +407,7 @@ heroku config:set MAGPIE_NO_BASIC_AUTH="true"</code></p>
 <p>For the first-time setup, run in the terminal</p>
 </li>
 </ul>
-<p><code>sh
-   docker volume create --name magpie-app-volume -d local
+<p><code>docker volume create --name magpie-app-volume -d local
    docker volume create --name magpie-db-volume -d local
    docker-compose run --rm web bash -c "mix deps.get &amp;&amp; npm install &amp;&amp; node node_modules/brunch/bin/brunch build &amp;&amp; mix ecto.migrate"</code></p>
 <h6 id="deployment">Deployment</h6>
