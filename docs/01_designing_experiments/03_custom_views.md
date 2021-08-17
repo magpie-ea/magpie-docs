@@ -187,7 +187,7 @@ When this function is called (automatically by \_magpie) it first creates the an
 
 When you write your own custom `handle_response_function` you should supply the same arguments as the function above. You should also make sure to record the data and call `magpie.findNextView` eventually. Other than this, you could implement a more dynamic display of different pictures and response options, using the interplay of `answer_container_generator` and `handle_response_function`, for example.
 
-If you write longer custom functions for customization, it is good practice to put these into the file `02_custom_functions.js`. An example is presented in the [showroom](https://github.com/magpie-ea/showroom).
+If you write longer custom functions for customization, it is good practice to put these into the file `02_custom_functions.js`. An example is presented in the [showroom](https://github.com/magpie-ea/magpie-showroom).
 
 ## Predefined view elements
 
